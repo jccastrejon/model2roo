@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:rooCommand="http:///schemas/rooCommand/_j1G3UNMXEd-KApFVOAwN9A/0" xmlns:rooStructure="http:///schemas/rooStructure/_onj5sNMXEd-KApFVOAwN9A/0" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/rooCommand/_j1G3UNMXEd-KApFVOAwN9A/0 ../../profiles/rooCommand.profile.uml#_j1HeYdMXEd-KApFVOAwN9A http:///schemas/rooStructure/_onj5sNMXEd-KApFVOAwN9A/0 ../../profiles/rooStructure.profile.uml#_onlH0dMXEd-KApFVOAwN9A">
+  <uml:Model xmi:id="_2GzGANMXEd-KApFVOAwN9A" name="PizzaShop">
+    <packagedElement xmi:type="uml:Class" xmi:id="_4zofsNMXEd-KApFVOAwN9A" name="Pizza"/>
+    <profileApplication xmi:id="__16PoNMXEd-KApFVOAwN9A">
+      <eAnnotations xmi:id="__16PodMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../profiles/rooCommand.profile.uml#_j1HeYdMXEd-KApFVOAwN9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../profiles/rooCommand.profile.uml#_2KGWYMwsEd-i0OdaSaaeAQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_BLY00NMYEd-KApFVOAwN9A">
+      <eAnnotations xmi:id="_BLY00dMYEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../profiles/rooStructure.profile.uml#_onlH0dMXEd-KApFVOAwN9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../profiles/rooStructure.profile.uml#_2KGWYMwsEd-i0OdaSaaeAQ"/>
+    </profileApplication>
+  </uml:Model>
+  <rooStructure:RooModel xmi:id="_FOv8kNMYEd-KApFVOAwN9A" package="mx.itesm.test" base_Model="_2GzGANMXEd-KApFVOAwN9A"/>
+  <rooCommand:RooModelCommand xmi:id="_FOv8kdMYEd-KApFVOAwN9A" persistenceProvider="hibernate" base_Model="_2GzGANMXEd-KApFVOAwN9A"/>
+  <rooCommand:RooEntityCommand xmi:id="_H9QKMNMYEd-KApFVOAwN9A" dod="true" base_Class="_4zofsNMXEd-KApFVOAwN9A"/>
+  <rooStructure:RooEntity xmi:id="_H9QKMdMYEd-KApFVOAwN9A" table="pizza2" serializable="" base_Class="_4zofsNMXEd-KApFVOAwN9A"/>
+</xmi:XMI>
