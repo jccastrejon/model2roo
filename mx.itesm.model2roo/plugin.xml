@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Model2Roo"
+            id="mx.itesm.model2roo.commands.category">
+      </category>
+      <command
+            name="Transform UML to Spring Roo"
+            categoryId="mx.itesm.model2roo.commands.category"
+            id="mx.itesm.model2roo.commands.uml2rooCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="mx.itesm.model2roo.commands.uml2rooCommand"
+            class="mx.itesm.model2roo.handlers.Uml2RooHandler">
+           <activeWhen>
+           	<with variable="selection">
+           		<iterate operator="or">
+           			<instanceof value="org.eclipse.uml2.uml.Package"/>
+           		</iterate>
+           	</with>
+           </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="mx.itesm.model2roo.commands.uml2rooCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Model2Roo"
+               mnemonic="M"
+               id="mx.itesm.model2roo.menus.model2rooMenu">
+            <command
+                  commandId="mx.itesm.model2roo.commands.uml2rooCommand"
+                  mnemonic="S"
+                  id="mx.itesm.model2roo.menus.uml2rooCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="mx.itesm.model2roo.toolbars.model2rooToolbar">
+            <command
+                  commandId="mx.itesm.model2roo.commands.uml2rooCommand"
+                  icon="icons/model2roo.gif"
+                  tooltip="Transform UML to Spring Roo"
+                  id="mx.itesm.model2roo.toolbars.uml2rooCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
