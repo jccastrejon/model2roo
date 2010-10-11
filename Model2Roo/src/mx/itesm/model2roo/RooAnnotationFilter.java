@@ -1,4 +1,4 @@
-package mx.itesm.mde;
+package mx.itesm.model2roo;
 
 import org.jdom.Element;
 import org.jdom.filter.Filter;

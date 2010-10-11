@@ -1,7 +1,9 @@
-package mx.itesm.mde;
+package mx.itesm.model2roo;
 
 import java.io.File;
 import java.io.IOException;
+
+import mx.itesm.model2roo.Ecore2RooAnnotatedEcore;
 
 import org.jdom.JDOMException;
 import org.junit.Test;

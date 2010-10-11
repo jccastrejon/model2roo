@@ -1,4 +1,4 @@
-package mx.itesm.mde;
+package mx.itesm.model2roo;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: 1.6.0.16 (Sun Microsystems Inc.)
+Class-Path: %%-##.jar jaxen.jar jdom.jar xalan.jar
