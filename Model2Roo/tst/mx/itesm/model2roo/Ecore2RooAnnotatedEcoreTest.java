@@ -26,9 +26,13 @@ public class Ecore2RooAnnotatedEcoreTest extends EcoreTest {
         File annotationsFile;
 
         // Annotate ecore file
-        fileToAnnotate = new File("./tst/ecore/PizzaShop.ecore");
+        fileToAnnotate = new File("./tst/rosy/Rosy.ecore");
         annotationsFile = new File("./profiles/rooCommand.ecore");
         Ecore2RooAnnotatedEcore.annotateEcore(fileToAnnotate, annotationsFile);
-        this.testAnnotatedClassifiers(fileToAnnotate);
+        System.out.println("Se agregaron aotaciones de comandos");
+        annotationsFile = new File("./profiles/rooStructure.ecore");
+        Ecore2RooAnnotatedEcore.annotateEcore(fileToAnnotate, annotationsFile);
+        System.out.println("Se agregaron anotaciones de estructura");
+//        this.testAnnotatedClassifiers(fileToAnnotate);
     }
 }
