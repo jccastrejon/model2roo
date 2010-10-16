@@ -130,7 +130,7 @@ public class UmlProfile2Ecore {
             }
         }
 
-        ecoreElement.removeContent(RooAnnotationFilter.getFilter());
+        ecoreElement.removeContent(RooAnnotationFilter.getFilter(""));
         ecoreElement.addContent(annotation);
     }
 }

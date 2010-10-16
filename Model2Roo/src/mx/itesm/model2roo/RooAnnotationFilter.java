@@ -25,16 +25,19 @@ public class RooAnnotationFilter implements Filter {
      */
     private RooAnnotationFilter() {
     }
+    
+    private static String annotationName;
 
     /**
      * 
      * @return
      */
-    public static RooAnnotationFilter getFilter() {
+    public static RooAnnotationFilter getFilter(final String annotationFilename) {
         if (RooAnnotationFilter.filter == null) {
             RooAnnotationFilter.filter = new RooAnnotationFilter();
         }
 
+        annotationName = annotationFilename;
         return RooAnnotationFilter.filter;
     }
 
@@ -46,7 +49,7 @@ public class RooAnnotationFilter implements Filter {
         if (Element.class.isAssignableFrom(content.getClass())) {
             element = (Element) content;
             returnValue = ((element.getName().equals("eAnnotations")) && (element.getAttributeValue("source")
-                            .startsWith("roo:")));
+                            .startsWith(annotationName)));
         } else {
             returnValue = false;
         }
