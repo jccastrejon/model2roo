@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/jaxen.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
-	<classpathentry kind="lib" path="lib/Model2Roo-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/xalan.jar"/>
+	<classpathentry kind="lib" path="lib/Model2Roo-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

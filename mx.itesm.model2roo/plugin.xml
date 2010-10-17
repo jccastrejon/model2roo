@@ -13,6 +13,16 @@
             categoryId="mx.itesm.model2roo.commands.category"
             id="mx.itesm.model2roo.commands.uml2rooCommand">
       </command>
+      <command
+            name="Add Roo Annotations to Ecore model"
+            categoryId="mx.itesm.model2roo.commands.category"
+            id="mx.itesm.model2roo.commands.ecore2rooAnnotatedEcoreCommand">
+      </command>
+      <command
+            name="Transform Ecore to Spring Roo"
+            categoryId="mx.itesm.model2roo.commands.category"
+            id="mx.itesm.model2roo.commands.ecore2rooCommand">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -27,6 +37,28 @@
            	</with>
            </activeWhen>
       </handler>
+      <handler
+            commandId="mx.itesm.model2roo.commands.ecore2rooAnnotatedEcoreCommand"
+            class="mx.itesm.model2roo.handlers.Ecore2RooAnnotatedEcoreHandler">
+           <activeWhen>
+           	<with variable="selection">
+           		<iterate operator="or">
+           			<instanceof value="org.eclipse.emf.ecore.EPackage"/>
+           		</iterate>
+           	</with>
+           </activeWhen>
+      </handler>
+      <handler
+            commandId="mx.itesm.model2roo.commands.ecore2rooCommand"
+            class="mx.itesm.model2roo.handlers.Ecore2RooHandler">
+           <activeWhen>
+           	<with variable="selection">
+           		<iterate operator="or">
+           			<instanceof value="org.eclipse.emf.ecore.EPackage"/>
+           		</iterate>
+           	</with>
+           </activeWhen>
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -34,6 +66,18 @@
             commandId="mx.itesm.model2roo.commands.uml2rooCommand"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="mx.itesm.model2roo.commands.ecore2rooAnnotatedEcoreCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+7"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="mx.itesm.model2roo.commands.ecore2rooCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+8"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>
@@ -47,20 +91,54 @@
                id="mx.itesm.model2roo.menus.model2rooMenu">
             <command
                   commandId="mx.itesm.model2roo.commands.uml2rooCommand"
-                  mnemonic="S"
+                  mnemonic="U"
                   id="mx.itesm.model2roo.menus.uml2rooCommand">
+            </command>
+            <command
+                  commandId="mx.itesm.model2roo.commands.ecore2rooAnnotatedEcoreCommand"
+                  mnemonic="A"
+                  id="mx.itesm.model2roo.menus.ecore2rooAnnotatedEcoreCommand">
+            </command>
+            <command
+                  commandId="mx.itesm.model2roo.commands.ecore2rooCommand"
+                  mnemonic="E"
+                  id="mx.itesm.model2roo.menus.ecore2rooCommand">
             </command>
          </menu>
       </menuContribution>
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
-               id="mx.itesm.model2roo.toolbars.model2rooToolbar">
+               id="mx.itesm.model2roo.toolbars.uml2rooToolbar">
             <command
                   commandId="mx.itesm.model2roo.commands.uml2rooCommand"
                   icon="icons/model2roo.gif"
                   tooltip="Transform UML to Spring Roo"
                   id="mx.itesm.model2roo.toolbars.uml2rooCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="mx.itesm.model2roo.toolbars.ecore2rooAnnotatedEcoreToolbar">
+            <command
+                  commandId="mx.itesm.model2roo.commands.ecore2rooAnnotatedEcoreCommand"
+                  icon="icons/model2roo.gif"
+                  tooltip="Add Roo Annotations to Ecore model"
+                  id="mx.itesm.model2roo.toolbars.ecore2rooAnnotatedEcoreCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="mx.itesm.model2roo.toolbars.ecore2rooToolbar">
+            <command
+                  commandId="mx.itesm.model2roo.commands.ecore2rooCommand"
+                  icon="icons/model2roo.gif"
+                  tooltip="Transform Ecore to Spring Roo"
+                  id="mx.itesm.model2roo.toolbars.ecore2rooCommand">
             </command>
          </toolbar>
       </menuContribution>
