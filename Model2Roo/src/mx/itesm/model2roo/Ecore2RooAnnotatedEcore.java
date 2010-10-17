@@ -1,8 +1,11 @@
 package mx.itesm.model2roo;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +69,17 @@ public class Ecore2RooAnnotatedEcore {
 		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject", "Number");
 	}
 
+    /**
+     * 
+     * @param ecoreFile
+     * @param rooEcoreFile
+     * @throws JDOMException
+     * @throws IOException
+     */
+    public static void annotateEcore(final File ecoreFile, final File rooEcoreFile) throws JDOMException, IOException {
+        Ecore2RooAnnotatedEcore.annotateEcore(ecoreFile, new BufferedInputStream(new FileInputStream(rooEcoreFile)));
+    }
+    
 	/**
 	 * 
 	 * @param ecoreFile
@@ -74,9 +88,10 @@ public class Ecore2RooAnnotatedEcore {
 	 * @throws JDOMException
 	 */
 	@SuppressWarnings("unchecked")
-	public static void annotateEcore(final File ecoreFile, final File rooEcoreFile) throws JDOMException, IOException {
+	public static void annotateEcore(final File ecoreFile, final InputStream rooEcoreFile) throws JDOMException, IOException {
 		XMLOutputter out;
 		XPath elementsPath;
+		String profileName;
 		String elementType;
 		Document rooDocument;
 		SAXBuilder saxBuilder;
@@ -92,8 +107,7 @@ public class Ecore2RooAnnotatedEcore {
 		ecoreDocument = saxBuilder.build(ecoreFile);
 		rooDocument = saxBuilder.build(rooEcoreFile);
 		
-		final String profileName = rooEcoreFile.getName().substring(0, rooEcoreFile.getName().indexOf(".")); 
-
+		profileName = rooDocument.getRootElement().getAttributeValue("name"); 
 		System.out.println("\n\n:::::::::::::::::::::::::::::::::::::::::::::");
 		System.out.println("ECORE: " + profileName);
 		System.out.println(":::::::::::::::::::::::::::::::::::::::::::::\n");
