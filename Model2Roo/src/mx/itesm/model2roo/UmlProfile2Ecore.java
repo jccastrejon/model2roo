@@ -1,8 +1,10 @@
 package mx.itesm.model2roo;
 
+import java.beans.Introspector;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,15 +30,23 @@ public class UmlProfile2Ecore {
      */
     private static Map<String, String> uml2EcoreTypes;
 
+    /**
+     * List of Ecore types for which the UML2 transformation decapitalizes names.
+     */
+    private static List<String> decapitalizedEcoreTypes;
+
     static {
         uml2EcoreTypes = new HashMap<String, String>();
-        uml2EcoreTypes.put("Model", "EPackage");
+        uml2EcoreTypes.put("Model", "ecore:EPackage");
         uml2EcoreTypes.put("Class", "eClassifiers");
         uml2EcoreTypes.put("Property", "eStructuralFeatures");
         uml2EcoreTypes.put("Enumeration", "eClassifiers");
         uml2EcoreTypes.put("EnumerationLiteral", "eLiterals");
+
+        decapitalizedEcoreTypes = new ArrayList<String>();
+        decapitalizedEcoreTypes.add("EPackage");
     }
-    
+
     /**
      * Transform the UML Profiles applied in the specified UML file, into
      * corresponding EAnnotations in the specified Ecore file.
@@ -76,10 +86,13 @@ public class UmlProfile2Ecore {
     @SuppressWarnings("unchecked")
     private static void associateStereotypes(final Document ecoreDocument, final Document umlDocument,
                     final String umlType, final String ecoreType) throws JDOMException {
+        boolean associate;
         String parentName;
         XPath umlTypePath;
+        String elementName;
         Element umlElement;
         XPath ecoreTypePath;
+        Element parentElement;
         XPath umlStereotypesPath;
         List<Element> stereotypes;
         List<Element> ecoreElements;
@@ -93,11 +106,26 @@ public class UmlProfile2Ecore {
                 umlElement = (Element) umlTypePath.selectSingleNode(umlDocument);
                 parentName = umlElement.getParentElement().getAttributeValue("name");
 
-                ecoreTypePath = XPath.newInstance("//" + ecoreType + "[@name='" + umlElement.getAttributeValue("name")
-                                + "']");
+                // Possible Ecore elements associated to the Uml element
+                elementName = umlElement.getAttributeValue("name");
+                if (UmlProfile2Ecore.decapitalizedEcoreTypes.contains(elementName)) {
+                    elementName = Introspector.decapitalize(elementName);
+                }
+                ecoreTypePath = XPath.newInstance("//" + ecoreType + "[@name='" + elementName + "']");
+
+                // The right Ecore element should not only have the appropriate
+                // name, but also the appropriate parent
+                associate = false;
                 ecoreElements = ecoreTypePath.selectNodes(ecoreDocument);
                 for (Element ecoreElement : ecoreElements) {
-                    if (ecoreElement.getParentElement().getAttributeValue("name").equals(parentName)) {
+                    associate = true;
+                    parentElement = ecoreElement.getParentElement();
+                    if ((parentElement != null) && (parentElement.getAttributeValue("name").equals(parentName))) {
+                        associate = true;
+                    }
+
+                    // Ecore element found
+                    if (associate) {
                         UmlProfile2Ecore.associateStereotype(ecoreElement, umlElement, stereotype);
                         break;
                     }
