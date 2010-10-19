@@ -23,12 +23,12 @@ public class UmlProfile2EcoreTest extends EcoreTest {
      */
     @Test
     public void testTransformUmlProfiles() throws JDOMException, IOException {
-        File profileFile;
+        File sourceUmlFile;
         File targetEcoreFile;
 
         targetEcoreFile = new File("./tst/uml/pizzaShop.ecore");
-        profileFile = new File("./profiles/rooCommand.profile.uml");
-        UmlProfile2Ecore.transformUmlProfiles(targetEcoreFile, profileFile);
+        sourceUmlFile = new File("./tst/uml/PizzaShop.uml");
+        UmlProfile2Ecore.transformUmlProfiles(targetEcoreFile, sourceUmlFile);
         this.testAnnotatedClassifiers(targetEcoreFile);
     }
 
