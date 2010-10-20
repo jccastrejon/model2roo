@@ -26,14 +26,14 @@ public class UmlProfile2EcoreTest extends EcoreTest {
         File sourceUmlFile;
         File targetEcoreFile;
 
-        targetEcoreFile = new File("./tst/uml/pizzaShop.ecore");
-        sourceUmlFile = new File("./tst/uml/PizzaShop.uml");
+        targetEcoreFile = new File("./tst/model/toys.ecore");
+        sourceUmlFile = new File("./tst/model/Toys.uml");
         UmlProfile2Ecore.transformUmlProfiles(targetEcoreFile, sourceUmlFile);
         this.testAnnotatedClassifiers(targetEcoreFile);
     }
 
     @After
     public void afterTest() throws JDOMException, IOException {
-        this.removeAnnotations(new File("./tst/uml/pizzaShop.ecore"));
+        this.removeAnnotations(new File("./tst/model/toys.ecore"));
     }
 }

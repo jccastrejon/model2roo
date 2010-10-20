@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0" name="toys" nsURI="http:///toys.ecore" nsPrefix="toys">
+  <eClassifiers xsi:type="ecore:EClass" name="Toy">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumAge" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1" eType="#//Toy" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Skill">
+    <eLiterals name="memory" />
+    <eLiterals name="calculus" value="1" />
+    <eLiterals name="language" value="2" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToyType" abstract="true" />
+  <eClassifiers xsi:type="ecore:EClass" name="Educational" eSuperTypes="#//ToyType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="skill" ordered="false" lowerBound="1" eType="#//Skill" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sports" eSuperTypes="#//ToyType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="risk" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="association" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Generic" eSuperTypes="#//ToyType" />
+  <eClassifiers xsi:type="ecore:EClass" name="Supplier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contacts" ordered="false" upperBound="-1" eType="#//Contact" containment="true" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Contact">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phone" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" ordered="false" lowerBound="1" eType="#//Supplier" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToySupplier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" ordered="false" lowerBound="1" eType="#//Supplier" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toy" ordered="false" lowerBound="1" eType="#//Toy" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PurchaseOrder">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deliveryDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="warehouse" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toySupplier" ordered="false" lowerBound="1" eType="#//ToySupplier" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" ordered="false" lowerBound="1" eType="#//OrderStatus" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OrderStatus">
+    <eLiterals name="requested" />
+    <eLiterals name="processing" value="1" />
+    <eLiterals name="delivered" value="2" />
+    <eLiterals name="canceled" value="3" />
+  </eClassifiers>
+</ecore:EPackage>

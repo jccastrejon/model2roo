@@ -22,22 +22,17 @@ public class Ecore2RooAnnotatedEcoreTest extends EcoreTest {
     @Test
     public void testAnnotateEcore() throws JDOMException, IOException {
         File fileToAnnotate;
-        File annotationsFile;
 
-        // Annotate ecore file
-        fileToAnnotate = new File("./tst/ecore/PizzaShop.ecore");
-        annotationsFile = new File("./profiles/rooCommand.ecore");
-        Ecore2RooAnnotatedEcore.annotateEcore(fileToAnnotate, annotationsFile);
-        System.out.println("Se agregaron aotaciones de comandos");
-        annotationsFile = new File("./profiles/rooStructure.ecore");
-        Ecore2RooAnnotatedEcore.annotateEcore(fileToAnnotate, annotationsFile);
-        System.out.println("Se agregaron anotaciones de estructura");
+        // Annotate with roo profiles
+        fileToAnnotate = new File("./tst/model/toys.ecore");
+        Ecore2RooAnnotatedEcore.annotateEcore(fileToAnnotate, new File("./profiles/rooCommand.ecore"), new File(
+                        "./profiles/rooStructure.ecore"));
 
         this.testAnnotatedClassifiers(fileToAnnotate);
     }
 
     @After
     public void afterTest() throws JDOMException, IOException {
-        this.removeAnnotations(new File("./tst/ecore/PizzaShop.ecore"));
+        this.removeAnnotations(new File("./tst/model/toys.ecore"));
     }
 }

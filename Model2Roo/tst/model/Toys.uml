@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:rooCommand="http:///schemas/rooCommand/_j1G3UNMXEd-KApFVOAwN9A/0" xmlns:rooStructure="http:///schemas/rooStructure/_onj5sNMXEd-KApFVOAwN9A/0" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/rooCommand/_j1G3UNMXEd-KApFVOAwN9A/0 ../../profiles/rooCommand.profile.uml#_j1HeYdMXEd-KApFVOAwN9A http:///schemas/rooStructure/_onj5sNMXEd-KApFVOAwN9A/0 ../../profiles/rooStructure.profile.uml#_onlH0dMXEd-KApFVOAwN9A">
+  <uml:Model xmi:id="_r-eUcceNEd-jXKrbmatzng" name="Toys">
+    <packagedElement xmi:type="uml:Class" xmi:id="_vVsu8MeNEd-jXKrbmatzng" name="Toy">
+      <ownedAttribute xmi:id="_1Zfn8MeOEd-jXKrbmatzng" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_8op9UMeOEd-jXKrbmatzng" name="description">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_E1-kEMePEd-jXKrbmatzng" name="minimumAge">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_PDb2kMePEd-jXKrbmatzng" name="type" type="_vVsu8MeNEd-jXKrbmatzng" aggregation="shared"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_zw2roMeNEd-jXKrbmatzng" name="Skill">
+      <ownedLiteral xmi:id="_bC4EEMePEd-jXKrbmatzng" name="Memory"/>
+      <ownedLiteral xmi:id="_dzkDAMePEd-jXKrbmatzng" name="Calculus"/>
+      <ownedLiteral xmi:id="_geZ4oMePEd-jXKrbmatzng" name="Language"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_4C5voMeNEd-jXKrbmatzng" name="ToyType" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_9DPdAMeNEd-jXKrbmatzng" name="Educational">
+      <generalization xmi:id="_RnWaQMeOEd-jXKrbmatzng" general="_4C5voMeNEd-jXKrbmatzng"/>
+      <ownedAttribute xmi:id="_pr1RgMePEd-jXKrbmatzng" name="skill" type="_zw2roMeNEd-jXKrbmatzng" aggregation="shared"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VPY38MeOEd-jXKrbmatzng" name="Sports">
+      <generalization xmi:id="_XQQjgMeOEd-jXKrbmatzng" general="_4C5voMeNEd-jXKrbmatzng"/>
+      <ownedAttribute xmi:id="_4wu0EMePEd-jXKrbmatzng" name="risk">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EBoolean"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_8nC-UMePEd-jXKrbmatzng" name="association">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EBoolean"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_d7Zl0MeOEd-jXKrbmatzng" name="Generic">
+      <generalization xmi:id="_fgLLQMeOEd-jXKrbmatzng" general="_4C5voMeNEd-jXKrbmatzng"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_icKbQMeOEd-jXKrbmatzng" name="Supplier">
+      <ownedAttribute xmi:id="_IWZhYMeQEd-jXKrbmatzng" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_My0CUMeQEd-jXKrbmatzng" name="address">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Rkr14MeQEd-jXKrbmatzng" name="description">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_V8vbQMeQEd-jXKrbmatzng" name="contacts" type="_lOL28MeOEd-jXKrbmatzng" aggregation="composite">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_aLM_wMeQEd-jXKrbmatzng" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_awqdQMeQEd-jXKrbmatzng"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lOL28MeOEd-jXKrbmatzng" name="Contact">
+      <ownedAttribute xmi:id="_dkyxwMeQEd-jXKrbmatzng" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_e-H8MMeQEd-jXKrbmatzng" name="phone">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_gr_MMMeQEd-jXKrbmatzng" name="email">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_juhwIMeQEd-jXKrbmatzng" name="supplier" type="_icKbQMeOEd-jXKrbmatzng" aggregation="shared"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ngkwUMeOEd-jXKrbmatzng" name="ToySupplier">
+      <ownedAttribute xmi:id="_uNvhAMeQEd-jXKrbmatzng" name="supplier" type="_icKbQMeOEd-jXKrbmatzng" aggregation="shared"/>
+      <ownedAttribute xmi:id="_uoSvAMeQEd-jXKrbmatzng" name="toy" type="_vVsu8MeNEd-jXKrbmatzng" aggregation="shared"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_rBIF8MeOEd-jXKrbmatzng" name="PurchaseOrder">
+      <ownedAttribute xmi:id="_1TBhoMeQEd-jXKrbmatzng" name="orderDate">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_6eLX4MeQEd-jXKrbmatzng" name="deliveryDate">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="__Hkk4MeQEd-jXKrbmatzng" name="warehouse">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_BETXUMeREd-jXKrbmatzng" name="quantity">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_Ec3OkMeREd-jXKrbmatzng" name="toySupplier" type="_ngkwUMeOEd-jXKrbmatzng" aggregation="shared"/>
+      <ownedAttribute xmi:id="_NSgZkMeREd-jXKrbmatzng" name="status" type="_XiKEcMeREd-jXKrbmatzng" aggregation="shared"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_XiKEcMeREd-jXKrbmatzng" name="OrderStatus">
+      <ownedLiteral xmi:id="_arArwMeREd-jXKrbmatzng" name="Requested"/>
+      <ownedLiteral xmi:id="_cwqJoMeREd-jXKrbmatzng" name="Processing"/>
+      <ownedLiteral xmi:id="_ehVdEMeREd-jXKrbmatzng" name="Delivered"/>
+      <ownedLiteral xmi:id="_gVRf4MeREd-jXKrbmatzng" name="Canceled"/>
+    </packagedElement>
+    <profileApplication xmi:id="_kDRQANvnEd-2ltkPRhqslA">
+      <eAnnotations xmi:id="_kDfScNvnEd-2ltkPRhqslA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../profiles/rooCommand.profile.uml#_j1HeYdMXEd-KApFVOAwN9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../profiles/rooCommand.profile.uml#_2KGWYMwsEd-i0OdaSaaeAQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_kDhusNvnEd-2ltkPRhqslA">
+      <eAnnotations xmi:id="_kDhusdvnEd-2ltkPRhqslA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../profiles/rooStructure.profile.uml#_onlH0dMXEd-KApFVOAwN9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../profiles/rooStructure.profile.uml#_2KGWYMwsEd-i0OdaSaaeAQ"/>
+    </profileApplication>
+  </uml:Model>
+  <rooStructure:RooModel xmi:id="_maT_4NvnEd-2ltkPRhqslA" package="mx.itesm.toys" base_Model="_r-eUcceNEd-jXKrbmatzng"/>
+  <rooStructure:RooEntity xmi:id="__sFmINvnEd-2ltkPRhqslA" base_Class="_vVsu8MeNEd-jXKrbmatzng"/>
+  <rooStructure:RooEnumType xmi:id="_Box8UNvoEd-2ltkPRhqslA" base_Enumeration="_zw2roMeNEd-jXKrbmatzng"/>
+  <rooStructure:RooEntity xmi:id="_Cx12INvoEd-2ltkPRhqslA" base_Class="_4C5voMeNEd-jXKrbmatzng"/>
+  <rooStructure:RooEntity xmi:id="_D-t48NvoEd-2ltkPRhqslA" base_Class="_9DPdAMeNEd-jXKrbmatzng"/>
+  <rooCommand:RooEntityCommand xmi:id="_FWQ6sNvoEd-2ltkPRhqslA" base_Class="_VPY38MeOEd-jXKrbmatzng"/>
+  <rooCommand:RooEntityCommand xmi:id="_GiL7QNvoEd-2ltkPRhqslA" base_Class="_d7Zl0MeOEd-jXKrbmatzng"/>
+  <rooCommand:RooEntityCommand xmi:id="_ITjyQNvoEd-2ltkPRhqslA" base_Class="_icKbQMeOEd-jXKrbmatzng"/>
+  <rooCommand:RooEntityCommand xmi:id="_JxxcsNvoEd-2ltkPRhqslA" base_Class="_lOL28MeOEd-jXKrbmatzng"/>
+  <rooStructure:RooEntity xmi:id="_K86aINvoEd-2ltkPRhqslA" base_Class="_ngkwUMeOEd-jXKrbmatzng"/>
+  <rooCommand:RooEntityCommand xmi:id="_MmBtANvoEd-2ltkPRhqslA" base_Class="_rBIF8MeOEd-jXKrbmatzng"/>
+  <rooStructure:RooEnumType xmi:id="_PLQp4NvoEd-2ltkPRhqslA" base_Enumeration="_XiKEcMeREd-jXKrbmatzng"/>
+  <rooStructure:RooFieldString xmi:id="_7T06gNvpEd-2ltkPRhqslA" base_Property="_1Zfn8MeOEd-jXKrbmatzng"/>
+  <rooStructure:RooFieldNumber xmi:id="_9IYoYNvpEd-2ltkPRhqslA" base_Property="_E1-kEMePEd-jXKrbmatzng"/>
+  <rooStructure:RooEnumConstant xmi:id="__AlgINvpEd-2ltkPRhqslA" base_EnumerationLiteral="_bC4EEMePEd-jXKrbmatzng"/>
+</xmi:XMI>
