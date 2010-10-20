@@ -21,9 +21,15 @@ import org.eclipse.emf.ecore.EPackage;
 public class Ecore2RooAnnotatedEcoreHandler extends AbstractHandler {
 
     /**
-     * 
+     * Names of the roo annotations files.
      */
-    private static final String[] rooAnnotationsNames = { "/profiles/rooCommand.ecore", "profiles/rooStructure.ecore" };
+    private static List<String> rooAnnotationsNames;
+
+    static {
+        rooAnnotationsNames = new ArrayList<String>();
+        rooAnnotationsNames.add("/profiles/rooCommand.ecore");
+        rooAnnotationsNames.add("profiles/rooStructure.ecore");
+    }
 
     /**
      * 
@@ -32,20 +38,17 @@ public class Ecore2RooAnnotatedEcoreHandler extends AbstractHandler {
     @Override
     public Object execute(final ExecutionEvent event) throws ExecutionException {
         File ecoreFile;
+        InputStream[] rooAnnotations;
         List<EPackage> ecorePackages;
         List<String> incorrectPackages;
-        List<InputStream> rooAnnotations;
 
         rooAnnotations = this.getRooAnnotations();
         incorrectPackages = new ArrayList<String>();
         ecorePackages = (List<EPackage>) Util.getSelectedItems(event);
         for (EPackage ecorePackage : ecorePackages) {
             try {
-                for (InputStream rooAnnotation : rooAnnotations) {
-                    ecoreFile = Util.getEcoreFile(ecorePackage);
-                    Ecore2RooAnnotatedEcore.annotateEcore(ecoreFile, rooAnnotation);
-                }
-
+                ecoreFile = Util.getEcoreFile(ecorePackage);
+                Ecore2RooAnnotatedEcore.annotateEcore(ecoreFile, rooAnnotations);
             } catch (Exception e) {
                 incorrectPackages.add(ecorePackage.getName());
                 e.printStackTrace();
@@ -63,12 +66,12 @@ public class Ecore2RooAnnotatedEcoreHandler extends AbstractHandler {
      * 
      * @return
      */
-    protected List<InputStream> getRooAnnotations() {
-        List<InputStream> returnValue;
+    protected InputStream[] getRooAnnotations() {
+        InputStream[] returnValue;
 
-        returnValue = new ArrayList<InputStream>(Ecore2RooAnnotatedEcoreHandler.rooAnnotationsNames.length);
-        for (String rooAnnotationName : Ecore2RooAnnotatedEcoreHandler.rooAnnotationsNames) {
-            returnValue.add(Util.getResourceStream(this, rooAnnotationName));
+        returnValue = new InputStream[Ecore2RooAnnotatedEcoreHandler.rooAnnotationsNames.size()];
+        for (int i = 0; i < Ecore2RooAnnotatedEcoreHandler.rooAnnotationsNames.size(); i++) {
+            returnValue[i] = Util.getResourceStream(this, Ecore2RooAnnotatedEcoreHandler.rooAnnotationsNames.get(i));
         }
 
         return returnValue;
