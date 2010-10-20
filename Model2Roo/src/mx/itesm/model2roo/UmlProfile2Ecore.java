@@ -31,7 +31,8 @@ public class UmlProfile2Ecore {
     private static Map<String, String> uml2EcoreTypes;
 
     /**
-     * List of Ecore types for which the UML2 transformation decapitalizes names.
+     * List of Ecore types for which the UML2 transformation decapitalizes
+     * names.
      */
     private static List<String> decapitalizedEcoreTypes;
 
@@ -44,7 +45,8 @@ public class UmlProfile2Ecore {
         uml2EcoreTypes.put("EnumerationLiteral", "eLiterals");
 
         decapitalizedEcoreTypes = new ArrayList<String>();
-        decapitalizedEcoreTypes.add("EPackage");
+        decapitalizedEcoreTypes.add("ecore:EPackage");
+        decapitalizedEcoreTypes.add("eLiterals");
     }
 
     /**
@@ -108,7 +110,7 @@ public class UmlProfile2Ecore {
 
                 // Possible Ecore elements associated to the Uml element
                 elementName = umlElement.getAttributeValue("name");
-                if (UmlProfile2Ecore.decapitalizedEcoreTypes.contains(elementName)) {
+                if (UmlProfile2Ecore.decapitalizedEcoreTypes.contains(ecoreType)) {
                     elementName = Introspector.decapitalize(elementName);
                 }
                 ecoreTypePath = XPath.newInstance("//" + ecoreType + "[@name='" + elementName + "']");
