@@ -27,338 +27,334 @@ import org.jdom.xpath.XPath;
  */
 public class Ecore2RooAnnotatedEcore {
 
-	/**
-	 * Mapping between Uml and Ecore types.
-	 */
-	private static Map<String, String[]> uml2EcoreTypes;
+    /**
+     * Mapping between Uml and Ecore types.
+     */
+    private static Map<String, String[]> uml2EcoreTypes;
 
-	/**
-	 * Mapping between Ecore and Roo types.
-	 */
-	private static Map<String, String> ecore2RooTypes;
+    /**
+     * Mapping between Ecore and Roo types.
+     */
+    private static Map<String, String> ecore2RooTypes;
 
-	/**
-	 * XMI namespace.
-	 */
-	private static Namespace XMI_NAMESPACE = Namespace.getNamespace("http://www.w3.org/2001/XMLSchema-instance");
+    /**
+     * Ecore types that don't have an associated type name.
+     */
+    private static List<String> unnamedEcoreTypes;
 
-	static {
-		uml2EcoreTypes = new HashMap<String, String[]>();
-		uml2EcoreTypes.put("Model", new String[] { "EPackage" });
-		uml2EcoreTypes.put("Class", new String[] { "EClass" });
-		uml2EcoreTypes.put("Property", new String[] { "EAttribute", "EReference" });
-		uml2EcoreTypes.put("Enumeration", new String[] { "EEnum" });
-		uml2EcoreTypes.put("EnumerationLiteral", new String[] { "eLiterals" });
+    /**
+     * Top Ecore types that can be annotated.
+     */
+    private static List<String> topEcoreTypes;
 
-		ecore2RooTypes = new HashMap<String, String>();
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString", "String");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean", "Boolean");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject", "Boolean");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteObject", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShortObject", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate", "Date");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble", "Number");
-		ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject", "Number");
-	}
+    /**
+     * XMI namespace.
+     */
+    private static Namespace XMI_NAMESPACE = Namespace.getNamespace("http://www.w3.org/2001/XMLSchema-instance");
+
+    static {
+        uml2EcoreTypes = new HashMap<String, String[]>();
+        uml2EcoreTypes.put("Model", new String[] { "ecore:EPackage" });
+        uml2EcoreTypes.put("Class", new String[] { "EClass" });
+        uml2EcoreTypes.put("Property", new String[] { "EAttribute", "EReference" });
+        uml2EcoreTypes.put("Enumeration", new String[] { "EEnum" });
+        uml2EcoreTypes.put("EnumerationLiteral", new String[] { "eLiterals" });
+
+        ecore2RooTypes = new HashMap<String, String>();
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString", "String");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean", "Boolean");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject", "Boolean");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteObject", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShortObject", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate", "Date");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble", "Number");
+        ecore2RooTypes.put("ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject", "Number");
+
+        unnamedEcoreTypes = new ArrayList<String>();
+        unnamedEcoreTypes.add("ecore:EPackage");
+        unnamedEcoreTypes.add("eLiterals");
+
+        topEcoreTypes = new ArrayList<String>();
+        topEcoreTypes.add("ecore:EClass");
+        topEcoreTypes.add("ecore:EEnum");
+    }
 
     /**
      * 
      * @param ecoreFile
-     * @param rooEcoreFile
+     * @param rooEcoreFiles
      * @throws JDOMException
      * @throws IOException
      */
-    public static void annotateEcore(final File ecoreFile, final File rooEcoreFile) throws JDOMException, IOException {
-        Ecore2RooAnnotatedEcore.annotateEcore(ecoreFile, new BufferedInputStream(new FileInputStream(rooEcoreFile)));
+    public static void annotateEcore(final File ecoreFile, final File... rooEcoreFiles) throws JDOMException,
+                    IOException {
+        InputStream[] inputStreams;
+
+        inputStreams = null;
+        if (rooEcoreFiles != null) {
+            inputStreams = new InputStream[rooEcoreFiles.length];
+            for (int i = 0; i < inputStreams.length; i++) {
+                inputStreams[i] = new BufferedInputStream(new FileInputStream(rooEcoreFiles[i]));
+            }
+        }
+
+        Ecore2RooAnnotatedEcore.annotateEcore(ecoreFile, inputStreams);
     }
-    
-	/**
-	 * 
-	 * @param ecoreFile
-	 * @param rooEcoreFile
-	 * @throws IOException
-	 * @throws JDOMException
-	 */
-	@SuppressWarnings("unchecked")
-	public static void annotateEcore(final File ecoreFile, final InputStream rooEcoreFile) throws JDOMException, IOException {
-		XMLOutputter out;
-		XPath elementsPath;
-		String profileName;
-		String elementType;
-		Document rooDocument;
-		SAXBuilder saxBuilder;
-		Element currentDetail;
-		Element parentElement;
-		Document ecoreDocument;
-		Element ecoreAnnotation;
-		String currentDetailName;
-		List<Element> rooElements;
-		List<Element> elementDetails;
 
-		saxBuilder = new SAXBuilder();
-		ecoreDocument = saxBuilder.build(ecoreFile);
-		rooDocument = saxBuilder.build(rooEcoreFile);
-		
-		profileName = rooDocument.getRootElement().getAttributeValue("name"); 
-		System.out.println("\n\n:::::::::::::::::::::::::::::::::::::::::::::");
-		System.out.println("ECORE: " + profileName);
-		System.out.println(":::::::::::::::::::::::::::::::::::::::::::::\n");
+    /**
+     * 
+     * @param ecoreFile
+     * @param rooEcoreFiles
+     * @throws IOException
+     * @throws JDOMException
+     */
+    @SuppressWarnings("unchecked")
+    public static void annotateEcore(final File ecoreFile, final InputStream... rooEcoreFiles) throws JDOMException,
+                    IOException {
+        Element parent;
+        XMLOutputter out;
+        XPath elementsPath;
+        String profileName;
+        String elementType;
+        Document rooDocument;
+        SAXBuilder saxBuilder;
+        Element currentDetail;
+        Element parentElement;
+        Document ecoreDocument;
+        Element ecoreAnnotation;
+        String currentDetailName;
+        List<Element> rooElements;
+        List<Element> elementDetails;
 
-		// Identify Roo elements that should be converted into EAnnotations
-		elementsPath = XPath.newInstance("//eClassifiers");
-		rooElements = elementsPath.selectNodes(rooDocument);
-		if (rooElements != null) {
-			for (Element rooElement : rooElements) {
-				elementType = null;
+        if (rooEcoreFiles != null) {
+            saxBuilder = new SAXBuilder();
+            ecoreDocument = saxBuilder.build(ecoreFile);
 
-				//				System.out.println("\trootElement: " + rooElement.getName());
+            // Process each Roo ecore profile
+            for (InputStream rooEcoreFile : rooEcoreFiles) {
+                rooDocument = saxBuilder.build(rooEcoreFile);
+                profileName = rooDocument.getRootElement().getAttributeValue("name");
 
-				// EAnnotation general data
-				ecoreAnnotation = new Element("eAnnotations");
-				ecoreAnnotation.setAttribute("source", profileName + ":" + rooElement.getAttributeValue("name"));
+                // Identify Roo elements that should be converted into EAnnotations
+                elementsPath = XPath.newInstance("//eClassifiers");
+                rooElements = elementsPath.selectNodes(rooDocument);
+                if (rooElements != null) {
+                    for (Element rooElement : rooElements) {
+                        elementType = null;
 
-				// A detail element should be generated for each associated
-				// structural feature
-				elementDetails = (List<Element>) rooElement.getChildren("eStructuralFeatures");
-				elementDetails = new ArrayList<Element>(elementDetails);
-				elementDetails.addAll(Ecore2RooAnnotatedEcore.getParentDetails(rooElement, rooDocument));
+                        // EAnnotation general data
+                        ecoreAnnotation = new Element("eAnnotations");
+                        ecoreAnnotation.setAttribute("source", profileName + ":" + rooElement.getAttributeValue("name"));
 
-				final Element parent = getParentAnnotationElement(rooElement, rooDocument); //TODO
-				System.out.println("");
+                        // A detail element should be generated for each associated
+                        // structural feature
+                        elementDetails = (List<Element>) rooElement.getChildren("eStructuralFeatures");
+                        elementDetails = new ArrayList<Element>(elementDetails);
+                        elementDetails.addAll(Ecore2RooAnnotatedEcore.getParentDetails(rooElement, rooDocument));
+                        parent = getParentAnnotationElement(rooElement, rooDocument);
 
-				for (Element structuralFeature : elementDetails) {                	
+                        for (Element structuralFeature : elementDetails) {
+                            currentDetailName = structuralFeature.getAttributeValue("name");
 
-					//                	System.out.println("\n\nstructuralFeature: " + structuralFeature.getName());
+                            if (!currentDetailName.startsWith("base")) {
+                                currentDetail = new Element("details");
+                                ecoreAnnotation.addContent(currentDetail);
+                                currentDetail.setAttribute("key", currentDetailName);
+                                currentDetail.setAttribute("value", "");
+                            } else {
+                                elementType = Ecore2RooAnnotatedEcore.getElementType(structuralFeature);
+                            }
+                        }
 
-					currentDetailName = structuralFeature.getAttributeValue("name");
+                        // If no associated Ecore element type could be found, may we'll
+                        // find one in the element hierarchy
+                        if (elementType == null) {
+                            parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(rooElement, rooDocument);
+                            parentSearch: while (parentElement != null) {
+                                for (Element structuralFeature : (List<Element>) parentElement
+                                                .getChildren("eStructuralFeatures")) {
+                                    currentDetailName = structuralFeature.getAttributeValue("name");
+                                    if (currentDetailName.startsWith("base")) {
+                                        elementType = Ecore2RooAnnotatedEcore.getElementType(structuralFeature);
+                                        break parentSearch;
+                                    }
+                                }
+                                parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(parentElement, rooDocument);
+                            }
+                        }
 
-					//					System.out.println("\ncurrentDetailName: " + currentDetailName);
+                        // Annotate the corresponding Ecore elements
+                        Ecore2RooAnnotatedEcore.annotateElements(elementType, ecoreAnnotation, ecoreDocument, parent,
+                                        profileName);
+                    }
 
-					if (!currentDetailName.startsWith("base")) {                    	
-						currentDetail = new Element("details");
+                    out = new XMLOutputter();
+                    out.output(ecoreDocument, new FileWriter(ecoreFile));
+                }
+            }
+        }
+    }
 
-						ecoreAnnotation.addContent(currentDetail);
-						currentDetail.setAttribute("key", currentDetailName);
-						currentDetail.setAttribute("value", "");
+    /**
+     * Annotate the ecoreDocument's elements of the corresponding elementType
+     * with the specified ecoreAnnotation.
+     * 
+     * @param elementType
+     * @param ecoreAnnotation
+     * @param ecoreDocument
+     * @throws JDOMException
+     */
+    @SuppressWarnings("unchecked")
+    private static void annotateElements(final String elementType, final Element ecoreAnnotation,
+                    final Document ecoreDocument, final Element parent, final String profileName) throws JDOMException {
+        boolean annotate;
+        String ecoreType;
+        String ecoreEType;
+        XPath elementsPath;
+        Set<String> supportedEcoreTypes;
+        List<Element> elementsToAnnotate;
+        if (elementType != null) {
+            // Look for possible Ecore elements that could be annotated
+            for (String currentEcoreType : Ecore2RooAnnotatedEcore.uml2EcoreTypes.get(elementType)) {
+                // The Ecore type is contained as an attribute
+                if (Character.isUpperCase(currentEcoreType.charAt(0))) {
+                    elementsPath = XPath.newInstance("//*[@xsi:type='ecore:" + currentEcoreType + "']");
+                    elementsToAnnotate = elementsPath.selectNodes(ecoreDocument);
+                }
 
-						//                    	System.out.println("\tcurrentDetail: " + currentDetail.getName());
-					} else {
-						elementType = Ecore2RooAnnotatedEcore.getElementType(structuralFeature);
+                // The Ecore type is the element's name
+                else {
+                    elementsPath = XPath.newInstance("//" + currentEcoreType);
+                    elementsToAnnotate = elementsPath.selectNodes(ecoreDocument);
+                }
 
-						//                    	System.out.println("\telementType: " + elementType);
-					}
-				}
+                // Associate the annotation to the corresponding elements
+                if (elementsToAnnotate != null) {
+                    supportedEcoreTypes = Ecore2RooAnnotatedEcore.ecore2RooTypes.keySet();
+                    for (Element elementToAnnotate : elementsToAnnotate) {
+                        annotate = false;
+                        ecoreType = elementToAnnotate.getAttributeValue("type", Ecore2RooAnnotatedEcore.XMI_NAMESPACE);
+                        ecoreEType = elementToAnnotate.getAttributeValue("eType");
 
-				// If no associated Ecore element type could be found, may we'll
-				// find one in the element hierarchy
-				if (elementType == null) {
-					parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(rooElement, rooDocument);
-					parentSearch: while (parentElement != null) {
-						for (Element structuralFeature : (List<Element>) parentElement
-								.getChildren("eStructuralFeatures")) {
-							currentDetailName = structuralFeature.getAttributeValue("name");
-							if (currentDetailName.startsWith("base")) {
-								elementType = Ecore2RooAnnotatedEcore.getElementType(structuralFeature);
-								break parentSearch;
-							}
-						}
-						parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(parentElement, rooDocument);
-					}
-				}
+                        // References and Sets
+                        if (ecoreType != null) {
+                            // Top Ecore elements
+                            if (Ecore2RooAnnotatedEcore.topEcoreTypes.contains(ecoreType)) {
+                                annotate = true;
+                            } else if (ecoreType.endsWith("Reference")) {
+                                if (Boolean.parseBoolean(elementToAnnotate.getAttributeValue("containment"))) {
+                                    if (ecoreAnnotation.getAttributeValue("source").endsWith("Set")) {
+                                        annotate = true;
+                                    }
+                                } else if (ecoreAnnotation.getAttributeValue("source").endsWith("Reference")) {
+                                    annotate = true;
+                                }
+                            }
+                        }
 
-				// Annotate the corresponding Ecore elements
-				//ElementType: el tipo del estereotipo/anotación
-				System.out.println("\tAnnotate the element: " + elementType + ": " + ecoreAnnotation);
-				Ecore2RooAnnotatedEcore.annotateElements(elementType, ecoreAnnotation, ecoreDocument, parent, profileName);
-			}
+                        else if (ecoreEType != null) {
+                            // Enum attributes
+                            if (ecoreEType.startsWith("#")
+                                            && (ecoreAnnotation.getAttributeValue("source").endsWith("Enum"))) {
+                                annotate = true;
+                            }
 
-			out = new XMLOutputter();
-			out.output(ecoreDocument, new FileWriter(ecoreFile));
-		}
-	}
+                            // Simple attributes
+                            else {
+                                // Specific supported types
+                                if ((supportedEcoreTypes.contains(ecoreEType))
+                                                && ((ecoreAnnotation.getAttributeValue("source")
+                                                                .endsWith(Ecore2RooAnnotatedEcore.ecore2RooTypes
+                                                                                .get(ecoreEType))))) {
+                                    annotate = true;
+                                }
+                            }
+                        }
+                        // Enum constants
+                        else if (Ecore2RooAnnotatedEcore.unnamedEcoreTypes.contains(currentEcoreType)) {
+                            annotate = true;
+                        }
 
-	/**
-	 * Annotate the ecoreDocument's elements of the corresponding elementType
-	 * with the specified ecoreAnnotation.
-	 * 
-	 * @param elementType
-	 * @param ecoreAnnotation
-	 * @param ecoreDocument
-	 * @throws JDOMException
-	 */
-	@SuppressWarnings("unchecked")
-	private static void annotateElements(final String elementType, final Element ecoreAnnotation,
-			final Document ecoreDocument, final Element parent, final String profileName) throws JDOMException {
-		boolean annotate;
-		String ecoreType;
-		String ecoreEType;
-		XPath elementsPath;
-		Set<String> supportedEcoreTypes;
-		List<Element> elementsToAnnotate;
-		if (elementType != null) {
-			// Look for possible Ecore elements that could be annotated
-			for (String currentEcoreType : Ecore2RooAnnotatedEcore.uml2EcoreTypes.get(elementType)) {
+                        // Only annotate if the element was a valid one
+                        if (annotate) {
+                            elementToAnnotate.removeContent(RooAnnotationFilter.getFilter(profileName));
+                            elementToAnnotate.addContent((Element) ecoreAnnotation.clone());
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-				System.out.println("\tcurrentEcoreType: " + currentEcoreType);
-				// The Ecore type is contained as an attribute
-				if (Character.isUpperCase(currentEcoreType.charAt(0))) {
-					elementsPath = XPath.newInstance("//*[@xsi:type='ecore:" + currentEcoreType + "']");
-					elementsToAnnotate = elementsPath.selectNodes(ecoreDocument);
-				}
+    /**
+     * Get the super type of the corresponding annotation element. TODO: More
+     * than one parent?
+     * 
+     * @param annotation
+     * @param rooDocument
+     * @return
+     * @throws JDOMException
+     */
+    private static Element getParentAnnotationElement(final Element annotation, final Document rooDocument)
+                    throws JDOMException {
+        String parent;
+        XPath parentPath;
+        Element returnValue;
 
-				// The Ecore type is the element's name
-				else {
-					elementsPath = XPath.newInstance("//" + currentEcoreType);
-					elementsToAnnotate = elementsPath.selectNodes(ecoreDocument);
-				}
+        returnValue = null;
+        parent = annotation.getAttributeValue("eSuperTypes");
+        if (parent != null) {
+            parent = parent.replace("#//", "");
+            parentPath = XPath.newInstance("//*[@name='" + parent + "']");
+            returnValue = (Element) parentPath.selectSingleNode(rooDocument);
+        }
 
-				if(elementsToAnnotate == null || elementsToAnnotate.isEmpty()) { //TODO para anotar el paquete...
-					elementsPath = XPath.newInstance("ecore:" + currentEcoreType);
-					elementsToAnnotate = elementsPath.selectNodes(ecoreDocument);
-				}
+        return returnValue;
+    }
 
-				// Associate the annotation to the corresponding elements
-				if (elementsToAnnotate != null) {
-					supportedEcoreTypes = Ecore2RooAnnotatedEcore.ecore2RooTypes.keySet();
-					for (Element elementToAnnotate : elementsToAnnotate) {
+    /**
+     * Get the associated Ecore element type.
+     * 
+     * @param structuralFeature
+     * @return
+     */
+    private static String getElementType(final Element structuralFeature) {
+        String returnValue;
 
-						System.out.println("\t\telementToAnnotate: " + elementToAnnotate.getName() + ": " + elementToAnnotate.getAttributeValue("name"));
+        returnValue = structuralFeature.getAttributeValue("eType");
+        returnValue = returnValue.replace("ecore:EClass uml.ecore#//", "");
 
-						annotate = false;
-						ecoreType = elementToAnnotate.getAttributeValue("type", Ecore2RooAnnotatedEcore.XMI_NAMESPACE);
-						ecoreEType = elementToAnnotate.getAttributeValue("eType"); 
+        return returnValue;
+    }
 
-						System.out.println("\t\tParent: " + (parent != null ? parent.getAttributeValue("name") : parent));
+    /**
+     * 
+     * @param element
+     * @param rooDocument
+     * @return
+     * @throws JDOMException
+     */
+    @SuppressWarnings("unchecked")
+    private static List<Element> getParentDetails(final Element element, final Document rooDocument)
+                    throws JDOMException {
+        Element parent;
+        List<Element> returnValue;
 
-						System.out.println("\t\t\tecoreType: " + ecoreType);
-						System.out.println("\t\t\tecoreEType: " + ecoreEType);
+        parent = Ecore2RooAnnotatedEcore.getParentAnnotationElement(element, rooDocument);
+        if (parent != null) {
+            returnValue = parent.getChildren("eStructuralFeatures");
+        } else {
+            returnValue = new ArrayList<Element>(0);
+        }
 
-						// References and Sets
-						if ((ecoreType != null) && (ecoreType.equals("ecore:EReference"))) {
-							if (Boolean.parseBoolean(elementToAnnotate.getAttributeValue("containment"))) {
-								if (ecoreAnnotation.getAttributeValue("source").endsWith("Set")) {
-									annotate = true;
-								}
-							} else if (ecoreAnnotation.getAttributeValue("source").endsWith("Reference")) {
-								annotate = true;
-							}
-						}
-
-						else if (ecoreEType != null) {
-							// Enum attributes
-							if (ecoreEType.startsWith("#")
-									&& (ecoreAnnotation.getAttributeValue("source").endsWith("Enum"))) {
-								annotate = true;
-							}
-
-							// Simple attributes
-							else {
-								System.out.println("\t\tsource: " + ecoreAnnotation.getAttributeValue("source"));
-								// Specific supported types
-								if ((supportedEcoreTypes.contains(ecoreEType))
-										&& ((ecoreAnnotation.getAttributeValue("source")
-												.endsWith(Ecore2RooAnnotatedEcore.ecore2RooTypes
-														.get(ecoreEType))))) {
-									annotate = true;
-								}
-							}
-						} 
-
-						if(!annotate && parent == null) { //Si el estereotipo es un elementType entonces se debe anotar... si tiene papá (otro estereotipo) no entra... TODO
-							if(currentEcoreType.equals(currentEcoreType)) {
-								annotate = true;
-							}
-						}
-
-						System.out.println("\t\tAnnotate? " + annotate);
-						if (annotate) {
-							System.out.println("\t\t------------------------------");
-							System.out.println("\t\tAnnotating...");
-							System.out.println("\t\t------------------------------");
-							
-							if(parent != null) {
-								//TODO 2 opciones: 1 no agregar tags del papá y q c generen 2 tags... o agregar tags y eliminar anotación papá si hay anotación hijo..
-								elementToAnnotate.removeContent(RooAnnotationFilter.getFilter(profileName + ":" + parent.getAttributeValue("name")));
-							}
-							
-							elementToAnnotate.removeContent(RooAnnotationFilter.getFilter(profileName)); 
-							elementToAnnotate.addContent((Element) ecoreAnnotation.clone());
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Get the super type of the corresponding annotation element. TODO: More
-	 * than one parent?
-	 * 
-	 * @param annotation
-	 * @param rooDocument
-	 * @return
-	 * @throws JDOMException
-	 */
-	private static Element getParentAnnotationElement(final Element annotation, final Document rooDocument)
-	throws JDOMException {
-		String parent;
-		XPath parentPath;
-		Element returnValue;
-
-		returnValue = null;
-		parent = annotation.getAttributeValue("eSuperTypes");
-		if (parent != null) {
-			parent = parent.replace("#//", "");
-			parentPath = XPath.newInstance("//*[@name='" + parent + "']");
-			returnValue = (Element) parentPath.selectSingleNode(rooDocument);
-		}
-
-		return returnValue;
-	}
-
-	/**
-	 * Get the associated Ecore element type.
-	 * 
-	 * @param structuralFeature
-	 * @return
-	 */
-	private static String getElementType(final Element structuralFeature) {
-		String returnValue;
-
-		returnValue = structuralFeature.getAttributeValue("eType");
-		returnValue = returnValue.replace("ecore:EClass uml.ecore#//", "");
-
-		return returnValue;
-	}
-
-	/**
-	 * 
-	 * @param element
-	 * @param rooDocument
-	 * @return
-	 * @throws JDOMException
-	 */
-	@SuppressWarnings("unchecked")
-	private static List<Element> getParentDetails(final Element element, final Document rooDocument)
-	throws JDOMException {
-		Element parent;
-		List<Element> returnValue;
-
-		parent = Ecore2RooAnnotatedEcore.getParentAnnotationElement(element, rooDocument);
-		if (parent != null) {
-			returnValue = parent.getChildren("eStructuralFeatures");
-		} else {
-			returnValue = new ArrayList<Element>(0);
-		}
-
-		return returnValue;
-	}
+        return returnValue;
+    }
 }
