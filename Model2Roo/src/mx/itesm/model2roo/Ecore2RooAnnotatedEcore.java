@@ -143,7 +143,8 @@ public class Ecore2RooAnnotatedEcore {
                 rooDocument = saxBuilder.build(rooEcoreFile);
                 profileName = rooDocument.getRootElement().getAttributeValue("name");
 
-                // Identify Roo elements that should be converted into EAnnotations
+                // Identify Roo elements that should be converted into
+                // EAnnotations
                 elementsPath = XPath.newInstance("//eClassifiers");
                 rooElements = elementsPath.selectNodes(rooDocument);
                 if (rooElements != null) {
@@ -154,8 +155,8 @@ public class Ecore2RooAnnotatedEcore {
                         ecoreAnnotation = new Element("eAnnotations");
                         ecoreAnnotation.setAttribute("source", profileName + ":" + rooElement.getAttributeValue("name"));
 
-                        // A detail element should be generated for each associated
-                        // structural feature
+                        // A detail element should be generated for each
+                        // associated structural feature
                         elementDetails = (List<Element>) rooElement.getChildren("eStructuralFeatures");
                         elementDetails = new ArrayList<Element>(elementDetails);
                         elementDetails.addAll(Ecore2RooAnnotatedEcore.getParentDetails(rooElement, rooDocument));
@@ -174,8 +175,8 @@ public class Ecore2RooAnnotatedEcore {
                             }
                         }
 
-                        // If no associated Ecore element type could be found, may we'll
-                        // find one in the element hierarchy
+                        // If no associated Ecore element type could be found,
+                        // may we'll find one in the element hierarchy
                         if (elementType == null) {
                             parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(rooElement, rooDocument);
                             parentSearch: while (parentElement != null) {
@@ -187,7 +188,8 @@ public class Ecore2RooAnnotatedEcore {
                                         break parentSearch;
                                     }
                                 }
-                                parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(parentElement, rooDocument);
+                                parentElement = Ecore2RooAnnotatedEcore.getParentAnnotationElement(parentElement,
+                                                rooDocument);
                             }
                         }
 
@@ -260,7 +262,7 @@ public class Ecore2RooAnnotatedEcore {
                             }
                         }
 
-                        else if (ecoreEType != null) {
+                        if ((!annotate) && (ecoreEType != null)) {
                             // Enum attributes
                             if (ecoreEType.startsWith("#")
                                             && (ecoreAnnotation.getAttributeValue("source").endsWith("Enum"))) {
