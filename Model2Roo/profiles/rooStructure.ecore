@@ -118,13 +118,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="RooFieldString" eSuperTypes="#//RooField">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalMin" ordered="false"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sizeMin" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalMax" ordered="false"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sizeMax" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RooModel">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" ordered="false"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topLevelPackage" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseModel" ordered="false"
         lowerBound="1" eType="ecore:EClass uml.ecore#//Model"/>

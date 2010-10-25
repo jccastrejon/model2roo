@@ -374,15 +374,15 @@
     <ownedAttribute xmi:id="_cknQUsw0Ed-i0OdaSaaeAQ" name="regexp">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_m8RnsMw0Ed-i0OdaSaaeAQ" name="decimalMin">
+    <ownedAttribute xmi:id="_m8RnsMw0Ed-i0OdaSaaeAQ" name="sizeMin">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_m8SOwMw0Ed-i0OdaSaaeAQ" name="decimalMax">
+    <ownedAttribute xmi:id="_m8SOwMw0Ed-i0OdaSaaeAQ" name="sizeMax">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_lM474NMSEd-KApFVOAwN9A" name="RooModel">
-    <ownedAttribute xmi:id="_lM474tMSEd-KApFVOAwN9A" name="package">
+    <ownedAttribute xmi:id="_lM474tMSEd-KApFVOAwN9A" name="topLevelPackage">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_w-BnodMSEd-KApFVOAwN9A" name="base_Model" association="_w9_LYNMSEd-KApFVOAwN9A">
