@@ -1,122 +1,42 @@
-
--- Ecore: http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/package-summary.html
--- TODO: 
---       [Support for additional commands (controller, database, finder, etc.)]
---       [Refactor 'getRooType']
---       [Package names]
 		  
 -- Roo log
 query Ecore2Roo = Ecore!EPackage.allInstances() ->
     iterate(package; acc: String = '' | acc + package.toString() + '\n') ->
-        println();
+    	println();    
+	--writeTo('c:/tmp/ROO_PAPER');
+		
+uses Enum;
+uses Annotation;
+uses Entity;
 
 -- Project
 helper context Ecore!EPackage def: toString(): String =
-    if self.name <> 'ecore' 
-        then 
-            'project --topLevelPackage ' + self.name + '\n\n' 
-            + self.eClassifiers -> 
-            iterate(classifier; acc: String = '' | acc + classifier.toString() + '\n') 
-        else '' 
+    if self.name <> 'ecore' then 
+		'project' +
+	
+		-- Roo structure
+		self.eAnnotations -> 
+			iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n\n' +
+		
+		-- Persistence setup
+		'persistence setup ' + self.eAnnotations ->
+			iterate(annotation; acc: String = '' | acc + annotation.getModelCommand('persistenceSetup')) + '\n\n' +
+		
+		--1° Enums
+		self.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EEnum)) ->
+			iterate(c; acc: String = '' | acc + c.toString() + '\n') +
+		
+		--2° Entities
+		self.eClassifiers -> select(c | not c.oclIsTypeOf(Ecore!EEnum)) ->
+			iterate(c; acc: String = '' | acc + c.toString() + '\n') + '\n' +
+		
+		--3° Attributes, references, etc.
+		self.eClassifiers -> select(c | not c.oclIsTypeOf(Ecore!EEnum)) ->
+			iterate(c; acc: String = '' | acc + c.featuresToString() + '\n') +
+			
+		--Roo commands
+		self.eAnnotations -> 
+			iterate(annotation; acc: String = '' | acc + annotation.getModelCommands())
+		
+    else ''
     endif;
-
--- Entities
-helper context Ecore!EClassifier def: toString(): String =
-    'entity --class ~.domain.' + self.name + 
-	
-	-- Support for abstract classes
-	' --abstract ' + 
-	if self.abstract then
-		'true'
-	else 
-		'false'
-	endif +
-	
-	-- Inheritance
-	if not self.eSuperTypes -> isEmpty() then
-		' --extends ' + 
-		self.eSuperTypes -> iterate(superType; acc: String = '' | acc + '~.domain.' + superType.name)
-	else
-		''
-	endif +
-	
-	-- Roo details
-	self.eAnnotations -> iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n' +
-	
-	-- Attributes
-    self.eStructuralFeatures ->
-        iterate(feature; acc: String = '' | acc + feature.toString() + '\n');
-
--- Enumerations
-helper context Ecore!EEnum def: toString(): String =
-    'enum type --class ~.domain.' + self.name + 
-	
-	-- Roo details
-	self.eAnnotations -> iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n' +
-	
-    self.eLiterals ->
-        iterate(literal; acc: String = '' | acc + literal.toString() + '\n');
-
--- Enumeration literals
-helper context Ecore!EEnumLiteral def: toString(): String =
-    'enum constant --name ' + self.name +
-	
-	-- Roo details
-	self.eAnnotations -> iterate(annotation; acc: String = '' | acc + annotation.getRooDetails());
-
--- Enumeration references
-helper context Ecore!EEnum def: getRooType(feature: Ecore!EStructuralFeature ): String =
-    'enum --type ~.domain.' + self.name; 
-
--- Fields
-helper context Ecore!EStructuralFeature def: toString(): String =
-    'field ' + self.eType.getRooType(self) + ' --fieldName ' + self.name + 
-	
-	-- Roo details
-	self.eAnnotations -> iterate(annotation; acc: String = '' | acc + annotation.getRooDetails());
-
--- References and Sets
-helper context Ecore!EClassifier def: getRooType(feature: Ecore!EStructuralFeature ): String =
-    if feature.containment then
-        'set --element '
-    else
-        'reference --type '
-    endif
-    + '~.domain.' + self.name;
-
--- Primitive Types
-helper context Ecore!EDataType def: getRooType(feature: Ecore!EStructuralFeature): String =
-    Map{
-        ('EString', 'string'),
-        ('EBoolean', 'boolean'),
-        ('EBooleanObject', 'boolean'),
-        ('EByte', 'number --type java.lang.Byte'),
-        ('EByteObject', 'number --type java.lang.Byte'),
-        ('EFloat', 'number --type java.lang.Float'),
-        ('EFloatObject', 'number --type java.lang.Float'),
-        ('EShort', 'number --type java.lang.Short'),
-        ('EShortObject', 'number --type java.lang.Short'),
-        ('EDate', 'date --type java.util.Date'),
-        ('ELong', 'number --type java.lang.Long'),
-        ('ELongObject', 'number --type java.lang.Long'),
-        ('EInt', 'number --type java.lang.Integer'),
-        ('EIntegerObject', 'number --type java.lang.Integer'),
-        ('EDouble', 'number --type java.lang.Double'),
-        ('EDoubleObject', 'number --type java.lang.Double')
-        } -> get(self.name);
-        
--- Roo details
-helper context Ecore!EAnnotation def: getRooDetails(): String =
-	if self.source.startsWith('roo:') then
-		self.details 
-			-> iterate(
-				detail; acc: String = ' ' | 
-				
-				if detail.value.trim().size() > 0 then 
-					acc + '--' + detail.key + ' ' + detail.value + ' '
-				else
-					''
-				endif)
-	else
-		''
-	endif;

@@ -1,0 +1,69 @@
+library Entity;
+
+-- Entities
+helper context Ecore!EClassifier def: toString(): String =
+    'entity --class ~.domain.' + self.name + 
+	
+	-- Support for abstract classes 
+	if self.abstract then
+		' --abstract'
+	else 
+		''
+	endif +
+	
+	-- Inheritance
+	if not self.eSuperTypes -> isEmpty() then
+		' --extends ' + 
+		self.eSuperTypes -> iterate(superType; acc: String = '' | acc + '~.domain.' + superType.name)
+	else
+		''
+	endif +
+	
+	-- Roo details
+	self.eAnnotations -> iterate(annotation; acc: String = '' | acc + annotation.getRooDetails());
+
+-- Attributes, references, etc.
+helper context Ecore!EClassifier def: featuresToString(): String =	
+    self.eStructuralFeatures ->
+        iterate(feature; acc: String = '' | acc + feature.toString() + '--class ~.domain.' + self.name + '\n');
+
+
+-- Fields
+helper context Ecore!EStructuralFeature def: toString(): String =
+    'field ' + self.eType.getRooType(self) + ' --fieldName ' + self.name + ' ' +
+	
+	-- Roo details
+	self.eAnnotations -> iterate(annotation; acc: String = '' | acc + annotation.getRooDetails());
+
+-- References and Sets
+helper context Ecore!EClassifier def: getRooType(feature: Ecore!EStructuralFeature ): String =
+    if feature.containment then
+        'set --element '
+    else
+        'reference --type '
+    endif
+    + '~.domain.' + self.name;
+
+-- Primitive Types
+helper context Ecore!EDataType def: getRooType(feature: Ecore!EStructuralFeature): String =
+    Map{
+        ('EString', 'string'),
+        ('EBoolean', 'boolean'),
+        ('EBooleanObject', '--type java.lang.Boolean'),
+        ('EByte', 'number --type java.lang.Byte'),
+        ('EByteObject', 'number --type java.lang.Byte'),
+        ('EFloat', 'number --type java.lang.Float'),
+        ('EFloatObject', 'number --type java.lang.Float'),
+        ('EShort', 'number --type java.lang.Short'),
+        ('EShortObject', 'number --type java.lang.Short'),
+        ('EDate', 'date --type java.util.Date'),
+        ('ELong', 'number --type java.lang.Long'),
+        ('ELongObject', 'number --type java.lang.Long'),
+        ('EInt', 'number --type java.lang.Integer'),
+        ('EIntegerObject', 'number --type java.lang.Integer'),
+        ('EDouble', 'number --type java.lang.Double'),
+        ('EDoubleObject', 'number --type java.lang.Double')
+        } -> get(self.name);
+        
+	
+	

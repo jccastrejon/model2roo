@@ -1,0 +1,91 @@
+library Annotation;
+
+-- Default properties
+helper context String def: getDefaultProperties(): Map(String, String) = Map{
+	('topLevelPackage', 'com.model2roo'),
+	('persistenceSetupProvider', 'HIBERNATE'),
+	('persistenceSetupDatabase', 'HYPERSONIC_IN_MEMORY')
+}.get(self); 
+
+-- Properties - profiles mapping
+helper context String def: getMapping(): Map(String, String) = Map{
+	('controllerAllPackage', 'controller all --package'),
+	('persistenceSetupProvider', '--provider'),
+	('persistenceSetupDatabase', '--database'),
+	('persistenceSetupApplicationId', '--applicationId'),
+	('persistenceSetupJndiDataSource', '--jndiDataSource'),
+	('persistenceSetupDatabaseName', '--databaseName'),
+	('persistenceSetupUserName', '--userName'),
+	('persistenceSetupPassword', '--password'),
+	('seleniumTest', 'selenium test --controller'),
+	('seleniumName', '--name'),
+	('seleniumServerUrl', '--serverUrl')
+}.get(self); 
+
+helper def: groups : Set(String) = Set{
+	--'persistenceSetup',
+	'finders',
+	'controller',
+	'selenium',
+	'dod',
+	'testMock',
+	'testIntegration',
+	'controllerAll'
+};
+	
+-- Roo details
+helper context Ecore!EAnnotation def: getRooDetails(): String =
+	if self.source.startsWith('rooStructure:') then
+		self.details
+			-> iterate(
+				detail; acc: String = ' ' | 
+				
+				if detail.value.trim().size() > 0 then 
+					acc + '--' + detail.key + ' ' +
+					
+					if detail.value <> 'true' then
+						detail.value
+					else
+						''
+					endif
+						+ ' '
+				else
+					if detail.key.getDefaultProperties() <> OclUndefined then
+						acc + '--' + detail.key + ' ' + detail.key.getDefaultProperties() + ' '
+					else
+						acc + ''
+					endif
+				endif)
+	else
+		''
+	endif;
+
+helper context Ecore!EAnnotation def: getModelCommand(prefix : String): String =
+	if self.source.startsWith('rooCommand:') then
+		self.details -> select(detail | detail.key.startsWith(prefix))
+			-> iterate(
+				detail; acc: String = '' | 				
+					acc +
+					
+					if detail.value.trim().size() > 0 then 
+						detail.key.getMapping() + ' ' +
+						
+						if detail.value <> 'true' then
+							detail.value
+						else
+							''
+						endif
+							+ ' '
+					else
+						if detail.key.getDefaultProperties() <> OclUndefined then
+							detail.key.getMapping()  + ' ' + detail.key.getDefaultProperties() + ' '
+						else
+						    ''
+						endif
+					endif) + '\n'
+	else
+		''
+	endif;
+
+helper context Ecore!EAnnotation def: getModelCommands(): String =
+	thisModule.groups -> iterate(prefix; acc : String = '' | acc + self.getModelCommand(prefix));
