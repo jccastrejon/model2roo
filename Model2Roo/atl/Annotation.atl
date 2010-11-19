@@ -20,18 +20,23 @@ helper context String def: getMapping(): Map(String, String) = Map{
 	('persistencePassword', '--password'),
 	('seleniumTest', 'selenium test --controller'),
 	('seleniumName', '--name'),
-	('seleniumServerUrl', '--serverUrl')
-}.get(self); 
+	('seleniumServerUrl', '--serverUrl'),
+	('finders', 'finder add --finderName ')
+}.get(self);
+
+-- Context for properties
+helper def: contextMapping: Map(String, String) = Map{
+	('seleniumTest', '~.web.<entity>Controller'),
+	('finders', '--class ~.domain.<entity>')
+};
 
 helper def: groups : Set(String) = Set{
-	--'persistenceSetup',
-	'finder',
+	'finders',
 	'controller',
 	'selenium',
 	'dod',
 	'testMock',
-	'testIntegration',
-	'controllerAll'
+	'testIntegration'
 };
 	
 -- Roo details
@@ -61,21 +66,42 @@ helper context Ecore!EAnnotation def: getRooDetails(): String =
 		''
 	endif;
 
-helper context Ecore!EAnnotation def: getModelCommand(prefix : String): String =
+helper context Ecore!EAnnotation def: getModelCommand(prefix : String, entity: String): String =
 	if self.source.startsWith('rooCommand:') then
 		self.details -> select(detail | detail.key.startsWith(prefix))
 			-> iterate(
 				detail; acc: String = '' | 				
 					acc +
-					if detail.value.trim().size() > 0 and not detail.key.getMapping().oclIsUndefined() then 
-						detail.key.getMapping() + ' ' +
+					--'evaluating: ' + detail.key + ': ' + detail.value + ':' + detail.key.getMapping() + '\n' +
+					if detail.value.trim().size() > 0 and not detail.key.getMapping().oclIsUndefined() then
+						if detail.value.indexOf(',') > 0 then
+						-- Multiple values
+							acc + detail.value.split(',') ->
+								iterate(value; accValue: String = '' | 
+									accValue + detail.key.getMapping() + ' ' + value.trim() + ' ' +
+									if not thisModule.contextMapping.get(detail.key).oclIsUndefined() then
+										thisModule.contextMapping.get(detail.key).regexReplaceAll('<entity>', entity)
+									else ''
+									endif
+									
+									+ '\n')
 						
-						if detail.value <> 'true' then
-							detail.value
 						else
-							''
+						-- Single value
+							detail.key.getMapping() + ' ' +
+							
+							if detail.value <> 'true' then
+								detail.value
+							else
+								if not thisModule.contextMapping.get(detail.key).oclIsUndefined() then
+									thisModule.contextMapping.get(detail.key).regexReplaceAll('<entity>', entity)
+								else ''
+								endif
+							endif
 						endif
-							+ ' '
+						
+						+ ' '
+						
 					else
 						if detail.key.getDefaultProperties() <> OclUndefined then
 							detail.key.getMapping()  + ' ' + detail.key.getDefaultProperties() + ' '
@@ -87,5 +113,5 @@ helper context Ecore!EAnnotation def: getModelCommand(prefix : String): String =
 		''
 	endif;
 
-helper context Ecore!EAnnotation def: getModelCommands(): String =
-	thisModule.groups -> iterate(prefix; acc : String = '' | acc + self.getModelCommand(prefix));
+helper context Ecore!EAnnotation def: getModelCommands(entity: String): String =
+	thisModule.groups -> iterate(prefix; acc : String = '' | acc + self.getModelCommand(prefix, entity));

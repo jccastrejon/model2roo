@@ -28,25 +28,36 @@ helper context Ecore!EPackage def: toString(): String =
 		
 		+ '\n\n' +
 		
-		--1° Enums
+		-- 1. Enums
 		self.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EEnum)) ->
 			iterate(c; acc: String = '' | acc + c.toString() + '\n') +
 		
-		--2° Entities
+		-- 2. Entities
 		self.eClassifiers -> select(c | not c.oclIsTypeOf(Ecore!EEnum)) ->
 			iterate(c; acc: String = '' | acc + c.toString() + '\n') + '\n' +
 		
-		--3° Attributes, references, etc.
+		-- 3. Attributes, references, etc.
 		self.eClassifiers -> select(c | not c.oclIsTypeOf(Ecore!EEnum)) ->
 			iterate(c; acc: String = '' | acc + c.featuresToString() + '\n') +
 			
-		--Roo commands
+		-- System Roo commands
 		if self.eAnnotations -> isEmpty() then
 			'controller all --package ~.web'
 		else
 			self.eAnnotations -> 
-				iterate(annotation; acc: String = '' | acc + annotation.getModelCommands())
+				iterate(annotation; acc: String = '' | acc + annotation.getModelCommands(''))
 		endif
+		
+		+ '\n\n' +
+		
+		-- Entities Roo commands
+		self.eClassifiers -> select(class | not class.oclIsTypeOf(Ecore!EEnum)) ->
+			iterate(class; acc: String = '' | 
+				if not class.eAnnotations -> isEmpty() then
+					acc + class.eAnnotations -> 
+						iterate(annotation; accAn: String = '' | accAn + annotation.getModelCommands(class.name) + '\n')
+				else ''
+				endif)
 		
     else ''
     endif;
