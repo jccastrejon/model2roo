@@ -6,7 +6,7 @@ helper context Ecore!EClassifier def: toString(): String =
 	
 	-- Support for abstract classes 
 	if self.abstract then
-		' --abstract'
+		' --abstract true'
 	else 
 		''
 	endif +

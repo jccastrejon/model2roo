@@ -2,8 +2,7 @@
 -- Roo log
 query Ecore2Roo = Ecore!EPackage.allInstances() ->
     iterate(package; acc: String = '' | acc + package.toString() + '\n') ->
-    	println();    
-	--writeTo('c:/tmp/ROO_PAPER');
+    	println();
 		
 uses Enum;
 uses Annotation;
@@ -12,15 +11,22 @@ uses Entity;
 -- Project
 helper context Ecore!EPackage def: toString(): String =
     if self.name <> 'ecore' then 
-		'project' +
+		'project ' +
 	
-		-- Roo structure
-		self.eAnnotations -> 
-			iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n\n' +
+		-- Roo structure and Persistence setup
+		if self.eAnnotations -> isEmpty() then
+			'--topLevelPackage ' + 'topLevelPackage'.getDefaultProperties() + '.' + self.name + '\n\n' +
+			'persistence setup' + ' --provider ' + 'persistenceSetupProvider'.getDefaultProperties() 
+								 +	' --database ' + 'persistenceSetupDatabase'.getDefaultProperties()
+		else
+			self.eAnnotations -> 
+				iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n\n' +
+			
+			'persistence setup ' + self.eAnnotations ->
+				iterate(annotation; acc: String = '' | acc + annotation.getModelCommand('persistenceSetup'))
+		endif
 		
-		-- Persistence setup
-		'persistence setup ' + self.eAnnotations ->
-			iterate(annotation; acc: String = '' | acc + annotation.getModelCommand('persistenceSetup')) + '\n\n' +
+		+ '\n\n' +
 		
 		--1° Enums
 		self.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EEnum)) ->
@@ -35,8 +41,12 @@ helper context Ecore!EPackage def: toString(): String =
 			iterate(c; acc: String = '' | acc + c.featuresToString() + '\n') +
 			
 		--Roo commands
-		self.eAnnotations -> 
-			iterate(annotation; acc: String = '' | acc + annotation.getModelCommands())
+		if self.eAnnotations -> isEmpty() then
+			'controller all --package ~.web'
+		else
+			self.eAnnotations -> 
+				iterate(annotation; acc: String = '' | acc + annotation.getModelCommands())
+		endif
 		
     else ''
     endif;

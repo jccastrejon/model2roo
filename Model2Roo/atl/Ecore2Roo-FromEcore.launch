@@ -7,7 +7,11 @@
 <mapAttribute key="Input">
 <mapEntry key="IN" value="Ecore"/>
 </mapAttribute>
-<mapAttribute key="Libs"/>
+<mapAttribute key="Libs">
+<mapEntry key="Annotation" value="/Model2Roo/atl/Annotation.asm"/>
+<mapEntry key="Entity" value="/Model2Roo/atl/Entity.asm"/>
+<mapEntry key="Enum" value="/Model2Roo/atl/Enum.asm"/>
+</mapAttribute>
 <mapAttribute key="Model Handler">
 <mapEntry key="Ecore" value="EMF"/>
 </mapAttribute>
@@ -31,7 +35,7 @@
 <mapAttribute key="Output"/>
 <mapAttribute key="Path">
 <mapEntry key="Ecore" value="uri:http://www.eclipse.org/emf/2002/Ecore"/>
-<mapEntry key="IN" value="/Model2Roo/tst/ecore/PizzaShop.ecore"/>
+<mapEntry key="IN" value="/Model2Roo/tst/model/PetClinic.ecore"/>
 </mapAttribute>
 <listAttribute key="Superimpose"/>
 </launchConfiguration>
