@@ -9,7 +9,8 @@ helper context String def: getDefaultProperties(): Map(String, String) = Map{
 
 -- Properties - profiles mapping
 helper context String def: getMapping(): Map(String, String) = Map{
-	('controllerAllPackage', 'controller all --package'),
+	('controllersAll', 'controller all'),
+	('controllersPackage', '--package'),
 	('persistenceProvider', '--provider'),
 	('persistenceDatabase', '--database'),
 	('persistenceApplicationId', '--applicationId'),
@@ -24,7 +25,7 @@ helper context String def: getMapping(): Map(String, String) = Map{
 
 helper def: groups : Set(String) = Set{
 	--'persistenceSetup',
-	'finders',
+	'finder',
 	'controller',
 	'selenium',
 	'dod',
@@ -66,7 +67,6 @@ helper context Ecore!EAnnotation def: getModelCommand(prefix : String): String =
 			-> iterate(
 				detail; acc: String = '' | 				
 					acc +
-					
 					if detail.value.trim().size() > 0 and not detail.key.getMapping().oclIsUndefined() then 
 						detail.key.getMapping() + ' ' +
 						
