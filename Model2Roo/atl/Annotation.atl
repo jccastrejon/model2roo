@@ -3,20 +3,20 @@ library Annotation;
 -- Default properties
 helper context String def: getDefaultProperties(): Map(String, String) = Map{
 	('topLevelPackage', 'com.model2roo'),
-	('persistenceSetupProvider', 'HIBERNATE'),
-	('persistenceSetupDatabase', 'HYPERSONIC_IN_MEMORY')
+	('persistenceProvider', 'HIBERNATE'),
+	('persistenceDatabase', 'HYPERSONIC_IN_MEMORY')
 }.get(self); 
 
 -- Properties - profiles mapping
 helper context String def: getMapping(): Map(String, String) = Map{
 	('controllerAllPackage', 'controller all --package'),
-	('persistenceSetupProvider', '--provider'),
-	('persistenceSetupDatabase', '--database'),
-	('persistenceSetupApplicationId', '--applicationId'),
-	('persistenceSetupJndiDataSource', '--jndiDataSource'),
-	('persistenceSetupDatabaseName', '--databaseName'),
-	('persistenceSetupUserName', '--userName'),
-	('persistenceSetupPassword', '--password'),
+	('persistenceProvider', '--provider'),
+	('persistenceDatabase', '--database'),
+	('persistenceApplicationId', '--applicationId'),
+	('persistenceJndiDataSource', '--jndiDataSource'),
+	('persistenceDatabaseName', '--databaseName'),
+	('persistenceUserName', '--userName'),
+	('persistencePassword', '--password'),
 	('seleniumTest', 'selenium test --controller'),
 	('seleniumName', '--name'),
 	('seleniumServerUrl', '--serverUrl')
@@ -67,7 +67,7 @@ helper context Ecore!EAnnotation def: getModelCommand(prefix : String): String =
 				detail; acc: String = '' | 				
 					acc +
 					
-					if detail.value.trim().size() > 0 then 
+					if detail.value.trim().size() > 0 and not detail.key.getMapping().oclIsUndefined() then 
 						detail.key.getMapping() + ' ' +
 						
 						if detail.value <> 'true' then

@@ -23,7 +23,7 @@ helper context Ecore!EPackage def: toString(): String =
 				iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n\n' +
 			
 			'persistence setup ' + self.eAnnotations ->
-				iterate(annotation; acc: String = '' | acc + annotation.getModelCommand('persistenceSetup'))
+				iterate(annotation; acc: String = '' | acc + annotation.getModelCommand('persistence'))
 		endif
 		
 		+ '\n\n' +
