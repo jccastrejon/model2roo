@@ -24,7 +24,7 @@ public class Ecore2RooAnnotatedEcoreTest extends EcoreTest {
         File fileToAnnotate;
 
         // Annotate with roo profiles
-        fileToAnnotate = new File("./tst/model/toys.ecore");
+        fileToAnnotate = new File("./tst/model/PetClinic.ecore");
         Ecore2RooAnnotatedEcore.annotateEcore(fileToAnnotate, new File("./profiles/rooCommand.ecore"), new File(
                         "./profiles/rooStructure.ecore"));
 
@@ -33,6 +33,6 @@ public class Ecore2RooAnnotatedEcoreTest extends EcoreTest {
 
     @After
     public void afterTest() throws JDOMException, IOException {
-        this.removeAnnotations(new File("./tst/model/toys.ecore"));
+        //this.removeAnnotations(new File("./tst/model/toys.ecore"));
     }
 }
