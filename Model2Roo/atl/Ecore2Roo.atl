@@ -1,8 +1,7 @@
 		  
 -- Roo log
 query Ecore2Roo = Ecore!EPackage.allInstances() ->
-    iterate(package; acc: String = '' | acc + package.toString() + '\n') ->
-    	println();
+    iterate(package; acc: String = '' | acc + package.toString() + '\n') -> println();
 		
 uses Enum;
 uses Annotation;
