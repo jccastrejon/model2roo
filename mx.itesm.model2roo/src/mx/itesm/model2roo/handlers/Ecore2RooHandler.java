@@ -1,43 +1,42 @@
 package mx.itesm.model2roo.handlers;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.ui.console.MessageConsoleStream;
 
 /**
+ * Handler to transform an Ecore model to a Spring Roo application.
  * 
  * @author jccastrejon
  * 
  */
-public class Ecore2RooHandler extends AbstractHandler {
+public class Ecore2RooHandler extends Model2RooHandler {
 
     @Override
     @SuppressWarnings("unchecked")
     public Object execute(final ExecutionEvent event) throws ExecutionException {
         File ecoreFile;
         List<EPackage> ecorePackages;
-        List<String> incorrectPackages;
+        MessageConsoleStream consoleStream;
 
-        incorrectPackages = new ArrayList<String>();
+        consoleStream = this.getConsoleStream();
         ecorePackages = (List<EPackage>) Util.getSelectedItems(event);
+
+        this.clearConsole();
         for (EPackage ecorePackage : ecorePackages) {
             try {
                 ecoreFile = Util.getEcoreFile(ecorePackage);
-                Util.ecore2Roo(this, ecoreFile);
+                consoleStream.println("Generating script for package: " + ecorePackage.getName() + "...");
+                Util.ecore2Roo(this, ecoreFile, consoleStream);
             } catch (Exception e) {
-                incorrectPackages.add(ecorePackage.getName());
+                consoleStream.println("The Ecore package could not be successfully transformed to a Spring Roo script");
                 e.printStackTrace();
             }
         }
-
-        // Output results
-        Util.outputMessage(event, "The Spring Roo scripts were successfully generated",
-                        "An error occurred while generating scripts for packages: ", incorrectPackages);
 
         return null;
     }

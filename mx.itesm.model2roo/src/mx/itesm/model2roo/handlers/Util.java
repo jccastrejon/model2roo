@@ -16,11 +16,9 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.m2m.atl.common.ATLLogFormatter;
 import org.eclipse.m2m.atl.common.ATLLogger;
@@ -30,10 +28,11 @@ import org.eclipse.m2m.atl.engine.vm.AtlLauncher;
 import org.eclipse.m2m.atl.engine.vm.AtlModelHandler;
 import org.eclipse.m2m.atl.engine.vm.ModelLoader;
 import org.eclipse.m2m.atl.engine.vm.nativelib.ASMModel;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
+ * Model2Roo utility methods
  * 
  * @author jccastrejon
  * 
@@ -41,6 +40,42 @@ import org.eclipse.ui.handlers.HandlerUtil;
 public class Util {
 
     /**
+     * Thread in which Roo scripts can be executed.
+     * 
+     * @author jccastrejon
+     * 
+     */
+    static class RooThread implements Runnable {
+        private File rooFile;
+        private MessageConsoleStream consoleStream;
+
+        public RooThread(final File rooFile, final MessageConsoleStream consoleStream) {
+            this.rooFile = rooFile;
+            this.consoleStream = consoleStream;
+        }
+
+        @Override
+        public void run() {
+            Process process;
+            int processCode;
+
+            try {
+                process = Runtime.getRuntime().exec("roo script --file " + rooFile.getName(), null,
+                                rooFile.getParentFile());
+                processCode = process.waitFor();
+                if (processCode != 0) {
+                    throw new RuntimeException();
+                } else {
+                    consoleStream.println("Roo script successfully executed!");
+                }
+            } catch (Exception e) {
+                consoleStream.println("The Roo script could not be successfully executed");
+            }
+        }
+    }
+
+    /**
+     * Get the current selected elements when a plugin operation is executed.
      * 
      * @param event
      * @return
@@ -56,6 +91,8 @@ public class Util {
     }
 
     /**
+     * Get the URL of the given resourceName, according to the class path of the
+     * current object.
      * 
      * @param currentObject
      * @param resourceName
@@ -72,6 +109,8 @@ public class Util {
     }
 
     /**
+     * Get an Input Stream of the given resourceName, according to the class
+     * path of the current object.
      * 
      * @param currentObject
      * @param resourceName
@@ -88,35 +127,16 @@ public class Util {
     }
 
     /**
-     * 
-     * @param event
-     * @param successMessage
-     * @param failMessage
-     * @param errors
-     * @throws ExecutionException
-     */
-    public static void outputMessage(final ExecutionEvent event, final String successMessage, final String failMessage,
-                    final List<?> errors) throws ExecutionException {
-        String outputMessage;
-        IWorkbenchWindow window;
-
-        outputMessage = successMessage;
-        if ((errors != null) && (!errors.isEmpty())) {
-            outputMessage = failMessage + errors.toString();
-        }
-
-        // Output results
-        window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-        MessageDialog.openInformation(window.getShell(), "Model2Roo", outputMessage);
-    }
-
-    /**
+     * Transform from an Ecore model to a Spring Roo application.
      * 
      * @param currentObject
      * @param ecoreFile
+     * @param consoleStream
      * @throws IOException
+     * @throws InterruptedException
      */
-    public static void ecore2Roo(final Object currentObject, final File ecoreFile) throws IOException {
+    public static void ecore2Roo(final Object currentObject, final File ecoreFile,
+                    final MessageConsoleStream consoleStream) throws IOException, InterruptedException {
         URL atlQuery;
         File rooFile;
         Handler rooHandler;
@@ -155,11 +175,18 @@ public class Util {
         transformationModels.put("Ecore", ecoreMetaModel);
         transformationModels.put("IN", modelLoader.loadModel("IN", ecoreMetaModel, new BufferedInputStream(
                         new FileInputStream(ecoreFile))));
+        consoleStream.println("Generating Roo script: " + rooFile.getName() + "...");
         AtlLauncher.getDefault().launch(atlQuery, libraries, transformationModels, Collections.EMPTY_MAP,
                         Collections.EMPTY_LIST, Collections.EMPTY_MAP);
+        consoleStream.println("Roo script successfully generated!");
+
+        // Execute Roo script
+        consoleStream.println("Executing Roo script...");
+        new Thread(new RooThread(rooFile, consoleStream)).start();
     }
 
     /**
+     * Get the Ecore file associated to the given Ecore package.
      * 
      * @param ecorePackage
      * @return
@@ -177,6 +204,7 @@ public class Util {
     }
 
     /**
+     * Get the Ecore file associated to the given Eclipse resource.
      * 
      * @param resource
      * @return
@@ -194,6 +222,7 @@ public class Util {
     }
 
     /**
+     * Get the UML file associated to the given UML package.
      * 
      * @param umlPackage
      * @return
@@ -211,6 +240,7 @@ public class Util {
     }
 
     /**
+     * Get the current workspace path.
      * 
      * @return
      */
@@ -219,6 +249,7 @@ public class Util {
     }
 
     /**
+     * Get the class loader associated to the specified object.
      * 
      * @param currentObject
      * @return

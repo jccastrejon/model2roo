@@ -2,45 +2,44 @@ package mx.itesm.model2roo.handlers;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import mx.itesm.model2roo.UmlProfile2Ecore;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.uml2.uml.util.UMLUtil;
 import org.jdom.JDOMException;
 
 /**
- * Handler to transform from UML to Ecore.
+ * Handler to transform an UML model to a Spring Roo application.
  * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
+ * @author jccastrejon
+ * 
  */
-public class Uml2RooHandler extends AbstractHandler {
+public class Uml2RooHandler extends Model2RooHandler {
 
     /**
      * Transformation process.
      */
     @SuppressWarnings("unchecked")
     public Object execute(final ExecutionEvent event) throws ExecutionException {
-        URL atlQuery;
         List<Resource> ecoreResources;
-        List<String> incorrectPackages;
+        MessageConsoleStream consoleStream;
         List<org.eclipse.uml2.uml.Package> umlPackages;
 
         // Transform each of the selected UML packages
-        incorrectPackages = new ArrayList<String>();
-        atlQuery = Util.getResourceURL(this, "/atl/Ecore2Roo.asm");
+        consoleStream = this.getConsoleStream();
         umlPackages = (List<org.eclipse.uml2.uml.Package>) Util.getSelectedItems(event);
+
+        this.clearConsole();
         for (org.eclipse.uml2.uml.Package umlPackage : umlPackages) {
             // Uml2Ecore
             ecoreResources = this.transformUmlPackageToEcoreResources(umlPackage);
@@ -48,16 +47,14 @@ public class Uml2RooHandler extends AbstractHandler {
             // Ecore2Roo
             for (Resource resource : ecoreResources) {
                 try {
-                    this.transformEcoreResourceToRooScript(umlPackage, resource, atlQuery);
+                    consoleStream.println("Generating script for package: " + umlPackage.getName() + "...");
+                    this.transformEcoreResourceToRooScript(umlPackage, resource, consoleStream);
                 } catch (Exception e) {
-                    incorrectPackages.add(umlPackage.getName());
+                    consoleStream.println("The Uml package could not be successfully transformed to a Spring Roo script");
                     e.printStackTrace();
                 }
             }
         }
-
-        Util.outputMessage(event, "The Spring Roo scripts were successfully generated",
-                        "An error occurred while generating scripts for packages: ", incorrectPackages);
         return null;
     }
 
@@ -93,12 +90,14 @@ public class Uml2RooHandler extends AbstractHandler {
      * 
      * @param umlPackage
      * @param resource
-     * @param atlQuery
+     * @param consoleStream
      * @throws IOException
      * @throws JDOMException
+     * @throws InterruptedException
      */
     private void transformEcoreResourceToRooScript(final org.eclipse.uml2.uml.Package umlPackage,
-                    final Resource resource, final URL atlQuery) throws IOException, JDOMException {
+                    final Resource resource, MessageConsoleStream consoleStream) throws IOException, JDOMException,
+                    InterruptedException {
         File umlFile;
         File ecoreFile;
 
@@ -111,6 +110,6 @@ public class Uml2RooHandler extends AbstractHandler {
         UmlProfile2Ecore.transformUmlProfiles(ecoreFile, umlFile);
 
         // Uml2Roo
-        Util.ecore2Roo(this, ecoreFile);
+        Util.ecore2Roo(this, ecoreFile, consoleStream);
     }
 }

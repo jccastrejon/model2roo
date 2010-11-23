@@ -7,18 +7,18 @@ import java.util.List;
 
 import mx.itesm.model2roo.Ecore2RooAnnotatedEcore;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.ui.console.MessageConsoleStream;
 
 /**
- * Handler to transform from UML to Ecore.
+ * Handler to annotate an Ecore model with the Spring Roo details
  * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
+ * @author jccastrejon
+ * 
  */
-public class Ecore2RooAnnotatedEcoreHandler extends AbstractHandler {
+public class Ecore2RooAnnotatedEcoreHandler extends Model2RooHandler {
 
     /**
      * Names of the roo annotations files.
@@ -40,24 +40,24 @@ public class Ecore2RooAnnotatedEcoreHandler extends AbstractHandler {
         File ecoreFile;
         InputStream[] rooAnnotations;
         List<EPackage> ecorePackages;
-        List<String> incorrectPackages;
+        MessageConsoleStream consoleStream;
 
+        consoleStream = this.getConsoleStream();
         rooAnnotations = this.getRooAnnotations();
-        incorrectPackages = new ArrayList<String>();
         ecorePackages = (List<EPackage>) Util.getSelectedItems(event);
+
+        this.clearConsole();
         for (EPackage ecorePackage : ecorePackages) {
             try {
                 ecoreFile = Util.getEcoreFile(ecorePackage);
+                consoleStream.println("Annotating Ecore package " + ecorePackage.getName() + "...");
                 Ecore2RooAnnotatedEcore.annotateEcore(ecoreFile, rooAnnotations);
+                consoleStream.println("Ecore package successfully annotated!");
             } catch (Exception e) {
-                incorrectPackages.add(ecorePackage.getName());
+                consoleStream.println("The Ecore package could not be successfully annotated");
                 e.printStackTrace();
             }
         }
-
-        // Output results
-        Util.outputMessage(event, "The Ecore models were correctly annotated",
-                        "An error occurred while annotating packages: ", incorrectPackages);
 
         return null;
     }
