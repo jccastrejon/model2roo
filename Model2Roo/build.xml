@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Model2Roo" basedir="." default="jar">
+<project name="Model2Roo" basedir="." default="distribute">
 	<property file="build.properties" />
 
 	<path id="master-classpath">
@@ -70,7 +70,7 @@
 	        </fail>
 	</target>
 
-	<!-- Distribute -->
+	<!-- Package -->
 	<target name="jar" depends="build">
 		<delete dir="${dist.dir}" />
 		<mkdir dir="${dist.dir}" />
@@ -84,6 +84,15 @@
 			</fileset>
 		</copy>
 		<delete file="${dist.dir}/MANIFEST.MF" />
+	</target>
+
+	<!-- Distribute -->
+	<target name="distribute" depends="jar">
+		<copy todir="${plugin.dir}/lib" preservelastmodified="true">
+			<fileset dir="${dist.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
 	</target>
 
 </project>
