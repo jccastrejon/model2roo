@@ -4,8 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="petclinic"
     nsURI="http://petclinic/1.0" nsPrefix="petclinic">
   <eAnnotations source="rooCommand:RooModelCommand">
+    <details key="loggingLevel" value="DEBUG"/>
+    <details key="loggingPackage" value=""/>
     <details key="controllersAll" value="true"/>
-    <details key="controllersPackage" value="~.web"/>
     <details key="persistenceProvider" value=""/>
     <details key="persistenceDatabase" value=""/>
     <details key="persistenceApplicationId" value=""/>
@@ -13,6 +14,7 @@
     <details key="persistenceDatabaseName" value=""/>
     <details key="persistenceUserName" value=""/>
     <details key="persistencePassword" value=""/>
+    <details key="webLanguages" value="de, es"/>
   </eAnnotations>
   <eAnnotations source="rooStructure:RooModel">
     <details key="topLevelPackage" value="com.springsource.petclinic"/>
@@ -67,14 +69,13 @@
       <details key="testIntegration" value=""/>
       <details key="dod" value=""/>
       <details key="finders" value=""/>
-      <details key="controllerClass" value=""/>
       <details key="controllerPath" value=""/>
       <details key="controllerDisallowedOperations" value=""/>
       <details key="seleniumName" value=""/>
       <details key="seleniumServerUrl" value=""/>
     </eAnnotations>
     <eAnnotations source="rooStructure:RooEntity">
-      <details key="testAutomatically" value="true"/>
+      <details key="testAutomatically" value=""/>
       <details key="table" value=""/>
       <details key="identifierField" value=""/>
       <details key="identifierColumn" value=""/>
@@ -199,7 +200,6 @@
       <details key="testIntegration" value=""/>
       <details key="dod" value=""/>
       <details key="finders" value=""/>
-      <details key="controllerClass" value=""/>
       <details key="controllerPath" value=""/>
       <details key="controllerDisallowedOperations" value=""/>
       <details key="seleniumName" value=""/>
@@ -238,7 +238,6 @@
       <details key="testIntegration" value=""/>
       <details key="dod" value=""/>
       <details key="finders" value=""/>
-      <details key="controllerClass" value=""/>
       <details key="controllerPath" value=""/>
       <details key="controllerDisallowedOperations" value=""/>
       <details key="seleniumName" value=""/>
@@ -274,7 +273,7 @@
       <eAnnotations source="rooStructure:RooFieldEnum">
         <details key="enumType" value=""/>
         <details key="transient" value=""/>
-        <details key="notNull" value="false"/>
+        <details key="notNull" value=""/>
         <details key="nullRequired" value=""/>
         <details key="comment" value=""/>
         <details key="permitReservedWords" value=""/>
@@ -290,7 +289,6 @@
       <details key="testIntegration" value=""/>
       <details key="dod" value=""/>
       <details key="finders" value="findPetsByNameAndWeight, findPetsByOwner, findPetsBySendRemindersAndWeightLessThan, findPetsByTypeAndNameLike"/>
-      <details key="controllerClass" value=""/>
       <details key="controllerPath" value=""/>
       <details key="controllerDisallowedOperations" value=""/>
       <details key="seleniumName" value=""/>
@@ -306,14 +304,14 @@
       <details key="mappedSuperclass" value=""/>
       <details key="serializable" value=""/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sendRemainders" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sendReminders" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="rooStructure:RooFieldBoolean">
         <details key="assertFalse" value=""/>
         <details key="assertTrue" value=""/>
-        <details key="primitive" value=""/>
+        <details key="primitive" value="true"/>
         <details key="column" value=""/>
         <details key="transient" value=""/>
-        <details key="notNull" value=""/>
+        <details key="notNull" value="true"/>
         <details key="nullRequired" value=""/>
         <details key="comment" value=""/>
         <details key="permitReservedWords" value=""/>
@@ -323,10 +321,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="rooStructure:RooFieldString">
         <details key="regexp" value=""/>
-        <details key="sizeMin" value=""/>
+        <details key="sizeMin" value="1"/>
         <details key="sizeMax" value=""/>
         <details key="transient" value=""/>
-        <details key="notNull" value=""/>
+        <details key="notNull" value="true"/>
         <details key="nullRequired" value=""/>
         <details key="comment" value=""/>
         <details key="permitReservedWords" value=""/>
@@ -339,12 +337,12 @@
         <details key="decimalMax" value=""/>
         <details key="digitsInteger" value=""/>
         <details key="digitsFraction" value=""/>
-        <details key="min" value=""/>
+        <details key="min" value="0"/>
         <details key="max" value=""/>
         <details key="primitive" value=""/>
         <details key="column" value=""/>
         <details key="transient" value=""/>
-        <details key="notNull" value=""/>
+        <details key="notNull" value="true"/>
         <details key="nullRequired" value=""/>
         <details key="comment" value=""/>
         <details key="permitReservedWords" value=""/>
@@ -355,7 +353,7 @@
       <eAnnotations source="rooStructure:RooFieldEnum">
         <details key="enumType" value=""/>
         <details key="transient" value=""/>
-        <details key="notNull" value=""/>
+        <details key="notNull" value="true"/>
         <details key="nullRequired" value=""/>
         <details key="comment" value=""/>
         <details key="permitReservedWords" value=""/>
@@ -384,7 +382,6 @@
       <details key="testIntegration" value=""/>
       <details key="dod" value=""/>
       <details key="finders" value="findVisitsByDescriptionAndVisitDate, findVisitsByVisitDateBetween, findVisitsByDescriptionLike"/>
-      <details key="controllerClass" value=""/>
       <details key="controllerPath" value=""/>
       <details key="controllerDisallowedOperations" value=""/>
       <details key="seleniumName" value=""/>

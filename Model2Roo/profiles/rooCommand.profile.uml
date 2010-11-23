@@ -98,9 +98,6 @@
     <ownedAttribute xmi:id="_W4KvEMwtEd-i0OdaSaaeAQ" name="finders">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_bvTdIMwtEd-i0OdaSaaeAQ" name="controllerClass">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_e4jtEMwtEd-i0OdaSaaeAQ" name="controllerPath">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
@@ -127,9 +124,6 @@
     <ownedAttribute xmi:id="_LQNhYN-dEd-WQKqfvios0g" name="controllersAll">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_lM474tMSEd-KApFVOAwN9A" name="controllersPackage">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_sToqMNMUEd-KApFVOAwN9A" name="persistenceProvider">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
@@ -153,6 +147,15 @@
     </ownedAttribute>
     <ownedAttribute xmi:id="_rcg_gNMVEd-KApFVOAwN9A" name="base_Model" association="_rcgYcNMVEd-KApFVOAwN9A">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Model"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_1U8nAPchEd-McuiygbqZQg" name="webLanguages">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_G94zoPciEd-McuiygbqZQg" name="loggingLevel">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_IZQlcPciEd-McuiygbqZQg" name="loggingPackage">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_qKW0ENMVEd-KApFVOAwN9A" name="Class_RooEntityCommand" memberEnd="_qKW0EdMVEd-KApFVOAwN9A _qKW0EtMVEd-KApFVOAwN9A">

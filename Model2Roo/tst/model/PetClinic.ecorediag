@@ -138,7 +138,7 @@
     <children xmi:type="notation:Node" xmi:id="_ycr3IPQFEd-UZZZKeJjbMQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_ycr3IfQFEd-UZZZKeJjbMQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_zpFY0PQFEd-UZZZKeJjbMQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="PetClinic.ecore#//Pet/sendRemainders"/>
+        <element xmi:type="ecore:EAttribute" href="PetClinic.ecore#//Pet/sendReminders"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_zpFY0fQFEd-UZZZKeJjbMQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_2MOD8PQFEd-UZZZKeJjbMQ" type="2001">
@@ -164,7 +164,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ycrQEfQFEd-UZZZKeJjbMQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="PetClinic.ecore#//Pet"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ycrQEvQFEd-UZZZKeJjbMQ" x="212" y="268"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ycrQEvQFEd-UZZZKeJjbMQ" x="220" y="268"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_8u7jAPQFEd-UZZZKeJjbMQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_8u8KEPQFEd-UZZZKeJjbMQ" type="4001"/>

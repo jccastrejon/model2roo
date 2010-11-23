@@ -42,7 +42,7 @@ helper context Ecore!EPackage def: toString(): String =
 			
 		-- System Roo commands
 		if self.eAnnotations -> isEmpty() then
-			'controller all --package ~.web'
+			'controllersAll'.getDefaultProperties()
 		else
 			self.eAnnotations -> 
 				iterate(annotation; acc: String = '' | acc + annotation.getModelCommands(''))
