@@ -122,6 +122,7 @@ public class Util {
         Handler rooHandler;
         ModelLoader modelLoader;
         ASMModel ecoreMetaModel;
+        Map<String, URL> libraries;
         AtlEMFModelHandler modelHandler;
         Map<String, Object> transformationModels;
 
@@ -139,6 +140,12 @@ public class Util {
         rooHandler.setLevel(Level.ALL);
         ATLLogger.getLogger().addHandler(rooHandler);
 
+        // Load query libraries
+        libraries = new HashMap<String, URL>();
+        libraries.put("Enum", Util.getResourceURL(currentObject, "/atl/Enum.asm"));
+        libraries.put("Annotation", Util.getResourceURL(currentObject, "/atl/Annotation.asm"));
+        libraries.put("Entity", Util.getResourceURL(currentObject, "/atl/Entity.asm"));
+
         // Execute the ATL query
         atlQuery = Util.getResourceURL(currentObject, "/atl/Ecore2Roo.asm");
         modelHandler = (AtlEMFModelHandler) AtlModelHandler.getDefault(AtlModelHandler.AMH_EMF);
@@ -148,7 +155,7 @@ public class Util {
         transformationModels.put("Ecore", ecoreMetaModel);
         transformationModels.put("IN", modelLoader.loadModel("IN", ecoreMetaModel, new BufferedInputStream(
                         new FileInputStream(ecoreFile))));
-        AtlLauncher.getDefault().launch(atlQuery, Collections.EMPTY_MAP, transformationModels, Collections.EMPTY_MAP,
+        AtlLauncher.getDefault().launch(atlQuery, libraries, transformationModels, Collections.EMPTY_MAP,
                         Collections.EMPTY_LIST, Collections.EMPTY_MAP);
     }
 
