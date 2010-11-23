@@ -16,8 +16,8 @@ helper context Ecore!EPackage def: toString(): String =
 		-- Roo structure and Persistence setup
 		if self.eAnnotations -> isEmpty() then
 			'--topLevelPackage ' + 'topLevelPackage'.getDefaultProperties() + '.' + self.name + '\n\n' +
-			'persistence setup' + ' --provider ' + 'persistenceSetupProvider'.getDefaultProperties() 
-								 +	' --database ' + 'persistenceSetupDatabase'.getDefaultProperties()
+			'persistence setup' + ' --provider ' + 'persistenceProvider'.getDefaultProperties() 
+								 +	' --database ' + 'persistenceDatabase'.getDefaultProperties()
 		else
 			self.eAnnotations -> 
 				iterate(annotation; acc: String = '' | acc + annotation.getRooDetails()) + '\n\n' +
@@ -42,7 +42,7 @@ helper context Ecore!EPackage def: toString(): String =
 			
 		-- System Roo commands
 		if self.eAnnotations -> isEmpty() then
-			'controllersAll'.getDefaultProperties()
+			'controllersAll'.getMapping() + ' ' + 'controllersAll'.getDefaultProperties()
 		else
 			self.eAnnotations -> 
 				iterate(annotation; acc: String = '' | acc + annotation.getModelCommands(''))
