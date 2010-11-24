@@ -16,6 +16,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 
 import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -68,8 +69,25 @@ public class Util {
                 } else {
                     consoleStream.println("Roo script successfully executed!");
                 }
+                this.refreshWorkspace();
             } catch (Exception e) {
                 consoleStream.println("The Roo script could not be successfully executed");
+            }
+        }
+        
+        /**
+         * 
+         */
+        private void refreshWorkspace() {
+            IProject[] projects;
+
+            projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+            for (IProject project : projects) {
+                try {
+                    project.refreshLocal(IProject.DEPTH_INFINITE, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
