@@ -139,6 +139,7 @@ public class Util {
                     final MessageConsoleStream consoleStream) throws IOException, InterruptedException {
         URL atlQuery;
         File rooFile;
+        File pomFile;
         Handler rooHandler;
         ModelLoader modelLoader;
         ASMModel ecoreMetaModel;
@@ -150,6 +151,16 @@ public class Util {
         rooFile = new File(ecoreFile.getAbsolutePath().replace(".ecore", ".roo"));
         rooFile.delete();
         rooFile.createNewFile();
+
+        // Delete the results of previous executions
+        Util.deleteDirectory(new File(rooFile.getParentFile(), "/src"));
+        pomFile = new File(rooFile.getParentFile(), "pom.xml");
+        if (pomFile.exists()) {
+            pomFile.delete();
+        }
+        if (rooFile.exists()) {
+            rooFile.delete();
+        }
 
         // Ours will be the only ATL logger
         for (Handler logHandler : ATLLogger.getLogger().getHandlers()) {
@@ -263,5 +274,25 @@ public class Util {
         }
 
         return returnValue;
+    }
+
+    /**
+     * Delete a non-empty directory
+     * 
+     * @param path
+     * @return
+     */
+    private static boolean deleteDirectory(File path) {
+        if (path.exists()) {
+            File[] files = path.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    deleteDirectory(files[i]);
+                } else {
+                    files[i].delete();
+                }
+            }
+        }
+        return (path.delete());
     }
 }
