@@ -15,16 +15,18 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo.handlers;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,6 +70,55 @@ public class Util {
         private File rooFile;
         private MessageConsoleStream consoleStream;
 
+        /**
+         * Class that redirects Roo messages to an Eclipse console. Based on
+         * http://www.javaworld.com/jw-12-2000/jw-1229-traps.html?page=4
+         * 
+         * @author jccastrejon
+         * 
+         */
+        class RooConsoleStream extends Thread {
+            InputStream inputStream;
+            MessageConsoleStream consoleStream;
+
+            /**
+             * Full constructor.
+             * 
+             * @param inputStream
+             * @param type
+             * @param consoleStream
+             */
+            RooConsoleStream(InputStream inputStream, final MessageConsoleStream consoleStream) {
+                this.inputStream = inputStream;
+                this.consoleStream = consoleStream;
+            }
+
+            public void run() {
+                try {
+                    String line;
+                    BufferedReader bufferedReader;
+                    InputStreamReader inputStreamReader;
+
+                    inputStreamReader = new InputStreamReader(inputStream);
+                    bufferedReader = new BufferedReader(inputStreamReader);
+
+                    line = null;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        // Remove characters intended for console output
+                        consoleStream.println(line.replaceAll("\\[\\d*m", ""));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        /**
+         * Full constructor.
+         * 
+         * @param rooFile
+         * @param consoleStream
+         */
         public RooThread(final File rooFile, final MessageConsoleStream consoleStream) {
             this.rooFile = rooFile;
             this.consoleStream = consoleStream;
@@ -77,22 +128,35 @@ public class Util {
         public void run() {
             Process process;
             int processCode;
+            RooConsoleStream errorStream;
+            RooConsoleStream outputStream;
 
             try {
                 process = Runtime.getRuntime().exec("roo script --file " + rooFile.getName(), null,
                                 rooFile.getParentFile());
+
+                errorStream = new RooConsoleStream(process.getErrorStream(), consoleStream);
+                outputStream = new RooConsoleStream(process.getInputStream(), consoleStream);
+
+                // Prepare console streams and wait for the Roo execution
+                errorStream.start();
+                outputStream.start();
                 processCode = process.waitFor();
+
+                // Check if there was any error during the Roo execution
                 if (processCode != 0) {
                     throw new RuntimeException();
                 } else {
                     consoleStream.println("Roo script successfully executed!");
                 }
-                //this.refreshWorkspace();
+
+                // Show to the user the results of the Roo execution
+                this.refreshWorkspace();
             } catch (Exception e) {
                 consoleStream.println("The Roo script could not be successfully executed");
             }
         }
-        
+
         /**
          * 
          */
