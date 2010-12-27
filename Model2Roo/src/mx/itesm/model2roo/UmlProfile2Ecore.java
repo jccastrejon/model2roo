@@ -15,7 +15,7 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo;
 
 import java.beans.Introspector;
@@ -96,6 +96,7 @@ public class UmlProfile2Ecore {
     }
 
     /**
+     * Associate stereotypes to the elements of an XML document.
      * 
      * @param ecoreDocument
      * @param umlDocument
@@ -155,6 +156,7 @@ public class UmlProfile2Ecore {
     }
 
     /**
+     * Associate a stereotype to an XML element.
      * 
      * @param ecoreElement
      * @param umlElement

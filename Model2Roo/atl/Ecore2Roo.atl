@@ -17,7 +17,8 @@
 -- along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
 --
 
--- Roo log
+-- Starting point for the Model2Roo transformation.
+-- This Query generates a Spring Roo log file.
 query Ecore2Roo = Ecore!EPackage.allInstances() ->
     iterate(package; acc: String = '' | acc + package.toString() + '\n') -> println();
 		

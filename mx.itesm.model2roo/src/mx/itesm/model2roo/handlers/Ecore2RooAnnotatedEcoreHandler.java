@@ -15,7 +15,7 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo.handlers;
 
 import java.io.File;
@@ -49,9 +49,6 @@ public class Ecore2RooAnnotatedEcoreHandler extends Model2RooHandler {
         rooAnnotationsNames.add("profiles/rooStructure.ecore");
     }
 
-    /**
-     * 
-     */
     @SuppressWarnings("unchecked")
     @Override
     public Object execute(final ExecutionEvent event) throws ExecutionException {
@@ -81,6 +78,7 @@ public class Ecore2RooAnnotatedEcoreHandler extends Model2RooHandler {
     }
 
     /**
+     * Get the available Model2Roo annotations.
      * 
      * @return
      */

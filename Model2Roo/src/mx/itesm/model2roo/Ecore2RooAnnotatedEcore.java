@@ -15,7 +15,7 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo;
 
 import java.io.BufferedInputStream;
@@ -39,6 +39,7 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
 /**
+ * Adds Model2Roo annotations to the elements of an Ecore file.
  * 
  * @author jccastrejon
  * 

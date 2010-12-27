@@ -15,13 +15,15 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo;
 
 import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
+ * Identifies elements of an XML documents that match an specified annotation
+ * name.
  * 
  * @author jccastrejon
  * 
@@ -29,38 +31,41 @@ import org.jdom.filter.Filter;
 public class RooAnnotationFilter implements Filter {
 
     /**
+     * 
+     */
+    private static String annotationName;
+
+    /**
+     * Singleton filter.
+     */
+    private static RooAnnotationFilter filter;
+
+    /**
      * Serial Id.
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
-     */
-    private static RooAnnotationFilter filter;
-
-    /**
-     * 
+     * Default constructor.
      */
     private RooAnnotationFilter() {
     }
-    
-    private static String annotationName;
 
     /**
      * 
      * @return
      */
-    public static RooAnnotationFilter getFilter(final String annotationFilename) {
+    public static RooAnnotationFilter getFilter(final String annotationName) {
         if (RooAnnotationFilter.filter == null) {
             RooAnnotationFilter.filter = new RooAnnotationFilter();
         }
 
-        annotationName = annotationFilename;
+        RooAnnotationFilter.annotationName = annotationName;
         return RooAnnotationFilter.filter;
     }
 
     @Override
-    public boolean matches(Object content) {
+    public boolean matches(final Object content) {
         Element element;
         boolean returnValue;
 

@@ -15,7 +15,7 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo.handlers;
 
 import java.io.File;
@@ -77,6 +77,7 @@ public class Uml2RooHandler extends Model2RooHandler {
     }
 
     /**
+     * Get the list of Ecore resources associated to the specified UML package.
      * 
      * @param umlPackage
      * @return
@@ -105,6 +106,8 @@ public class Uml2RooHandler extends Model2RooHandler {
     }
 
     /**
+     * Get the Spring Roo scripts that correspond to the Ecore resources
+     * associated to the specified UML package.
      * 
      * @param umlPackage
      * @param resource

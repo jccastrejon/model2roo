@@ -15,7 +15,7 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo;
 
 import static org.junit.Assert.assertEquals;
@@ -33,12 +33,15 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
 /**
+ * Base class for Annotation test.
  * 
  * @author jccastrejon
  * 
  */
 public abstract class EcoreTest {
+
     /**
+     * Annotate the classifiers of an Ecore file.
      * 
      * @param ecoreFile
      * @throws JDOMException
@@ -65,6 +68,7 @@ public abstract class EcoreTest {
     }
 
     /**
+     * Remove all of the Annotations associated to an Ecore file.
      * 
      * @param ecoreFile
      * @throws JDOMException
@@ -92,6 +96,7 @@ public abstract class EcoreTest {
     }
 
     /**
+     * Get the JDOM document that corresponds to the specified XML file.
      * 
      * @param xmlFile
      * @return

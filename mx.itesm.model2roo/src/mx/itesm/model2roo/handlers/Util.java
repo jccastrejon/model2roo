@@ -53,7 +53,7 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
- * Model2Roo utility methods
+ * Model2Roo utility methods.
  * 
  * @author jccastrejon
  * 

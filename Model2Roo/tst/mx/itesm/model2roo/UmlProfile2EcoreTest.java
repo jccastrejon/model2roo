@@ -15,7 +15,7 @@
 
  * You should have received a copy of the GNU General Public License
  * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package mx.itesm.model2roo;
 
 import java.io.File;
@@ -28,6 +28,7 @@ import org.junit.After;
 import org.junit.Test;
 
 /**
+ * Test the correct annotation of UML elements.
  * 
  * @author jccastrejon
  * 
@@ -52,6 +53,6 @@ public class UmlProfile2EcoreTest extends EcoreTest {
 
     @After
     public void afterTest() throws JDOMException, IOException {
-        this.removeAnnotations(new File("./tst/model/toys.ecore"));
+        this.removeAnnotations(new File("./tst/model/PetClinic.ecore"));
     }
 }
