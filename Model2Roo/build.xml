@@ -93,6 +93,11 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
+		<copy todir="${plugin.dir}/profiles" preservelastmodified="true">
+			<fileset dir="${profiles.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>		
 	</target>
 
 </project>

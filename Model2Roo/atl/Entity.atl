@@ -43,7 +43,11 @@ helper context Ecore!EClassifier def: toString(): String =
 -- Attributes, references, etc.
 helper context Ecore!EClassifier def: featuresToString(): String =	
     self.eStructuralFeatures ->
-        iterate(feature; acc: String = '' | acc + feature.toString() + '--class ~.domain.' + self.name + '\n');
+        iterate(feature; acc: String = '' | 
+        	acc + 
+			if not feature.eType.oclIsUndefined() then
+				feature.toString() + '--class ~.domain.' + self.name + '\n'
+			else '' endif);
 
 
 -- Fields

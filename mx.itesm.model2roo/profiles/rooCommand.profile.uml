@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_2KGWYMwsEd-i0OdaSaaeAQ" name="rooCommand" metamodelReference="_u8xssMwvEd-i0OdaSaaeAQ">
+  <eAnnotations xmi:id="_j1HeYNMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_j1HeYdMXEd-KApFVOAwN9A" name="rooCommand" nsURI="http:///schemas/rooCommand/_j1G3UNMXEd-KApFVOAwN9A/0" nsPrefix="rooCommand">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_j1HeYtMXEd-KApFVOAwN9A" name="RooEntityCommand">
+        <eAnnotations xmi:id="_j1HeY9MXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_6Y7uUMwsEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeZNMXEd-KApFVOAwN9A" name="testMock" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeZtMXEd-KApFVOAwN9A" name="testIntegration" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeaNMXEd-KApFVOAwN9A" name="dod" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeatMXEd-KApFVOAwN9A" name="finders" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HebNMXEd-KApFVOAwN9A" name="controllerClass" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HebtMXEd-KApFVOAwN9A" name="controllerPath" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HecNMXEd-KApFVOAwN9A" name="controllerDisallowedOperations" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HectMXEd-KApFVOAwN9A" name="seleniumName" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HedNMXEd-KApFVOAwN9A" name="seleniumServerUrl" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_j1HedtMXEd-KApFVOAwN9A" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_j1HeeNMXEd-KApFVOAwN9A" name="RooModelCommand">
+        <eAnnotations xmi:id="_j1HeedMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_lM474NMSEd-KApFVOAwN9A"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeetMXEd-KApFVOAwN9A" name="controllersPackage" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HefNMXEd-KApFVOAwN9A" name="persistenceProvider" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeftMXEd-KApFVOAwN9A" name="persistenceDatabase" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HegNMXEd-KApFVOAwN9A" name="persistenceApplicationId" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HegtMXEd-KApFVOAwN9A" name="persistenceJndiDataSource" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HehNMXEd-KApFVOAwN9A" name="persistenceDatabaseName" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HehtMXEd-KApFVOAwN9A" name="persistenceUserName" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1HeiNMXEd-KApFVOAwN9A" name="persistencePassword" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_j1HeitMXEd-KApFVOAwN9A" name="base_Model" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Model"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_QSYG0MwtEd-i0OdaSaaeAQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_QTBnEMwtEd-i0OdaSaaeAQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_QTBnEcwtEd-i0OdaSaaeAQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <packageImport xmi:id="_u8xssMwvEd-i0OdaSaaeAQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_6Y7uUMwsEd-i0OdaSaaeAQ" name="RooEntityCommand">
+    <ownedAttribute xmi:id="_FzA44N-dEd-WQKqfvios0g" name="controller">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_AI2LYN-dEd-WQKqfvios0g" name="seleniumTest">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_A0L6gMwtEd-i0OdaSaaeAQ" name="testMock">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_cciEENMTEd-KApFVOAwN9A" name="testIntegration">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_iTNjkNMTEd-KApFVOAwN9A" name="dod">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_W4KvEMwtEd-i0OdaSaaeAQ" name="finders">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_e4jtEMwtEd-i0OdaSaaeAQ" name="controllerPath">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_iAPPsMwtEd-i0OdaSaaeAQ" name="controllerDisallowedOperations">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_kIjAAMwtEd-i0OdaSaaeAQ" name="seleniumName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_m33F8MwtEd-i0OdaSaaeAQ" name="seleniumServerUrl">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_qKW0EtMVEd-KApFVOAwN9A" name="base_Class" association="_qKW0ENMVEd-KApFVOAwN9A">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_lM474NMSEd-KApFVOAwN9A" name="RooModelCommand">
+    <ownedAttribute xmi:id="_opaPAN-oEd-I6d__Oq6WyQ" name="loggingLevel">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_sKP4gN-oEd-I6d__Oq6WyQ" name="loggingPackage">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_LQNhYN-dEd-WQKqfvios0g" name="controllersAll">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_sToqMNMUEd-KApFVOAwN9A" name="persistenceProvider">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vEK4INMUEd-KApFVOAwN9A" name="persistenceDatabase">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_w929oNMUEd-KApFVOAwN9A" name="persistenceApplicationId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_zVgxgNMUEd-KApFVOAwN9A" name="persistenceJndiDataSource">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_1hSskNMUEd-KApFVOAwN9A" name="persistenceDatabaseName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_4PYqgNMUEd-KApFVOAwN9A" name="persistenceUserName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_GrWk0NMVEd-KApFVOAwN9A" name="persistencePassword">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rcg_gNMVEd-KApFVOAwN9A" name="base_Model" association="_rcgYcNMVEd-KApFVOAwN9A">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Model"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_1U8nAPchEd-McuiygbqZQg" name="webLanguages">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_G94zoPciEd-McuiygbqZQg" name="loggingLevel">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_IZQlcPciEd-McuiygbqZQg" name="loggingPackage">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_qKW0ENMVEd-KApFVOAwN9A" name="Class_RooEntityCommand" memberEnd="_qKW0EdMVEd-KApFVOAwN9A _qKW0EtMVEd-KApFVOAwN9A">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_qKW0EdMVEd-KApFVOAwN9A" name="extension_RooEntityCommand" type="_6Y7uUMwsEd-i0OdaSaaeAQ" aggregation="composite" association="_qKW0ENMVEd-KApFVOAwN9A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_rcgYcNMVEd-KApFVOAwN9A" name="Model_RooModelCommand" memberEnd="_rcgYcdMVEd-KApFVOAwN9A _rcg_gNMVEd-KApFVOAwN9A">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_rcgYcdMVEd-KApFVOAwN9A" name="extension_RooModelCommand" type="_lM474NMSEd-KApFVOAwN9A" aggregation="composite" association="_rcgYcNMVEd-KApFVOAwN9A"/>
+  </packagedElement>
+</uml:Profile>

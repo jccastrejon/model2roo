@@ -2,6 +2,27 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+  <extension
+        point="org.eclipse.uml2.uml.generated_package">
+        <profile 
+   			uri="http://mx.itesm.model2roo/0.1.0/rooCommand" 
+   			location="pathmap://Model2Roo_PROFILES/rooCommand.profile.uml#_j1HeYdMXEd-KApFVOAwN9A"/> 
+  </extension>
+  
+  <extension
+        point="org.eclipse.uml2.uml.generated_package">
+        <profile 
+   			uri="http://mx.itesm.model2roo/0.1.0/rooStructure" 
+   			location="pathmap://Model2Roo_PROFILES/rooStructure.profile.uml#_onlH0dMXEd-KApFVOAwN9A"/> 
+  </extension>  
+
+   <extension
+         point="org.eclipse.emf.ecore.uri_mapping">
+      <mapping
+            source="pathmap://Model2Roo_PROFILES/"
+            target="platform:/plugin/mx.itesm.model2roo/profiles/"/>
+   </extension>
+
    <extension
          point="org.eclipse.ui.commands">
       <category

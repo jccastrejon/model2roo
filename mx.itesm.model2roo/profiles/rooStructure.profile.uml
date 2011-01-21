@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_2KGWYMwsEd-i0OdaSaaeAQ" name="rooStructure" metamodelReference="_u8xssMwvEd-i0OdaSaaeAQ">
+  <eAnnotations xmi:id="_onlH0NMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_onlH0dMXEd-KApFVOAwN9A" name="rooStructure" nsURI="http:///schemas/rooStructure/_onj5sNMXEd-KApFVOAwN9A/0" nsPrefix="rooStructure">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlH0tMXEd-KApFVOAwN9A" name="RooEntity">
+        <eAnnotations xmi:id="_onlH09MXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_6Y7uUMwsEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH1NMXEd-KApFVOAwN9A" name="testAutomatically" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH1tMXEd-KApFVOAwN9A" name="table" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH2NMXEd-KApFVOAwN9A" name="identifierField" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH2tMXEd-KApFVOAwN9A" name="identifierColumn" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH3NMXEd-KApFVOAwN9A" name="identifierType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH3tMXEd-KApFVOAwN9A" name="inheritanceType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH4NMXEd-KApFVOAwN9A" name="mappedSuperclass" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH4tMXEd-KApFVOAwN9A" name="serializable" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_onlH5NMXEd-KApFVOAwN9A" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlH5tMXEd-KApFVOAwN9A" name="RooEnumConstant">
+        <eAnnotations xmi:id="_onlH59MXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_--igIMwvEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH6NMXEd-KApFVOAwN9A" name="permitReservedWords" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_onlH6tMXEd-KApFVOAwN9A" name="base_EnumerationLiteral" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//EnumerationLiteral"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlH7NMXEd-KApFVOAwN9A" name="RooEnumType">
+        <eAnnotations xmi:id="_onlH7dMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Pt2WEMwwEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH7tMXEd-KApFVOAwN9A" name="path" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH8NMXEd-KApFVOAwN9A" name="permitReservedWords" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_onlH8tMXEd-KApFVOAwN9A" name="base_Enumeration" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Enumeration"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlH9NMXEd-KApFVOAwN9A" name="RooField">
+        <eAnnotations xmi:id="_onlH9dMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH9tMXEd-KApFVOAwN9A" name="transient" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH-NMXEd-KApFVOAwN9A" name="notNull" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH-tMXEd-KApFVOAwN9A" name="nullRequired" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH_NMXEd-KApFVOAwN9A" name="comment" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlH_tMXEd-KApFVOAwN9A" name="permitReservedWords" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIANMXEd-KApFVOAwN9A" name="class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_onlIAtMXEd-KApFVOAwN9A" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlIBNMXEd-KApFVOAwN9A" name="RooFieldBoolean" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlIBdMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_mFLH8MwxEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIBtMXEd-KApFVOAwN9A" name="assertFalse" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlICNMXEd-KApFVOAwN9A" name="assertTrue" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlICtMXEd-KApFVOAwN9A" name="primitive" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIDNMXEd-KApFVOAwN9A" name="column" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlID9MXEd-KApFVOAwN9A" name="RooFieldDate" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlIENMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ZtdH4MwyEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIEdMXEd-KApFVOAwN9A" name="future" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIE9MXEd-KApFVOAwN9A" name="past" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIFdMXEd-KApFVOAwN9A" name="persistenceType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIF9MXEd-KApFVOAwN9A" name="dateFormat" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIGdMXEd-KApFVOAwN9A" name="timeFormat" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIG9MXEd-KApFVOAwN9A" name="column" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlIHtMXEd-KApFVOAwN9A" name="RooFieldEnum" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlIH9MXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v4VOoMwyEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIINMXEd-KApFVOAwN9A" name="enumType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlII9MXEd-KApFVOAwN9A" name="RooFieldNumber" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlIJNMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_5vpSAMwyEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIJdMXEd-KApFVOAwN9A" name="decimalMin" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIJ9MXEd-KApFVOAwN9A" name="decimalMax" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIKdMXEd-KApFVOAwN9A" name="digitsInteger" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIK9MXEd-KApFVOAwN9A" name="digitsFraction" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlILdMXEd-KApFVOAwN9A" name="min" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIL9MXEd-KApFVOAwN9A" name="max" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIMdMXEd-KApFVOAwN9A" name="primitive" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIM9MXEd-KApFVOAwN9A" name="column" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlINtMXEd-KApFVOAwN9A" name="RooFieldReference" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlIN9MXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zC6e0MwzEd-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIONMXEd-KApFVOAwN9A" name="joinColumnName" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIOtMXEd-KApFVOAwN9A" name="cardinality" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIPNMXEd-KApFVOAwN9A" name="fetch" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlIP9MXEd-KApFVOAwN9A" name="RooFieldSet" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlIQNMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_MlsVgMw0Ed-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIQdMXEd-KApFVOAwN9A" name="mappedBy" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIQ9MXEd-KApFVOAwN9A" name="cardinality" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIRdMXEd-KApFVOAwN9A" name="fetch" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlISNMXEd-KApFVOAwN9A" name="RooFieldString" eSuperTypes="_onlH9NMXEd-KApFVOAwN9A">
+        <eAnnotations xmi:id="_onlISdMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_cknQUMw0Ed-i0OdaSaaeAQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIStMXEd-KApFVOAwN9A" name="regexp" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlITNMXEd-KApFVOAwN9A" name="decimalMin" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlITtMXEd-KApFVOAwN9A" name="decimalMax" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_onlIUdMXEd-KApFVOAwN9A" name="RooModel">
+        <eAnnotations xmi:id="_onlIUtMXEd-KApFVOAwN9A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_lM474NMSEd-KApFVOAwN9A"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_onlIU9MXEd-KApFVOAwN9A" name="package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_onlIVdMXEd-KApFVOAwN9A" name="base_Model" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Model"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_QSYG0MwtEd-i0OdaSaaeAQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_QTBnEMwtEd-i0OdaSaaeAQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_QTBnEcwtEd-i0OdaSaaeAQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <packageImport xmi:id="_u8xssMwvEd-i0OdaSaaeAQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_6Y7uUMwsEd-i0OdaSaaeAQ" name="RooEntity">
+    <ownedAttribute xmi:id="_A0L6gMwtEd-i0OdaSaaeAQ" name="testAutomatically">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_W4KvEMwtEd-i0OdaSaaeAQ" name="table">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_bvTdIMwtEd-i0OdaSaaeAQ" name="identifierField">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_e4jtEMwtEd-i0OdaSaaeAQ" name="identifierColumn">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_iAPPsMwtEd-i0OdaSaaeAQ" name="identifierType">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_kIjAAMwtEd-i0OdaSaaeAQ" name="inheritanceType">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_m33F8MwtEd-i0OdaSaaeAQ" name="mappedSuperclass">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_pZTH8MwtEd-i0OdaSaaeAQ" name="serializable">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_yVDQEswvEd-i0OdaSaaeAQ" name="base_Class" association="_yVDQEMwvEd-i0OdaSaaeAQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_--igIMwvEd-i0OdaSaaeAQ" name="RooEnumConstant">
+    <ownedAttribute xmi:id="_C9ea4MwwEd-i0OdaSaaeAQ" name="permitReservedWords">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_9TiXccyeEd-cF6TDMYXzqg" name="base_EnumerationLiteral" association="_9ThwYMyeEd-cF6TDMYXzqg">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#EnumerationLiteral"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_Pt2WEMwwEd-i0OdaSaaeAQ" name="RooEnumType">
+    <ownedAttribute xmi:id="_WWQNcMwwEd-i0OdaSaaeAQ" name="path">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Yl-NUMwwEd-i0OdaSaaeAQ" name="permitReservedWords">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_3eczYMyeEd-cF6TDMYXzqg" name="base_Enumeration" association="_3eZwEMyeEd-cF6TDMYXzqg">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Enumeration"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_ymcFkMwwEd-i0OdaSaaeAQ" name="RooField">
+    <ownedAttribute xmi:id="_AZ-t8MwxEd-i0OdaSaaeAQ" name="transient">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_zcypUMwxEd-i0OdaSaaeAQ" name="notNull">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_5Y9FwMwxEd-i0OdaSaaeAQ" name="nullRequired">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_9eySsMwxEd-i0OdaSaaeAQ" name="comment">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Up-m8MwyEd-i0OdaSaaeAQ" name="permitReservedWords">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_hoo1wMwyEd-i0OdaSaaeAQ" name="class">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vyOfQcw1Ed-i0OdaSaaeAQ" name="base_Property" association="_vyN4MMw1Ed-i0OdaSaaeAQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_mFLH8MwxEd-i0OdaSaaeAQ" name="RooFieldBoolean">
+    <generalization xmi:id="_toQe4MwxEd-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_CTTxoMwyEd-i0OdaSaaeAQ" name="assertFalse">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_EsM7oMwyEd-i0OdaSaaeAQ" name="assertTrue">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_UGTcsMwzEd-i0OdaSaaeAQ" name="primitive">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_owvrcMwzEd-i0OdaSaaeAQ" name="column">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_ZtdH4MwyEd-i0OdaSaaeAQ" name="RooFieldDate">
+    <generalization xmi:id="_ZtdH4cwyEd-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_ZtdH4swyEd-i0OdaSaaeAQ" name="future">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_ZtdH48wyEd-i0OdaSaaeAQ" name="past">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_eyquMMwyEd-i0OdaSaaeAQ" name="persistenceType">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_obC9sMwyEd-i0OdaSaaeAQ" name="dateFormat">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rKcjMMwyEd-i0OdaSaaeAQ" name="timeFormat">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_p7lt8MwzEd-i0OdaSaaeAQ" name="column">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v4VOoMwyEd-i0OdaSaaeAQ" name="RooFieldEnum">
+    <generalization xmi:id="_v4VOocwyEd-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_v4VOpMwyEd-i0OdaSaaeAQ" name="enumType">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_5vpSAMwyEd-i0OdaSaaeAQ" name="RooFieldNumber">
+    <generalization xmi:id="_5vpSAcwyEd-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_5vpSBMwyEd-i0OdaSaaeAQ" name="decimalMin">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_5vpSBcwyEd-i0OdaSaaeAQ" name="decimalMax">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_5vpSBswyEd-i0OdaSaaeAQ" name="digitsInteger">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_F9Ll4MwzEd-i0OdaSaaeAQ" name="digitsFraction">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_MvgOQMwzEd-i0OdaSaaeAQ" name="min">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_N3mewMwzEd-i0OdaSaaeAQ" name="max">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_QvUSwMwzEd-i0OdaSaaeAQ" name="primitive">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_r5Ac4MwzEd-i0OdaSaaeAQ" name="column">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_zC6e0MwzEd-i0OdaSaaeAQ" name="RooFieldReference">
+    <generalization xmi:id="_zC6e0cwzEd-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_zC6e0swzEd-i0OdaSaaeAQ" name="joinColumnName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_5rU9QMwzEd-i0OdaSaaeAQ" name="cardinality">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_7zbSMMwzEd-i0OdaSaaeAQ" name="fetch">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_MlsVgMw0Ed-i0OdaSaaeAQ" name="RooFieldSet">
+    <generalization xmi:id="_MlsVgcw0Ed-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_MlsVgsw0Ed-i0OdaSaaeAQ" name="mappedBy">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_MlsVg8w0Ed-i0OdaSaaeAQ" name="cardinality">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_MlsVhMw0Ed-i0OdaSaaeAQ" name="fetch">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_cknQUMw0Ed-i0OdaSaaeAQ" name="RooFieldString">
+    <generalization xmi:id="_cknQUcw0Ed-i0OdaSaaeAQ" general="_ymcFkMwwEd-i0OdaSaaeAQ"/>
+    <ownedAttribute xmi:id="_cknQUsw0Ed-i0OdaSaaeAQ" name="regexp">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_m8RnsMw0Ed-i0OdaSaaeAQ" name="sizeMin">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_m8SOwMw0Ed-i0OdaSaaeAQ" name="sizeMax">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_lM474NMSEd-KApFVOAwN9A" name="RooModel">
+    <ownedAttribute xmi:id="_lM474tMSEd-KApFVOAwN9A" name="topLevelPackage">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_w-BnodMSEd-KApFVOAwN9A" name="base_Model" association="_w9_LYNMSEd-KApFVOAwN9A">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Model"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_yVDQEMwvEd-i0OdaSaaeAQ" name="Class_RooEntity" memberEnd="_yVDQEcwvEd-i0OdaSaaeAQ _yVDQEswvEd-i0OdaSaaeAQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_yVDQEcwvEd-i0OdaSaaeAQ" name="extension_RooEntity" type="_6Y7uUMwsEd-i0OdaSaaeAQ" aggregation="composite" association="_yVDQEMwvEd-i0OdaSaaeAQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_vyN4MMw1Ed-i0OdaSaaeAQ" name="Property_RooField" memberEnd="_vyOfQMw1Ed-i0OdaSaaeAQ _vyOfQcw1Ed-i0OdaSaaeAQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vyOfQMw1Ed-i0OdaSaaeAQ" name="extension_RooField" type="_ymcFkMwwEd-i0OdaSaaeAQ" aggregation="composite" association="_vyN4MMw1Ed-i0OdaSaaeAQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_3eZwEMyeEd-cF6TDMYXzqg" name="Enumeration_RooEnumType" memberEnd="_3ecMUMyeEd-cF6TDMYXzqg _3eczYMyeEd-cF6TDMYXzqg">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_3ecMUMyeEd-cF6TDMYXzqg" name="extension_RooEnumType" type="_Pt2WEMwwEd-i0OdaSaaeAQ" aggregation="composite" association="_3eZwEMyeEd-cF6TDMYXzqg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_9ThwYMyeEd-cF6TDMYXzqg" name="EnumerationLiteral_RooEnumConstant" memberEnd="_9TiXcMyeEd-cF6TDMYXzqg _9TiXccyeEd-cF6TDMYXzqg">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_9TiXcMyeEd-cF6TDMYXzqg" name="extension_RooEnumConstant" type="_--igIMwvEd-i0OdaSaaeAQ" aggregation="composite" association="_9ThwYMyeEd-cF6TDMYXzqg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_w9_LYNMSEd-KApFVOAwN9A" name="Model_RooModel" memberEnd="_w-BnoNMSEd-KApFVOAwN9A _w-BnodMSEd-KApFVOAwN9A">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_w-BnoNMSEd-KApFVOAwN9A" name="extension_RooModel" type="_lM474NMSEd-KApFVOAwN9A" aggregation="composite" association="_w9_LYNMSEd-KApFVOAwN9A"/>
+  </packagedElement>
+</uml:Profile>
