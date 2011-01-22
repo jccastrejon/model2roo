@@ -107,6 +107,8 @@ helper context Ecore!EAnnotation def: getModelCommand(prefix : String, entity: S
 								acc + detail.value.split(',') ->
 									iterate(value; accValue: String = '' | 
 										accValue + detail.key.getMapping() + ' ' + value.trim() + ' ' +
+										
+										-- Context
 										if not thisModule.contextMapping.get(detail.key).oclIsUndefined() then
 											thisModule.contextMapping.get(detail.key).regexReplaceAll('<entity>', entity)
 										else ''
@@ -120,11 +122,13 @@ helper context Ecore!EAnnotation def: getModelCommand(prefix : String, entity: S
 							
 								if detail.value <> 'true' then
 									detail.value
-								else
-									if not thisModule.contextMapping.get(detail.key).oclIsUndefined() then
-										thisModule.contextMapping.get(detail.key).regexReplaceAll('<entity>', entity)
-									else ''
-									endif
+								else ''
+								endif + ' ' +
+								
+								-- Context
+								if not thisModule.contextMapping.get(detail.key).oclIsUndefined() then
+									thisModule.contextMapping.get(detail.key).regexReplaceAll('<entity>', entity)
+								else ''
 								endif
 							endif
 							
