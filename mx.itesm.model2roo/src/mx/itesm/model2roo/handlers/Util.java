@@ -254,6 +254,7 @@ public class Util {
 
         // Delete the results of previous executions
         Util.deleteDirectory(new File(rooFile.getParentFile(), "/src"));
+        Util.deleteDirectory(new File(rooFile.getParentFile(), "/target"));
         pomFile = new File(rooFile.getParentFile(), "pom.xml");
         if (pomFile.exists()) {
             pomFile.delete();
