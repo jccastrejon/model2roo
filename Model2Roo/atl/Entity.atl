@@ -60,7 +60,7 @@ helper context Ecore!EStructuralFeature def: toString(): String =
 -- References and Sets
 helper context Ecore!EClassifier def: getRooType(feature: Ecore!EStructuralFeature ): String =
     if feature.containment then
-        'set --element '
+        'set --type '
     else
         'reference --type '
     endif
