@@ -132,7 +132,7 @@ public class Util {
             RooConsoleStream outputStream;
 
             try {
-                process = Runtime.getRuntime().exec("roo script --file " + rooFile.getName(), null,
+                process = Runtime.getRuntime().exec(this.getRooCommand() + " script --file " + rooFile.getName(), null,
                                 rooFile.getParentFile());
 
                 errorStream = new RooConsoleStream(process.getErrorStream(), consoleStream);
@@ -153,8 +153,17 @@ public class Util {
                 // Show to the user the results of the Roo execution
                 this.refreshWorkspace();
             } catch (Exception e) {
-                consoleStream.println("The Roo script could not be successfully executed");
+                consoleStream.println("The Roo script could not be successfully executed: " + e.getMessage());
             }
+        }
+
+        /**
+         * Get the correct invocation of the Roo console depending on the OS.
+         * 
+         * @return
+         */
+        private String getRooCommand() {
+            return (System.getProperty("os.name").toLowerCase().startsWith("windows")) ? "roo.bat" : "roo";
         }
 
         /**
