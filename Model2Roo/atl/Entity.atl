@@ -20,7 +20,7 @@ library Entity;
 
 -- Entities
 helper context Ecore!EClassifier def: toString(): String =
-    'entity --class ~.domain.' + self.name + 
+    'entity jpa --class ~.domain.' + self.name + 
 	
 	-- Support for abstract classes 
 	if self.abstract then

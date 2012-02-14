@@ -28,7 +28,7 @@ helper context String def: getDefaultProperties(): Map(String, String) = Map{
 
 -- Properties - profiles mapping
 helper context String def: getMapping(): Map(String, String) = Map{
-	('controllersAll', 'controller all'),
+	('controllersAll', 'web mvc all'),
 	('persistenceProvider', '--provider'),
 	('persistenceDatabase', '--database'),
 	('persistenceApplicationId', '--applicationId'),

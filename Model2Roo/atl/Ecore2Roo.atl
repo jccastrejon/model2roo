@@ -34,7 +34,7 @@ helper context Ecore!EPackage def: toString(): String =
 		-- Roo structure and Persistence setup
 		if self.eAnnotations -> isEmpty() then
 			'--topLevelPackage ' + 'topLevelPackage'.getDefaultProperties() + '.' + self.name + '\n\n' +
-			'persistence setup' + ' --provider ' + 'persistenceProvider'.getDefaultProperties() 
+			'jpa setup' + ' --provider ' + 'persistenceProvider'.getDefaultProperties() 
 								 +	' --database ' + 'persistenceDatabase'.getDefaultProperties()
 		else
 			self.eAnnotations -> 
@@ -59,6 +59,7 @@ helper context Ecore!EPackage def: toString(): String =
 			iterate(c; acc: String = '' | acc + c.featuresToString() + '\n') +
 			
 		-- System Roo commands
+		'web mvc setup' + '\n' +
 		if self.eAnnotations -> isEmpty() then
 			'controllersAll'.getMapping() + ' ' + 'controllersAll'.getDefaultProperties()
 		else
