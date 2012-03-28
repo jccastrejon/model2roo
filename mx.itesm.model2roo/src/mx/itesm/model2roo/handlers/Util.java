@@ -250,6 +250,7 @@ public class Util {
         File rooFile;
         File pomFile;
         Handler rooHandler;
+        Handler[] atlHandlers;
         ModelLoader modelLoader;
         ASMModel ecoreMetaModel;
         Map<String, URL> libraries;
@@ -273,6 +274,7 @@ public class Util {
         }
 
         // Ours will be the only ATL logger
+        atlHandlers = ATLLogger.getLogger().getHandlers();
         for (Handler logHandler : ATLLogger.getLogger().getHandlers()) {
             ATLLogger.getLogger().removeHandler(logHandler);
         }
@@ -301,6 +303,11 @@ public class Util {
                         Collections.EMPTY_LIST, Collections.EMPTY_MAP);
         consoleStream.println("Roo script successfully generated!");
 
+        // Restore ATL handlers
+        for(Handler handler : atlHandlers) {
+        	ATLLogger.getLogger().addHandler(handler);
+        }
+        
         // Execute Roo script
         consoleStream.println("Executing Roo script...");
         new Thread(new RooThread(rooFile, consoleStream)).start();
