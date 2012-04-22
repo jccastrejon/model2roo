@@ -1,0 +1,100 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright 2012 jccastrejon
+ * 
+ * This file is part of Model2Roo.
+ * Model2Roo is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * 
+ * Model2Roo is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
+ */]
+[module Properties('http://www.eclipse.org/uml2/3.0.0/UML')]
+
+[import fr::imag::model2roo::common::Common /]
+
+[**
+ * Generate the properties of the classes contained in the specified package.
+ * @param aPackage UML package.
+ */]
+[template public generateEntitiesProperties(aPackage : Package) post(trim())]
+[for (anElement: Element | aPackage.ownedElement)]
+  [if anElement.oclIsTypeOf(Class)]
+    [anElement.oclAsType(Class).generateEntityProperties()/] 
+  [/if]
+[/for]
+[/template]
+
+[**
+ * Generate the properties of a particular UML class.
+ * @param aClass UML class.
+ */]
+[template public generateEntityProperties(aClass : Class) post(trim())]
+[for (anElement: Element | aClass.ownedElement)]
+  [if anElement.oclIsTypeOf(Property)]
+    [comment] Properties that belong to an association are generated as references (other module) [/comment]
+    [if anElement.oclAsType(Property).association.oclIsUndefined()]
+      [anElement.oclAsType(Property).generateEntityProperty()/] --class ~.domain.[aClass.name/]
+    [/if]
+  [/if]
+[/for]
+[/template]
+
+[**
+ * Generate the Spring Roo commands associated to a particular class property.
+ * @param property Class property.
+ */]
+[template public generateEntityProperty(property : Property) post(trim())]
+[if not property.name.contains('_')]
+field [property.type.getRooType(property)/] --fieldName [property.name/] [property.getRooDetails()/]
+[/if]
+[/template]
+
+[**
+ * Generate the Spring Roo type for the specified class property.
+ * @param type UML type.
+ * @param property Class property.
+ */]
+[template public getRooType(type : Type, property : Property) post(trim())]
+  [if type.oclIsUndefined()] [type.getUndefinedType(property)/]
+  [else] [if type.name = 'String'] string
+  [else] [if type.name = 'Boolean'] boolean
+  [else] [if type.name = 'Integer'] number --type java.lang.Integer
+  [else] [if type.name = 'UnlimitedNatural'] number --type java.lang.Long
+  [else] string
+  [/if] [/if] [/if] [/if] [/if]
+[/template]
+
+[**
+ * Get the Spring Roo type for a property with an unspecified UML primitive type.
+ * @param type UML type.
+ * @param property Class property.
+ */]
+[template public getUndefinedType(type : Type, property : Property) post(trim())]
+[if not property.getAppliedStereotype('rooStructure::RooFieldDate').oclIsUndefined()] date --type java.util.Date
+[else] [if property.getValue(property.getAppliedStereotype('rooStructure::RooFieldNumber'), '_numberType').oclIsInvalid()] string
+[else] [property.getValue(property.getAppliedStereotype('rooStructure::RooFieldNumber'), '_numberType').oclAsType(EnumerationLiteral).name.getRooNumberType()/]
+[/if] [/if]
+[/template]
+
+[**
+ * Get the Spring Roo number type for a numeric type.
+ * @param type Numeric type.
+ */]
+[template public getRooNumberType(type : String) post(trim())]
+  [if type = 'Byte'] number --type java.lang.Byte
+  [else] [if type = 'Float'] number --type java.lang.Float
+  [else] [if type = 'Short'] number --type java.lang.Short
+  [else] [if type = 'Long'] number --type java.lang.Long
+  [else] [if type = 'Int'] number --type java.lang.Integer
+  [else] [if type = 'Double'] number --type java.lang.Double
+  [else] string
+  [/if] [/if] [/if] [/if] [/if] [/if]
+[/template]

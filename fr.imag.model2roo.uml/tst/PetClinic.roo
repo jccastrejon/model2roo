@@ -1,0 +1,57 @@
+    
+     // Project definition
+     project --topLevelPackage fr.imag.petclinic 
+     persistence setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+     
+     // Enumerations
+     enum type --class ~.domain.PetType 
+         enum constant --name Dog 
+         enum constant --name Cat 
+         enum constant --name Bird 
+         enum type --class ~.domain.Specialty 
+         enum constant --name Cardiology 
+         enum constant --name Dentistry 
+         enum constant --name Nutriology
+     
+     // Entities
+     entity jpa --class ~.domain.Visit 
+            entity jpa --class ~.domain.Pet 
+           
+           
+            entity jpa --class ~.domain.AbstractPerson  --abstract true 
+     
+           
+           
+            entity jpa --class ~.domain.Vet  --extends ~.domain.AbstractPerson 
+            entity jpa --class ~.domain.Owner  --extends ~.domain.AbstractPerson
+     
+     // Attributes
+     field string --fieldName description --class ~.domain.Visit
+               field string --fieldName visitDate --class ~.domain.Visit 
+         field string --fieldName weight --class ~.domain.Pet
+               field boolean --fieldName sendReminders --class ~.domain.Pet
+               field string --fieldName type --class ~.domain.Pet
+               field string --fieldName name --class ~.domain.Pet 
+         field string --fieldName employedSince --class ~.domain.Vet
+               field string --fieldName specialty --class ~.domain.Vet 
+          
+         field string --fieldName city --class ~.domain.AbstractPerson
+               field string --fieldName birthday --class ~.domain.AbstractPerson
+               field string --fieldName lastName --class ~.domain.AbstractPerson
+               field string --fieldName firstName --class ~.domain.AbstractPerson
+               field string --fieldName homepage --class ~.domain.AbstractPerson
+               field string --fieldName address --class ~.domain.AbstractPerson
+               field string --fieldName email --class ~.domain.AbstractPerson
+               field string --fieldName telephone --class ~.domain.AbstractPerson
+     
+     // References
+     field reference --type ~.domain.Pet --fieldName pet  --class ~.domain.Visit
+           field reference --type ~.domain.Vet --fieldName vet  --class ~.domain.Visit
+           field reference --type ~.domain.Owner --fieldName owner  --class ~.domain.Pet
+           field set --type ~.domain.Pet --fieldName pets  --class ~.domain.Owner
+     
+     // System commands
+     web mvc setup 
+     web mvc all --package ~.web
+     
+     // Entities commands 
