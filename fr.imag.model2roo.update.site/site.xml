@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/fr.imag.model2roo.feature_1.0.0.0.jar" id="fr.imag.model2roo.feature" version="1.0.0.0">
+      <category name="model2roo"/>
+   </feature>
+   <category-def name="model2roo" label="Model2Roo">
+      <description>
+         Model2Roo: A Model Driven Approach for Web Application Development based on the Eclipse Modeling Framework and Spring Roo
+      </description>
+   </category-def>
+</site>
