@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UML Profiles for the Model2Roo project
+Bundle-SymbolicName: fr.imag.model2roo.uml.profiles;singleton:=true
+Bundle-Version: 1.0.0.0
+Bundle-Activator: fr.imag.model2roo.uml.profiles.Activator
+Bundle-Vendor: fr.imag
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.eclipse.papyrus.extensionpoints.uml2;bundle-version="0.8.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

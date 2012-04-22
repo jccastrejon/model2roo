@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.ecore.uri_mapping">
+      <mapping
+            source="pathmap://Model2Roo_UML_Profiles/"
+            target="platform:/plugin/fr.imag.model2roo.uml.profiles/profiles/">
+      </mapping>
+   </extension>
+   <extension
+         point="org.eclipse.papyrus.extensionpoints.uml2.UMLProfile">
+      <profile
+            description="Profile for Spring Roo commands"
+            iconpath="profiles/roo.ico"
+            name="rooCommand"
+            path="pathmap://Model2Roo_UML_Profiles/rooCommand.profile.uml"
+            provider="fr.imag">
+      </profile>
+   </extension>
+   <extension
+         point="org.eclipse.papyrus.extensionpoints.uml2.UMLProfile">
+      <profile
+            description="Profile for Spring Roo structure"
+            iconpath="profiles/roo.ico"
+            name="rooStructure"
+            path="pathmap://Model2Roo_UML_Profiles/rooStructure.profile.uml"
+            provider="fr.imag">
+      </profile>
+   </extension>
+
+</plugin>
