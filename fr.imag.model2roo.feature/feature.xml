@@ -39,13 +39,6 @@
          unpack="false"/>
 
    <plugin
-         id="mx.itesm.model2roo"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="fr.imag.model2roo.uml"
          download-size="0"
          install-size="0"
