@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Uml2Roo - Part of the Model2Roo project
+Bundle-SymbolicName: fr.imag.model2roo.uml.ui;singleton:=true
+Bundle-Version: 1.0.0.0
+Bundle-Activator: fr.imag.model2roo.uml.ui.Activator
+Bundle-Vendor: fr.imag
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ fr.imag.model2roo.uml,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore,
+ org.eclipse.acceleo.model,
+ org.eclipse.acceleo.engine,
+ org.eclipse.ui.console;bundle-version="3.5.100"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Eclipse-LazyStart: true
