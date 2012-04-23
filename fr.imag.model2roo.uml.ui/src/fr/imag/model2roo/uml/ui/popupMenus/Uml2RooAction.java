@@ -75,15 +75,20 @@ public class Uml2RooAction extends ActionDelegate implements IActionDelegate {
 	 */
 	public static MessageConsoleStream messageConsoleStream;
 
-	static {
-		Uml2RooAction.messageConsole = Uml2RooAction.findConsole("Model2Roo");
-		Uml2RooAction.messageConsoleStream = Uml2RooAction.messageConsole.newMessageStream();
-	}
-
 	/**
 	 * Selected model files.
 	 */
 	protected List<IFile> files;
+	
+	/**
+	 * 
+	 */
+	public Uml2RooAction() {
+		super();
+		
+		Uml2RooAction.messageConsole = Uml2RooAction.findConsole("Model2Roo");
+		Uml2RooAction.messageConsoleStream = Uml2RooAction.messageConsole.newMessageStream();
+	}
 
 	/**
 	 * Get the Output Stream to the Eclipse console.

@@ -15,7 +15,7 @@
                enablesFor="+"
                id="fr.imag.model2roo.uml.ui.popupMenus.acceleoGenerateUml2RooAction"
                icon="icons/roo.ico"
-               label="Generate Uml2Roo"
+               label="Generate Spring Roo commands"
                menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
       </objectContribution>
    </extension>
