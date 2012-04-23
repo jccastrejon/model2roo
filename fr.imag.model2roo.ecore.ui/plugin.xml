@@ -21,7 +21,7 @@
                enablesFor="1"
                icon="icons/roo.ico"
                id="fr.imag.model2roo.ecore.ui.Ecore2RooAction"
-               label="Ecore2Roo"
+               label="Generate Spring Roo commands"
                menubarPath="fr.imag.model2roo.ecore.ui.menu1/group1">
          </action>
          <action
@@ -29,7 +29,7 @@
                enablesFor="1"
                icon="icons/roo.ico"
                id="fr.imag.model2roo.ecore.ui.AnnotateEcoreAction"
-               label="AnnotateEcore"
+               label="Annotate model with Spring Roo details"
                menubarPath="fr.imag.model2roo.ecore.ui.menu1/group1">
          </action>
       </objectContribution>
