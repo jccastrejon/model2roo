@@ -27,7 +27,7 @@
 [template public generateEntitiesCommands(aPackage : Package)]
 [for (anElement: Element | aPackage.ownedElement)]
   [if anElement.oclIsTypeOf(Class)]
-    [if anElement.getAppliedStereotype('rooCommand::RooEntity')->notEmpty()] [anElement.generateModelCommands(anElement.getAppliedStereotype('rooCommand::RooEntity'), anElement.oclAsType(Class).name)/]
+    [if anElement.getAppliedStereotype('rooCommand::RooEntityCommand')->notEmpty()] [anElement.generateModelCommands(anElement.getAppliedStereotype('rooCommand::RooEntityCommand'), anElement.oclAsType(Class).name)/]
     [/if]
   [/if]
 [/for]
@@ -39,7 +39,7 @@
  */]
 [template public generateSystemCommands(aPackage : Package) post(trim())]
 web mvc setup 
-[if aPackage.getAppliedStereotype('rooCommand::RooModel')->notEmpty()] [aPackage.generateModelCommands(aPackage.getAppliedStereotype('rooCommand::RooModel'), '')/]
+[if aPackage.getAppliedStereotype('rooCommand::RooModelCommand')->notEmpty()] [aPackage.generateModelCommands(aPackage.getAppliedStereotype('rooCommand::RooModelCommand'), '')/]
 [else] ['controllersAll'.getMapping()/] ['controllersAll'.getDefaultValue()/]
 [/if]
 [/template]
