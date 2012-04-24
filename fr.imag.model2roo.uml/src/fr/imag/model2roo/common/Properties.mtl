@@ -52,8 +52,8 @@
  * @param property Class property.
  */]
 [template public generateEntityProperty(property : Property) post(trim())]
-[if not property.name.contains('_')]
-field [property.type.getRooType(property)/] --fieldName [property.name/] [property.getRooDetails()/]
+[if not property.name.contains('_')] 
+field [property.type.getRooType(property)/] --fieldName [property.name/] [property.type.handleEnumerationProperty()/] [property.getRooDetails()/]
 [/if]
 [/template]
 
@@ -64,12 +64,21 @@ field [property.type.getRooType(property)/] --fieldName [property.name/] [proper
  */]
 [template public getRooType(type : Type, property : Property) post(trim())]
   [if type.oclIsUndefined()] [type.getUndefinedType(property)/]
+  [else] [if type.oclIsTypeOf(Enumeration)] enum
   [else] [if type.name = 'String'] string
   [else] [if type.name = 'Boolean'] boolean
   [else] [if type.name = 'Integer'] number --type java.lang.Integer
   [else] [if type.name = 'UnlimitedNatural'] number --type java.lang.Long
   [else] string
-  [/if] [/if] [/if] [/if] [/if]
+  [/if] [/if] [/if] [/if] [/if] [/if]
+[/template]
+
+[**
+ * Add the required properties to handle properties that reference an enumeration.
+ * @param type UML type.
+ */]
+[template public handleEnumerationProperty(type : Type) post(trim())]
+  [if type.oclIsTypeOf(Enumeration)] --type ~.domain.[type.name/] [/if]
 [/template]
 
 [**

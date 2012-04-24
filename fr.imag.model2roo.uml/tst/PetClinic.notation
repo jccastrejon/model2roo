@@ -222,6 +222,13 @@
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iZJh1IxbEeGJHIbvalr3kg" source="QualifiedName">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_iZJh1YxbEeGJHIbvalr3kg" key="QualifiedNameDepth" value="1000"/>
         </eAnnotations>
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ovbIcI39EeGd_9GWiOttcw" source="Stereotype_Annotation">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_oxMqEI39EeGd_9GWiOttcw" key="StereotypeWithQualifiedNameList" value=""/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_oxMqEY39EeGd_9GWiOttcw" key="StereotypeList" value="rooStructure::RooEntity,rooCommand::RooEntityCommand"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_oxMqEo39EeGd_9GWiOttcw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_oxMqE439EeGd_9GWiOttcw" key="PropStereoDisplay" value=""/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_oxNRII39EeGd_9GWiOttcw" key="StereotypePropertyLocation" value="Compartment"/>
+        </eAnnotations>
         <children xmi:type="notation:DecorationNode" xmi:id="_iZJh1oxbEeGJHIbvalr3kg" type="5014"/>
         <children xmi:type="notation:BasicCompartment" xmi:id="_iZJh14xbEeGJHIbvalr3kg" type="7011">
           <children xmi:type="notation:Shape" xmi:id="_mpofkIxbEeGJHIbvalr3kg" type="3012" fontName="Lucida Grande" fontHeight="11" lineColor="0">
@@ -304,7 +311,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ovTBCYxaEeGJHIbvalr3kg"/>
     </children>
     <element xmi:type="uml:Package" href="PetClinic.uml#_ou4xUIxaEeGJHIbvalr3kg"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ovRy4YxaEeGJHIbvalr3kg" x="63" y="27" width="874" height="541"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ovRy4YxaEeGJHIbvalr3kg" x="63" y="27" width="874" height="559"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_maWi4YxaEeGJHIbvalr3kg"/>
   <element xmi:type="uml:Model" href="PetClinic.uml#_maSRcIxaEeGJHIbvalr3kg"/>

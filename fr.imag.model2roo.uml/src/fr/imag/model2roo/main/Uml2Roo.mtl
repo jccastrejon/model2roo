@@ -46,7 +46,7 @@
 [comment] Project definition [/comment]
 // Project definition
 project --topLevelPackage [aPackage.name.toLower()/] 
-persistence setup ['persistenceProvider'.getPropertyValue('--provider ', 'rooCommand::RooModelCommand', aPackage)/] ['persistenceDatabase'.getPropertyValue('--database ', 'rooCommand::RooModelCommand', aPackage)/]
+jpa setup ['persistenceProvider'.getPropertyValue('--provider ', 'rooCommand::RooModelCommand', aPackage)/] ['persistenceDatabase'.getPropertyValue('--database ', 'rooCommand::RooModelCommand', aPackage)/]
 
 // Enumerations
 [aPackage.generateEnums()/]

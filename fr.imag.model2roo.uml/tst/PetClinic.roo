@@ -1,4 +1,3 @@
-    
      // Project definition
      project --topLevelPackage fr.imag.petclinic 
      persistence setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
@@ -14,44 +13,53 @@
          enum constant --name Nutriology
      
      // Entities
-     entity jpa --class ~.domain.Visit 
+     entity jpa --class ~.domain.AbstractPerson  --abstract true 
             entity jpa --class ~.domain.Pet 
            
+            entity jpa --class ~.domain.Visit 
            
-            entity jpa --class ~.domain.AbstractPerson  --abstract true 
      
            
            
             entity jpa --class ~.domain.Vet  --extends ~.domain.AbstractPerson 
+           
             entity jpa --class ~.domain.Owner  --extends ~.domain.AbstractPerson
      
      // Attributes
-     field string --fieldName description --class ~.domain.Visit
-               field string --fieldName visitDate --class ~.domain.Visit 
-         field string --fieldName weight --class ~.domain.Pet
-               field boolean --fieldName sendReminders --class ~.domain.Pet
-               field string --fieldName type --class ~.domain.Pet
-               field string --fieldName name --class ~.domain.Pet 
-         field string --fieldName employedSince --class ~.domain.Vet
-               field string --fieldName specialty --class ~.domain.Vet 
-          
-         field string --fieldName city --class ~.domain.AbstractPerson
-               field string --fieldName birthday --class ~.domain.AbstractPerson
-               field string --fieldName lastName --class ~.domain.AbstractPerson
-               field string --fieldName firstName --class ~.domain.AbstractPerson
-               field string --fieldName homepage --class ~.domain.AbstractPerson
-               field string --fieldName address --class ~.domain.AbstractPerson
-               field string --fieldName email --class ~.domain.AbstractPerson
+     field string --fieldName homepage --class ~.domain.AbstractPerson
                field string --fieldName telephone --class ~.domain.AbstractPerson
+               field string --fieldName city --class ~.domain.AbstractPerson
+               field string --fieldName firstName --class ~.domain.AbstractPerson
+               field string --fieldName birthday --class ~.domain.AbstractPerson
+               field string --fieldName address --class ~.domain.AbstractPerson
+               field string --fieldName lastName --class ~.domain.AbstractPerson
+               field string --fieldName email --class ~.domain.AbstractPerson 
+         field string --fieldName name --class ~.domain.Pet
+               field boolean --fieldName sendReminders --class ~.domain.Pet
+               field enum --fieldName type --type ~.domain.PetType --class ~.domain.Pet
+               field string --fieldName weight --class ~.domain.Pet 
+         field enum --fieldName specialty --type ~.domain.Specialty --class ~.domain.Vet
+               field string --fieldName employedSince --class ~.domain.Vet 
+         field string --fieldName description --class ~.domain.Visit
+               field string --fieldName visitDate --class ~.domain.Visit
      
      // References
-     field reference --type ~.domain.Pet --fieldName pet  --class ~.domain.Visit
-           field reference --type ~.domain.Vet --fieldName vet  --class ~.domain.Visit
+     field set --type ~.domain.Pet --fieldName pets  --class ~.domain.Owner
+           field reference --type ~.domain.Pet --fieldName pet  --class ~.domain.Visit
            field reference --type ~.domain.Owner --fieldName owner  --class ~.domain.Pet
-           field set --type ~.domain.Pet --fieldName pets  --class ~.domain.Owner
+           field reference --type ~.domain.Vet --fieldName vet  --class ~.domain.Visit
      
      // System commands
      web mvc setup 
      web mvc all --package ~.web
      
-     // Entities commands 
+     // Entities commands
+     selenium test --controller ~.web.PetController
+         
+         finder add --finderName findPetsByNameAndWeight --class ~.domain.Pet
+                   finder add --finderName findPetsByOwner --class ~.domain.Pet
+                   finder add --finderName findPetsBySendRemindersAndWeightLessThan --class ~.domain.Pet
+                   finder add --finderName findPetsByTypeAndNameLike --class ~.domain.Pet 
+    
+    
+    

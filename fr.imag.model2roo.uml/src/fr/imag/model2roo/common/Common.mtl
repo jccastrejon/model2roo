@@ -84,6 +84,22 @@
 [/template]
 
 [**
+ * Decide whether the specified key doesn't require to output a value.
+ * @param key Key.
+ */]
+[template public requiresNoValue(key : String) post(trim())]
+[if key.getPropertiesWithoutValue().size() = 0] false [else] true [/if]
+[/template]
+
+[**
+ * Get the properties for which no value should be output.
+ * @param key Key.
+ */]
+[template public getPropertiesWithoutValue(key : String) post(trim())]
+  [if key = 'seleniumTest'] true [/if]
+[/template]
+
+[**
  * Decide whether the specified key requires a default value or not.
  * @param key Key.
  */]
@@ -129,6 +145,7 @@
   [if property.name.startsWith(prefix)]
     [let value : String = property.name.getPropertyValue('', stereotype.qualifiedName, element)]
     [let requiresDefault : String = property.name.requiresDefaultValue()]
+    [let requiresNoValue : String = property.name.requiresNoValue()]
     [let contextMapping : String = property.name.getContextMapping(entity)]
     [let hasMapping : String = property.name.hasMapping()]
 
@@ -144,14 +161,18 @@
         [/for]
 
       [comment] Special commands that doesn't output its property value [/comment]
+      [else] [if requiresNoValue = 'true']
+             [property.name.getMapping()/] [contextMapping/]
+
+      [comment] Special commands that can output a default value [/comment]
       [else] [if requiresDefault = 'true'] 
              [if value = 'true'] [property.name.getMapping()/] [property.name.getDefaultValue()/] [contextMapping/] [/if]
 
       [comment] Property with single value [/comment]
       [else] [property.name.getMapping()/] [value/] [contextMapping/]
-      [/if] [/if] [/if]
+      [/if] [/if] [/if] [/if]
     [/if]
-    [/let] [/let] [/let] [/let]
+    [/let] [/let] [/let] [/let] [/let]
   [/if]
 [/for]
 [/template]
