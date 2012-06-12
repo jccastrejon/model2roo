@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="Uml2Roo" name="fr.imag.model2roo.uml">
-    <property name="ECLIPSE_HOME" value="../../../eclipse"/>
-    <property name="ECLIPSE_WORKSPACE" value="../.."/>
+    <property name="ECLIPSE_HOME" value="../../../../java/eclipse"/>
+    <property name="ECLIPSE_WORKSPACE" value="../../../../java/workspace_model2roo"/>
 
     <!-- The classpath with only the dependencies used by the project -->
     <path id="fr.imag.model2roo.uml.libraryclasspath">
