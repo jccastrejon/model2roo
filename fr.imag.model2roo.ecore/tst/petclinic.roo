@@ -1,0 +1,22 @@
+project --topLevelPackage petclinic 
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+
+// Enumerations
+
+
+// Entities
+
+
+// Attributes
+
+
+// References
+
+
+// System commands
+web mvc setup 
+web mvc all --package ~.web
+
+// Entities commands
+
+
