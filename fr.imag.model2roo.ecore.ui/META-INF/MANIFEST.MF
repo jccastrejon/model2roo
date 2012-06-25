@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore2Roo - Part of the Model2Roo project
 Bundle-SymbolicName: fr.imag.model2roo.ecore.ui;singleton:=true
-Bundle-Version: 1.0.0.0
+Bundle-Version: 1.0.0.1
 Bundle-Activator: fr.imag.model2roo.ecore.ui.Activator
 Bundle-Vendor: fr.imag
 Require-Bundle: org.eclipse.ui,

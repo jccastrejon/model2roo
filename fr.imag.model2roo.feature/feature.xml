@@ -2,7 +2,7 @@
 <feature
       id="fr.imag.model2roo.feature"
       label="Model2Roo"
-      version="1.0.0.0"
+      version="1.0.0.1"
       provider-name="fr.imag">
 
    <description url="http://code.google.com/p/model2roo/">
@@ -14,7 +14,7 @@
    </copyright>
 
    <license url="http://gplv3.fsf.org/">
- GNU GENERAL PUBLIC LICENSE
+      GNU GENERAL PUBLIC LICENSE
  Version 3, 29 June 2007
  
  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see www.gnu.org/licenses.
@@ -25,15 +25,25 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.m2m.atl.sdk"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.papyrus"
          version="0.0.0"/>
 
    <plugin
+         id="fr.imag.model2roo.ecore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="fr.imag.model2roo.ecore.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.imag.model2roo.uml"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -48,13 +58,6 @@
 
    <plugin
          id="fr.imag.model2roo.uml.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.imag.model2roo.uml"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UML Profiles for the Model2Roo project
 Bundle-SymbolicName: fr.imag.model2roo.uml.profiles;singleton:=true
-Bundle-Version: 1.0.0.0
+Bundle-Version: 1.0.0.1
 Bundle-Activator: fr.imag.model2roo.uml.profiles.Activator
 Bundle-Vendor: fr.imag
 Require-Bundle: org.eclipse.ui,
