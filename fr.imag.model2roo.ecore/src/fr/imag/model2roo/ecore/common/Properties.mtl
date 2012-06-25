@@ -61,9 +61,9 @@ field [property.eAttributeType.getRooType(property)/] --fieldName [property.name
   [if type.oclIsUndefined()] [type.getUndefinedType(property)/]
   [else] [if type.oclIsTypeOf(EEnum)] enum
   [else] [if type.name = 'String'] string
-  [else] [if type.name = 'Boolean'] boolean
-  [else] [if type.name = 'Integer'] number --type java.lang.Integer
-  [else] [if type.name = 'UnlimitedNatural'] number --type java.lang.Long
+  [else] [if type.name = 'EBoolean'] boolean
+  [else] [if type.name = 'EInt'] number --type java.lang.Integer
+  [else] [if type.name = 'ELong'] number --type java.lang.Long
   [else] string
   [/if] [/if] [/if] [/if] [/if] [/if]
 [/template]
@@ -100,5 +100,5 @@ field [property.eAttributeType.getRooType(property)/] --fieldName [property.name
  * @param type UML type.
  */]
 [template public handleEnumerationProperty(type : EDataType) post(trim())]
-  [if type.oclIsTypeOf(EEnum)] --type ~.domain.[type.name/] [/if]
+  [if not type.oclIsUndefined()] [if type.oclIsTypeOf(EEnum)] --type ~.domain.[type.name/] [/if] [/if]
 [/template]

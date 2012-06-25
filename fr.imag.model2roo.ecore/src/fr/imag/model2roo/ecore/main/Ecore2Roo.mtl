@@ -31,7 +31,8 @@
  */]
 [template public generateRoo(aPackage : EPackage) post(trim())]
 [comment @main/]
-[file (aPackage.name.concat('.roo'), false, 'UTF-8')]
+[if aPackage.eSuperPackage->notEmpty()]
+[file (('Ecore2Roo.roo'), false, 'UTF-8')]
 project --topLevelPackage [aPackage.name.toLower()/] 
 jpa setup ['persistenceProvider'.getPropertyValue('--provider ', 'rooCommand::RooModelCommand', aPackage)/] ['persistenceDatabase'.getPropertyValue('--database ', 'rooCommand::RooModelCommand', aPackage)/]
 
@@ -52,6 +53,6 @@ jpa setup ['persistenceProvider'.getPropertyValue('--provider ', 'rooCommand::Ro
 
 // Entities commands
 [aPackage.generateEntitiesCommands()/]
-
 [/file]
+[/if]
 [/template]

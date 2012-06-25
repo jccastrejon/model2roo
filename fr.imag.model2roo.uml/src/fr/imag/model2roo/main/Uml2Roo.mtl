@@ -31,7 +31,7 @@
  */]
 [template public generateRoo(aModel : Model) post(trim())]
 [comment @main/]
-[file (aModel.name.concat('.roo'), false, 'UTF-8')]
+[file (('Uml2Roo.roo'), false, 'UTF-8')]
   [for (element : Element | aModel.ownedElement)]
     [if element.oclIsTypeOf(Package)] [element.oclAsType(Package).generateRooCommands()/] [/if]
   [/for]

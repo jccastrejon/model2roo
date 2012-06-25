@@ -180,7 +180,7 @@ public class Uml2RooAction extends ActionDelegate implements IActionDelegate {
 							URI modelURI = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
 							try {
 								target = model.getParent();
-								rooFile = new File(model.getRawLocation().toString().replaceAll(".uml", ".roo"));
+								rooFile = new File(target.getLocation().toFile(), model.getName().replace(".uml", ".roo"));
 								this.cleanTargetDirectory(rooFile);
 								GenerateAll generator = new GenerateAll(modelURI, target, getArguments());
 								generator.doGenerate(monitor);
@@ -188,7 +188,8 @@ public class Uml2RooAction extends ActionDelegate implements IActionDelegate {
 								IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
 								Activator.getDefault().getLog().log(status);
 							} finally {
-								this.formatOutputFiles(target.getLocation().toFile());
+								new File(target.getLocation().toFile(), "Uml2Roo.roo").renameTo(rooFile);
+								this.formatOutputFiles(rooFile.getParentFile());
 								model.getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 
 								// Execute Roo script
@@ -212,7 +213,6 @@ public class Uml2RooAction extends ActionDelegate implements IActionDelegate {
 					// The roo script will be regenerated
 					if (rooFile.exists()) {
 						rooFile.delete();
-						rooFile.createNewFile();
 					}
 
 					// Delete the results of previous executions
@@ -251,8 +251,10 @@ public class Uml2RooAction extends ActionDelegate implements IActionDelegate {
 				private void formatOutputFiles(final File targetDirectory) {
 					if (targetDirectory.exists()) {
 						for (File file : targetDirectory.listFiles()) {
-							this.formatOutputFile(file);
-						}
+                            if(file.getName().endsWith(".roo")) {
+                                this.formatOutputFile(file);   
+                            }
+                        }
 					}
 				}
 
