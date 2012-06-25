@@ -1,0 +1,75 @@
+project --topLevelPackage fr.imag.petclinic 
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+
+// Enumerations
+enum type --class ~.domain.Specialty 
+    enum constant --name Cardiology 
+    enum constant --name Dentistry 
+    enum constant --name Nutriology
+    enum type --class ~.domain.PetType 
+    enum constant --name Dog 
+    enum constant --name Cat 
+    enum constant --name Bird
+
+// Entities
+entity jpa --class ~.domain.AbstractPerson  --abstract true 
+      
+      
+       entity jpa --class ~.domain.Pet   --testAutomatically true 
+       entity jpa --class ~.domain.Visit   --testAutomatically true 
+
+      
+       entity jpa --class ~.domain.Owner  --extends ~.domain.AbstractPerson --testAutomatically true 
+       entity jpa --class ~.domain.Vet  --extends ~.domain.AbstractPerson --testAutomatically true
+
+// Attributes
+field string --fieldName firstName  --sizeMin 3              --sizeMax 30              --notNull true --class ~.domain.AbstractPerson
+      field string --fieldName lastName  --sizeMin 3              --sizeMax 30              --notNull true --class ~.domain.AbstractPerson
+      field string --fieldName address  --sizeMin 3              --sizeMax 50              --notNull true --class ~.domain.AbstractPerson
+      field string --fieldName city  --sizeMin 3              --sizeMax 30              --notNull true --class ~.domain.AbstractPerson
+      field string --fieldName telephone  --sizeMin 3              --sizeMax 30              --notNull true --class ~.domain.AbstractPerson
+      field string --fieldName homepage  --sizeMin 3              --sizeMax 30              --notNull true --class ~.domain.AbstractPerson
+      field string --fieldName email  --sizeMin 6              --sizeMax 30              --notNull true --class ~.domain.AbstractPerson
+      field date --type java.util.Date --fieldName birthday --class ~.domain.AbstractPerson 
+     
+    field date --type java.util.Date --fieldName employedSince --class ~.domain.Vet
+      field enum --fieldName specialty --type ~.domain.Specialty --class ~.domain.Vet 
+    field boolean --fieldName sendReminders  --primitive true              --notNull true --class ~.domain.Pet
+      field string --fieldName name  --sizeMin 1              --sizeMax 255              --notNull true --class ~.domain.Pet
+      field number --type java.lang.Float --fieldName weight  --notNull true --class ~.domain.Pet
+      field enum --fieldName type --type ~.domain.PetType --class ~.domain.Pet 
+    field string --fieldName description  --sizeMin 3              --sizeMax 30              --notNull true --class ~.domain.Visit
+      field date --type java.util.Date --fieldName visitDate --class ~.domain.Visit
+
+// References
+field set --type ~.domain.Pet --fieldName pets --mappedBy owner              --cardinality ONE_TO_MANY --class ~.domain.Owner 
+        field reference --type ~.domain.Owner --fieldName owner --notNull true --class ~.domain.Pet 
+        field reference --type ~.domain.Pet --fieldName pet  --class ~.domain.Visit 
+        field reference --type ~.domain.Vet --fieldName vet  --class ~.domain.Visit
+
+// System commands
+web mvc setup 
+web mvc language --code de 
+              web mvc language --code es
+    
+    
+    
+    
+    logging setup --level INFO
+    web mvc all --package ~.web
+
+// Entities commands
+selenium test --controller ~.web.OwnerController
+selenium test --controller ~.web.VetController
+selenium test --controller ~.web.PetController
+    
+    finder add --finderName findPetsByNameAndWeight --class ~.domain.Pet
+              finder add --finderName findPetsByOwner --class ~.domain.Pet
+              finder add --finderName findPetsBySendRemindersAndWeightLessThan --class ~.domain.Pet
+              finder add --finderName findPetsByTypeAndNameLike --class ~.domain.Pet
+selenium test --controller ~.web.VisitController
+    
+    finder add --finderName findVisitsByDescriptionAndVisitDate --class ~.domain.Visit
+              finder add --finderName findVisitsByVisitDateBetween --class ~.domain.Visit
+              finder add --finderName findVisitsByDescriptionLike --class ~.domain.Visit
+
