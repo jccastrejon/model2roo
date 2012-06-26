@@ -6,7 +6,7 @@
       provider-name="fr.imag">
 
    <description url="http://code.google.com/p/model2roo/">
-      Model2Roo: A Model Driven Approach for Web Application Development based on the Eclipse Modeling Framework and Spring Roo
+      Model2Roo: Web Application Development based on the Eclipse Modeling Framework and Spring Roo
    </description>
 
    <copyright>
