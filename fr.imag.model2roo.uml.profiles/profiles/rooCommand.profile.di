@@ -2,14 +2,14 @@
 <di:SashWindowsMngr xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.eclipse.org/papyrus/0.7.0/sashdi">
   <pageList>
     <availablePage>
-      <emfPageIdentifier href="rooCommand.profile.notation#_dq_J0IlLEeG3w_M8Us-GSw"/>
+      <emfPageIdentifier href="rooCommand.profile.notation#_c6nMQPT4EeGcPu8BxIpktA"/>
     </availablePage>
   </pageList>
   <sashModel currentSelection="//@sashModel/@windows.0/@children.0">
     <windows>
       <children xsi:type="di:TabFolder">
         <children>
-          <emfPageIdentifier href="rooCommand.profile.notation#_dq_J0IlLEeG3w_M8Us-GSw"/>
+          <emfPageIdentifier href="rooCommand.profile.notation#_c6nMQPT4EeGcPu8BxIpktA"/>
         </children>
       </children>
     </windows>

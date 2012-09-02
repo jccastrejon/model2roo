@@ -11,9 +11,21 @@
    <extension
          point="org.eclipse.papyrus.uml.extensionpoints.UMLProfile">
       <profile
-            name="fr.imag.model2roo.uml.profiles.profile1"
-            path="fr.imag.model2roo.uml.profiles.profile1">
+            description="Profile for Spring Roo commands"
+            iconpath="profiles/roo.ico"
+            name="rooCommand"
+            path="pathmap://Model2Roo_UML_Profiles/rooCommand.profile.uml"
+            provider="fr.imag">
       </profile>
    </extension>
-
+   <extension
+         point="org.eclipse.papyrus.uml.extensionpoints.UMLProfile">
+      <profile
+            description="Profile for Spring Roo structure"
+            iconpath="profiles/roo.ico"
+            name="rooStructure"
+            path="pathmap://Model2Roo_UML_Profiles/rooStructure.profile.uml"
+            provider="fr.imag">
+      </profile>
+   </extension>
 </plugin>
