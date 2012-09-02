@@ -20,10 +20,9 @@
 
 [import fr::imag::model2roo::common::Common/]
 [import fr::imag::model2roo::common::Commands/]
-[import fr::imag::model2roo::common::Entities/]
-[import fr::imag::model2roo::common::Enumerations/]
-[import fr::imag::model2roo::common::Properties/]
+[import fr::imag::model2roo::common::DataModel/]
 [import fr::imag::model2roo::common::References/]
+[import fr::imag::model2roo::common::Enumerations/]
 
 [**
  * Generates Spring Roo commands from each package contained in a UML class model.
@@ -43,10 +42,9 @@
  * @param aPackage UML2 package.
  */]
 [template public generateRooCommands(aPackage : Package) post(trim())]
-[comment] Project definition [/comment]
 // Project definition
-project --topLevelPackage [aPackage.name.toLower()/] 
-jpa setup ['persistenceProvider'.getPropertyValue('--provider ', 'rooCommand::RooModelCommand', aPackage)/] ['persistenceDatabase'.getPropertyValue('--database ', 'rooCommand::RooModelCommand', aPackage)/]
+project --topLevelPackage [aPackage.name.toLower()/]
+[aPackage.generateDataModelSetup()/]
 
 // Enumerations
 [aPackage.generateEnums()/]
@@ -65,4 +63,7 @@ jpa setup ['persistenceProvider'.getPropertyValue('--provider ', 'rooCommand::Ro
 
 // Entities commands
 [aPackage.generateEntitiesCommands()/]
+
+// MVC Finders
+[aPackage.generateMVCFinders()/]
 [/template]

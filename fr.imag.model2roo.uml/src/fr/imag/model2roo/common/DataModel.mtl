@@ -1,0 +1,94 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright 2012 jccastrejon
+ * 
+ * This file is part of Model2Roo.
+ * Model2Roo is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * 
+ * Model2Roo is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
+ */]
+[module DataModel('http://www.eclipse.org/uml2/3.0.0/UML')]
+
+[import fr::imag::model2roo::common::Common/]
+[import fr::imag::model2roo::common::DocumentDataModel/]
+[import fr::imag::model2roo::common::RelationalDataModel/]
+
+[**
+ * Generates the appropriate commands for the mvc finders setup.
+ * @param aPackage UML2 package.
+*/]
+[template public generateMVCFinders(aPackage : Package) post(trim())]
+[if aPackage.isDocumentDataModel() = 'false'] [aPackage.generateRelationalFinders()/] [/if]
+[/template]
+
+[**
+ * Generates the appropriate setup for the chosen data model (relational, document, graph, etc.)
+ * @param aPackage UML2 package.
+*/]
+[template public generateDataModelSetup(aPackage : Package) post(trim())]
+[if aPackage.isDocumentDataModel() = 'true'] [aPackage.generateDocumentSetup()/] [else] [aPackage.generateRelationalSetup()/] [/if]
+[/template]
+
+[**
+ * Generates the required Spring Roo commands for each Class contained in a UML package. 
+ * @param aPackage UML2 package.
+ */]
+[template public generateEntities(aPackage : Package) post(trim())]
+[comment] Base classes [/comment]
+[aPackage.generateBaseClasses()/]
+
+[comment] Child class [/comment]
+[for (anElement: Element | aPackage.ownedElement)]
+  [if anElement.oclIsTypeOf(Class)]
+    [let childClass : Class = anElement.oclAsType(Class)]
+      [if not childClass.superClass->isEmpty()] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
+      [elseif not childClass.isAbstract] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
+      [/if]
+    [/let] [/if]
+[/for]
+[/template]
+
+[**
+ * Generate the properties of the classes contained in the specified package.
+ * @param aPackage UML package.
+ * TODO: Revisar clases que no tienen padre, pero tampoco hijos...esas clases s’ deben escribirse en el log (a menos de que sean abstractas)
+ */]
+[template public generateEntitiesProperties(aPackage : Package) post(trim())]
+[if aPackage.isDocumentDataModel() = 'true']
+  [aPackage.generateDocumentEntitiesProperties()/]
+  [else] [aPackage.generateRelationalEntitiesProperties()/]
+[/if]
+[/template]
+
+[**
+ * Generates the required Spring Roo commands for a UML Class
+ * @param aClass UML2 Class.
+ * @param aPackage UML2 Package.
+*/]
+[template private generateEntity(aClass : Class, aPackage : Package) post(trim())]
+[if aPackage.isDocumentDataModel() = 'true'] [aClass.generateDocumentEntity()/] [else] [aClass.generateRelationalEntity()/] [/if]
+[/template]
+
+[**
+ * Generates the required Spring Roo commands for each Class contained in a UML package, and that have associated children.
+ * @param aPackage UML2 Package.
+*/]
+[template private generateBaseClasses(aPackage : Package) post(trim())]
+[if aPackage.isDocumentDataModel() = 'false']
+[for (anElement: Element | aPackage.ownedElement)]
+  [if anElement.oclIsTypeOf(Class)]
+    [let childClass : Class = anElement.oclAsType(Class)]
+      [if childClass.superClass->isEmpty()] [anElement.oclAsType(Class).generateEntity(aPackage)/] [/if]
+    [/let] [/if]
+[/for]
+[/if]
+[/template]

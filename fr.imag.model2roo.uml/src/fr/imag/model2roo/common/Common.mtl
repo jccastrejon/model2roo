@@ -202,6 +202,7 @@
  */]
 [template public getMapping(key : String) post(trim())]
 [if key = 'controllersAll'] web mvc all
+[else] [if key = 'findersAll'] web mvc finder all
 [else] [if key = 'persistenceProvider'] --provider
 [else] [if key = 'persistenceDatabase'] --database
 [else] [if key = 'persistenceApplicationId'] --applicationId
@@ -216,7 +217,7 @@
 [else] [if key = 'loggingLevel'] logging setup --level
 [else] [if key = 'webLanguages'] web mvc language --code
 [/if] [/if] [/if] [/if] [/if] [/if] [/if]
-[/if] [/if] [/if] [/if] [/if] [/if] [/if]
+[/if] [/if] [/if] [/if] [/if] [/if] [/if] [/if]
 [/template]
 
 [**
@@ -227,4 +228,82 @@
 [if key = 'seleniumTest'] ~.web.<entity>Controller
 [else] [if key = 'finders'] --class ~.domain.<entity>
 [/if] [/if]
+[/template]
+
+
+[**
+ * Generate the properties of a particular UML class.
+ * @param aClass UML class.
+ * @param targetClass UML class to associate the properties
+ */]
+[template public generateEntityProperties(aClass : Class, targetClass : Class) post(trim())]
+[for (anElement: Element | aClass.ownedElement)]
+  [if anElement.oclIsTypeOf(Property)]
+    [comment] Properties that belong to an association are generated as references (other module) [/comment]
+    [if anElement.oclAsType(Property).association.oclIsUndefined()]
+      [anElement.oclAsType(Property).generateEntityProperty()/] --class ~.domain.[targetClass.name/]
+    [/if]
+  [/if]
+[/for]
+[/template]
+
+[**
+ * Generate the Spring Roo commands associated to a particular class property.
+ * @param property Class property.
+ */]
+[template private generateEntityProperty(property : Property) post(trim())]
+[if not property.name.contains('_')] 
+field [property.type.getRooType(property)/] --fieldName [property.name/] [property.type.handleEnumerationProperty()/] [property.getRooDetails()/]
+[/if]
+[/template]
+
+[**
+ * Generate the Spring Roo type for the specified class property.
+ * @param type UML type.
+ * @param property Class property.
+ */]
+[template private getRooType(type : Type, property : Property) post(trim())]
+  [if type.oclIsUndefined()] [type.getUndefinedType(property)/]
+  [else] [if type.oclIsTypeOf(Enumeration)] enum
+  [else] [if type.name = 'String'] string
+  [else] [if type.name = 'Boolean'] boolean
+  [else] [if type.name = 'Integer'] number --type java.lang.Integer
+  [else] [if type.name = 'UnlimitedNatural'] number --type java.lang.Long
+  [else] string
+  [/if] [/if] [/if] [/if] [/if] [/if]
+[/template]
+
+[**
+ * Add the required properties to handle properties that reference an enumeration.
+ * @param type UML type.
+ */]
+[template private handleEnumerationProperty(type : Type) post(trim())]
+  [if type.oclIsTypeOf(Enumeration)] --type ~.domain.[type.name/] [/if]
+[/template]
+
+[**
+ * Get the Spring Roo type for a property with an unspecified UML primitive type.
+ * @param type UML type.
+ * @param property Class property.
+ */]
+[template private getUndefinedType(type : Type, property : Property) post(trim())]
+[if not property.getAppliedStereotype('rooStructure::RooFieldDate').oclIsUndefined()] date --type java.util.Date
+[else] [if property.getValue(property.getAppliedStereotype('rooStructure::RooFieldNumber'), '_numberType').oclIsInvalid()] string
+[else] [property.getValue(property.getAppliedStereotype('rooStructure::RooFieldNumber'), '_numberType').oclAsType(EnumerationLiteral).name.getRooNumberType()/]
+[/if] [/if]
+[/template]
+
+[**
+ * Get the Spring Roo number type for a numeric type.
+ * @param type Numeric type.
+ */]
+[template private getRooNumberType(type : String) post(trim())]
+  [if type = 'Byte'] number --type java.lang.Byte
+  [else] [if type = 'Float'] number --type java.lang.Float
+  [else] [if type = 'Short'] number --type java.lang.Short
+  [else] [if type = 'Long'] number --type java.lang.Long
+  [else] [if type = 'Int'] number --type java.lang.Integer
+  [else] [if type = 'Double'] number --type java.lang.Double
+  [else] string
+  [/if] [/if] [/if] [/if] [/if] [/if]
 [/template]
