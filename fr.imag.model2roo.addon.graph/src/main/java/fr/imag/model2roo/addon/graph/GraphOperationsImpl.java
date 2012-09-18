@@ -3,13 +3,21 @@ package fr.imag.model2roo.addon.graph;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.springframework.roo.classpath.PhysicalTypeCategory;
+import org.springframework.roo.classpath.PhysicalTypeIdentifier;
+import org.springframework.roo.classpath.TypeManagementService;
+import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetailsBuilder;
+import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
+import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
@@ -20,9 +28,9 @@ import org.springframework.roo.support.util.XmlUtils;
 import org.w3c.dom.Element;
 
 /**
- * Implementation of operations this add-on offers.
  * 
- * @since 1.1
+ * @author jccastrejon
+ * 
  */
 @Component
 @Service
@@ -50,9 +58,52 @@ public class GraphOperationsImpl implements GraphOperations {
     /**
      * 
      */
+    @Reference
+    TypeManagementService typeManagementService;
+
+    /**
+     * 
+     */
+    public boolean isGraphSetupAvailable() {
+        return (!fileManager.exists(this.getContextPath()));
+    }
+
+    /**
+     * 
+     */
     public void graphSetup(final GraphProvider provider, final String dataStoreLocation) {
         this.addDependencies(provider);
         this.addConfiguration(provider, dataStoreLocation);
+    }
+
+    /**
+     * 
+     */
+    public boolean isNewEntityAvailable() {
+        return (fileManager.exists(this.getContextPath()));
+    }
+
+    /**
+     * 
+     */
+    public void newEntity(final JavaType name, final GraphProvider graphProvider) {
+        String entityId;
+        List<AnnotationMetadataBuilder> annotations;
+        ClassOrInterfaceTypeDetailsBuilder entityBuilder;
+
+        Validate.notNull(name, "Entity name required");
+        Validate.notNull(graphProvider, "Graph provider required");
+        entityId = PhysicalTypeIdentifier.createIdentifier(name, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
+        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, name,
+                PhysicalTypeCategory.CLASS);
+
+        annotations = new ArrayList<AnnotationMetadataBuilder>();
+        for (JavaType javaType : graphProvider.getAnnotations()) {
+            annotations.add(new AnnotationMetadataBuilder(javaType));
+        }
+
+        entityBuilder.setAnnotations(annotations);
+        typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
     }
 
     /**
@@ -89,7 +140,7 @@ public class GraphOperationsImpl implements GraphOperations {
         OutputStream configurationStream;
 
         // Create a new graph configuration file every time
-        contextPath = pathResolver.getFocusedIdentifier(Path.SPRING_CONFIG_ROOT, "applicationContext-graph.xml");
+        contextPath = this.getContextPath();
         if (this.fileManager.exists(contextPath)) {
             this.fileManager.delete(contextPath);
         }
@@ -111,6 +162,13 @@ public class GraphOperationsImpl implements GraphOperations {
             IOUtils.closeQuietly(templateStream);
             IOUtils.closeQuietly(configurationStream);
         }
+    }
 
+    /**
+     * 
+     * @return
+     */
+    private String getContextPath() {
+        return pathResolver.getFocusedIdentifier(Path.SPRING_CONFIG_ROOT, "applicationContext-graph.xml");
     }
 }
