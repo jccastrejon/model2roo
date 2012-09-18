@@ -84,9 +84,8 @@ public class GraphOperationsImpl implements GraphOperations {
      */
     private void addConfiguration(final GraphProvider provider, final String dataStoreLocation) {
         String contextPath;
+        String outputContents;
         InputStream templateStream;
-        StringBuilder outputContents;
-        List<String> templateContents;
         OutputStream configurationStream;
 
         // Create a new graph configuration file every time
@@ -99,15 +98,11 @@ public class GraphOperationsImpl implements GraphOperations {
         templateStream = null;
         configurationStream = null;
         try {
+            // Read template contents and update required variables
             templateStream = FileUtils.getInputStream(this.getClass(), "applicationContext-graph-"
                     + provider.name().toLowerCase() + ".xml");
-            templateContents = IOUtils.readLines(templateStream);
-
-            outputContents = new StringBuilder();
-            for (String line : templateContents) {
-                outputContents.append(line.replace("${store.location}", dataStoreLocation) + "\n");
-            }
-
+            outputContents = IOUtils.toString(templateStream);
+            outputContents = outputContents.replace("${store.location}", dataStoreLocation);
             configurationStream = this.fileManager.createFile(contextPath).getOutputStream();
             IOUtils.write(outputContents, configurationStream);
         } catch (IOException e) {
