@@ -14,9 +14,12 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.springframework.roo.classpath.PhysicalTypeCategory;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
+import org.springframework.roo.classpath.TypeLocationService;
 import org.springframework.roo.classpath.TypeManagementService;
+import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetailsBuilder;
-import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
+import org.springframework.roo.classpath.details.FieldMetadataBuilder;
+import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.project.Dependency;
@@ -37,13 +40,6 @@ import org.w3c.dom.Element;
 public class GraphOperationsImpl implements GraphOperations {
 
     /**
-     * Use ProjectOperations to install new dependencies, plugins, properties,
-     * etc into the project configuration
-     */
-    @Reference
-    private ProjectOperations projectOperations;
-
-    /**
      * 
      */
     @Reference
@@ -56,10 +52,23 @@ public class GraphOperationsImpl implements GraphOperations {
     private PathResolver pathResolver;
 
     /**
+     * Use ProjectOperations to install new dependencies, plugins, properties,
+     * etc into the project configuration
+     */
+    @Reference
+    private ProjectOperations projectOperations;
+
+    /**
      * 
      */
     @Reference
     TypeManagementService typeManagementService;
+
+    /**
+     * 
+     */
+    @Reference
+    private TypeLocationService typeLocationService;
 
     /**
      * 
@@ -88,22 +97,27 @@ public class GraphOperationsImpl implements GraphOperations {
      */
     public void newEntity(final JavaType name, final GraphProvider graphProvider) {
         String entityId;
-        List<AnnotationMetadataBuilder> annotations;
+        FieldMetadataBuilder fieldBuilder;
+        ClassOrInterfaceTypeDetails entityDetails;
         ClassOrInterfaceTypeDetailsBuilder entityBuilder;
 
         Validate.notNull(name, "Entity name required");
         Validate.notNull(graphProvider, "Graph provider required");
+
+        // Create entity class
         entityId = PhysicalTypeIdentifier.createIdentifier(name, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
         entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, name,
                 PhysicalTypeCategory.CLASS);
 
-        annotations = new ArrayList<AnnotationMetadataBuilder>();
-        for (JavaType javaType : graphProvider.getAnnotations()) {
-            annotations.add(new AnnotationMetadataBuilder(javaType));
-        }
-
-        entityBuilder.setAnnotations(annotations);
+        // Associate appropriate annotations
+        entityBuilder.setAnnotations(graphProvider.getClassAnnotations());
         typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
+
+        // Add id field
+        entityDetails = typeLocationService.getTypeDetails(name);
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                graphProvider.getIdAnnotations(), new JavaSymbolName("nodeId"), JavaType.LONG_OBJECT);
+        typeManagementService.addField(fieldBuilder.build());
     }
 
     /**

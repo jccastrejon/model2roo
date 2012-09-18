@@ -3,6 +3,7 @@ package fr.imag.model2roo.addon.graph;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.model.JavaType;
 
 /**
@@ -47,11 +48,24 @@ public enum GraphProvider {
      * 
      * @return
      */
-    public List<JavaType> getAnnotations() {
-        List<JavaType> returnValue;
+    public List<AnnotationMetadataBuilder> getClassAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
 
-        returnValue = new ArrayList<JavaType>();
-        returnValue.add(new JavaType("org.springframework.data.neo4j.annotation.NodeEntity"));
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType("org.springframework.data.neo4j.annotation.NodeEntity")));
+
+        return returnValue;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public List<AnnotationMetadataBuilder> getIdAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
+
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType("org.springframework.data.neo4j.annotation.GraphId")));
 
         return returnValue;
     }
