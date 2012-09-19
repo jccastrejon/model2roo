@@ -52,11 +52,12 @@ public enum GraphProvider {
         List<AnnotationMetadataBuilder> returnValue;
 
         returnValue = new ArrayList<AnnotationMetadataBuilder>();
-        returnValue.add(new AnnotationMetadataBuilder(new JavaType("org.springframework.data.neo4j.annotation.NodeEntity")));
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType(
+                "org.springframework.data.neo4j.annotation.NodeEntity")));
 
         return returnValue;
     }
-    
+
     /**
      * 
      * @return
@@ -65,7 +66,21 @@ public enum GraphProvider {
         List<AnnotationMetadataBuilder> returnValue;
 
         returnValue = new ArrayList<AnnotationMetadataBuilder>();
-        returnValue.add(new AnnotationMetadataBuilder(new JavaType("org.springframework.data.neo4j.annotation.GraphId")));
+        returnValue
+                .add(new AnnotationMetadataBuilder(new JavaType("org.springframework.data.neo4j.annotation.GraphId")));
+
+        return returnValue;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public List<String> getRepositoryBaseClasses() {
+        List<String> returnValue;
+
+        returnValue = new ArrayList<String>();
+        returnValue.add("org.springframework.data.neo4j.repository.GraphRepository");
 
         return returnValue;
     }

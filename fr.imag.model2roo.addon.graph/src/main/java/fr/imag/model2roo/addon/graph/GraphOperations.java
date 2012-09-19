@@ -34,4 +34,17 @@ public interface GraphOperations {
      * @param graphProvider
      */
     public void newEntity(final JavaType name, final GraphProvider graphProvider);
+    
+    /**
+     * 
+     * @return
+     */
+    public boolean isNewRepositoryAvailable();
+    
+    /**
+     * 
+     * @param domainType
+     * @param graphProvider
+     */
+    public void newRepository(final JavaType domainType, final GraphProvider graphProvider);
 }

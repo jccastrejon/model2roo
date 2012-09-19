@@ -3,6 +3,7 @@ package fr.imag.model2roo.addon.graph;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.springframework.roo.classpath.converters.JavaTypeConverter;
 import org.springframework.roo.classpath.details.BeanInfoUtils;
 import org.springframework.roo.classpath.operations.Cardinality;
 import org.springframework.roo.model.JavaType;
@@ -57,6 +58,17 @@ public class GraphCommands implements CommandMarker {
         } else {
             throw new IllegalArgumentException("Invalid entity name");
         }
+    }
+
+    @CliAvailabilityIndicator("repository graph")
+    public boolean isGraphRepositoryAvailable() {
+        return operations.isNewRepositoryAvailable();
+    }
+
+    @CliCommand(value = "repository graph", help = "Creates a new graph repository in SRC_MAIN_JAVA")
+    public void newGraphRepository(
+            @CliOption(key = "entity", optionContext = JavaTypeConverter.PROJECT, mandatory = true, help = "The domain entity this repository should expose") final JavaType domainType) {
+        operations.newRepository(domainType, this.getCurrentProvider());
     }
 
     @CliAvailabilityIndicator("graph relationship")

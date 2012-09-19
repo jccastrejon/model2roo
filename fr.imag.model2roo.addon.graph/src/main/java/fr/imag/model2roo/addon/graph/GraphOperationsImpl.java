@@ -19,6 +19,7 @@ import org.springframework.roo.classpath.TypeManagementService;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetailsBuilder;
 import org.springframework.roo.classpath.details.FieldMetadataBuilder;
+import org.springframework.roo.model.DataType;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
@@ -118,6 +119,40 @@ public class GraphOperationsImpl implements GraphOperations {
         fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
                 graphProvider.getIdAnnotations(), new JavaSymbolName("nodeId"), JavaType.LONG_OBJECT);
         typeManagementService.addField(fieldBuilder.build());
+    }
+
+    /**
+     * 
+     */
+    public boolean isNewRepositoryAvailable() {
+        return (fileManager.exists(this.getContextPath()));
+    }
+
+    /**
+     * 
+     */
+    public void newRepository(final JavaType domainType, final GraphProvider graphProvider) {
+        String entityId;
+        JavaType repository;
+        List<JavaType> repositoryParameters;
+        ClassOrInterfaceTypeDetailsBuilder entityBuilder;
+
+        // Create repository class
+        repository = new JavaType(domainType.getPackage().getFullyQualifiedPackageName() + "."
+                + domainType.getSimpleTypeName() + "Repository");
+        entityId = PhysicalTypeIdentifier.createIdentifier(repository, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
+        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, repository,
+                PhysicalTypeCategory.CLASS);
+
+        // Add neo4j repository base class
+        repositoryParameters = new ArrayList<JavaType>();
+        repositoryParameters.add(domainType);
+        for (String baseClass : graphProvider.getRepositoryBaseClasses()) {
+            entityBuilder.addExtendsTypes(new JavaType(baseClass, 0, DataType.TYPE, null, repositoryParameters));
+        }
+
+        // Save repository
+        typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
     }
 
     /**
