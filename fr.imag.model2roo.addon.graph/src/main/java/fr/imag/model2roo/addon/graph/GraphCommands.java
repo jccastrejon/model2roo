@@ -54,9 +54,11 @@ public class GraphCommands implements CommandMarker {
 
     @CliCommand(value = "entity graph", help = "Creates a new graph entity in SRC_MAIN_JAVA")
     public void newGraphEntity(
-            @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the entity to create") final JavaType name) {
+            @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the entity to create") final JavaType name,
+            @CliOption(key = "extends", mandatory = false, unspecifiedDefaultValue = "java.lang.Object", help = "The superclass (defaults to java.lang.Object)") final JavaType superClass,
+            @CliOption(key = "abstract", mandatory = false, specifiedDefaultValue = "true", unspecifiedDefaultValue = "false", help = "Whether the generated class should be marked as abstract") final boolean isAbstract) {
         if (BeanInfoUtils.isEntityReasonablyNamed(name)) {
-            operations.newEntity(name, this.getCurrentProvider());
+            operations.newEntity(name, superClass, isAbstract, this.getCurrentProvider());
         } else {
             throw new IllegalArgumentException("Invalid entity name");
         }

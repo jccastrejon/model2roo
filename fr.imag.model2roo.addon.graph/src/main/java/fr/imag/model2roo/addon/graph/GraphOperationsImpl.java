@@ -1,10 +1,15 @@
 package fr.imag.model2roo.addon.graph;
 
+import static org.springframework.roo.model.JavaType.OBJECT;
+import static org.springframework.roo.model.RooJavaType.ROO_JAVA_BEAN;
+import static org.springframework.roo.model.RooJavaType.ROO_TO_STRING;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -40,6 +45,16 @@ import org.w3c.dom.Element;
 @Component
 @Service
 public class GraphOperationsImpl implements GraphOperations {
+
+    /**
+     * 
+     */
+    private static final AnnotationMetadataBuilder ROO_JAVA_BEAN_BUILDER = new AnnotationMetadataBuilder(ROO_JAVA_BEAN);
+
+    /**
+     * 
+     */
+    private static final AnnotationMetadataBuilder ROO_TO_STRING_BUILDER = new AnnotationMetadataBuilder(ROO_TO_STRING);
 
     /**
      * 
@@ -97,22 +112,41 @@ public class GraphOperationsImpl implements GraphOperations {
     /**
      * 
      */
-    public void newEntity(final JavaType name, final GraphProvider graphProvider) {
+    public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract,
+            final GraphProvider graphProvider) {
+        int modifier;
         String entityId;
         FieldMetadataBuilder fieldBuilder;
         ClassOrInterfaceTypeDetails entityDetails;
+        ClassOrInterfaceTypeDetails superClassDetails;
         ClassOrInterfaceTypeDetailsBuilder entityBuilder;
 
         Validate.notNull(name, "Entity name required");
         Validate.notNull(graphProvider, "Graph provider required");
 
+        // Class modifier
+        modifier = Modifier.PUBLIC;
+        if (isAbstract) {
+            modifier = Modifier.ABSTRACT;
+        }
+
         // Create entity class
         entityId = PhysicalTypeIdentifier.createIdentifier(name, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
-        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, name,
-                PhysicalTypeCategory.CLASS);
+        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, modifier, name, PhysicalTypeCategory.CLASS);
+
+        // Base class
+        if (!superClass.equals(OBJECT)) {
+            superClassDetails = typeLocationService.getTypeDetails(superClass);
+            if (superClassDetails != null) {
+                entityBuilder.setSuperclass(new ClassOrInterfaceTypeDetailsBuilder(superClassDetails));
+            }
+        }
+        entityBuilder.setExtendsTypes(Arrays.asList(superClass));
 
         // Associate appropriate annotations
         entityBuilder.setAnnotations(graphProvider.getClassAnnotations());
+        entityBuilder.addAnnotation(ROO_JAVA_BEAN_BUILDER);
+        entityBuilder.addAnnotation(ROO_TO_STRING_BUILDER);
         typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
 
         // Add id field
@@ -187,6 +221,8 @@ public class GraphOperationsImpl implements GraphOperations {
             annotation.addStringAttribute("type", type);
         }
         entityBuilder.setAnnotations(relationshipAnnotations);
+        entityBuilder.addAnnotation(ROO_JAVA_BEAN_BUILDER);
+        entityBuilder.addAnnotation(ROO_TO_STRING_BUILDER);
         typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
 
         // Id

@@ -35,7 +35,7 @@ public interface GraphOperations {
      * @param name
      * @param graphProvider
      */
-    public void newEntity(final JavaType name, final GraphProvider graphProvider);
+    public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract, final GraphProvider graphProvider);
 
     /**
      * 
