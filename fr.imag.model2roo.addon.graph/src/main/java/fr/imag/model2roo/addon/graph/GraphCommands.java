@@ -58,7 +58,7 @@ public class GraphCommands implements CommandMarker {
             @CliOption(key = "extends", mandatory = false, unspecifiedDefaultValue = "java.lang.Object", help = "The superclass (defaults to java.lang.Object)") final JavaType superClass,
             @CliOption(key = "abstract", mandatory = false, specifiedDefaultValue = "true", unspecifiedDefaultValue = "false", help = "Whether the generated class should be marked as abstract") final boolean isAbstract) {
         if (BeanInfoUtils.isEntityReasonablyNamed(name)) {
-            operations.newEntity(name, superClass, isAbstract, this.getCurrentProvider());
+            operations.newEntity(name, superClass, isAbstract);
         } else {
             throw new IllegalArgumentException("Invalid entity name");
         }
@@ -85,7 +85,7 @@ public class GraphCommands implements CommandMarker {
                     propertiesList.add(property.trim());
                 }
             }
-            operations.newRelationshipEntity(this.getCurrentProvider(), name, type, fromNode, toNode, propertiesList);
+            operations.newRelationshipEntity(name, type, fromNode, toNode, propertiesList);
         } else {
             throw new IllegalArgumentException("Invalid entity name");
         }
@@ -98,8 +98,9 @@ public class GraphCommands implements CommandMarker {
 
     @CliCommand(value = "repository graph", help = "Creates a new graph repository in SRC_MAIN_JAVA")
     public void newGraphRepository(
+            @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the repository to create") final JavaType name,
             @CliOption(key = "entity", optionContext = JavaTypeConverter.PROJECT, mandatory = true, help = "The domain entity this repository should expose") final JavaType domainType) {
-        operations.newRepository(domainType, this.getCurrentProvider());
+        operations.newRepository(name, domainType);
     }
 
     @CliAvailabilityIndicator("relationship graph")
@@ -109,11 +110,11 @@ public class GraphCommands implements CommandMarker {
 
     @CliCommand(value = "relationship graph", help = "Creates a new relationship between two graph entities")
     public void newGraphRelationship(
-            @CliOption(key = "via", mandatory = false, help = "Name of explicit relationship class") final JavaType viaNode,
+            @CliOption(key = "via", mandatory = false, help = "Name of explicit relationship class (Either this or the 'to' property has to be specified).") final JavaType viaNode,
             @CliOption(key = "fieldName", mandatory = true, help = "Name of the field name") final String fieldName,
             @CliOption(key = "type", mandatory = false, help = "Name of relationship") final String type,
             @CliOption(key = "from", optionContext = "update,project", mandatory = true, help = "Name of the start graph entity") final JavaType fromNode,
-            @CliOption(key = "to", optionContext = "update,project", mandatory = true, help = "Name of the end graph entity") final JavaType toNode,
+            @CliOption(key = "to", optionContext = "update,project", mandatory = false, help = "Name of the end graph entity (Either this or the 'via' property has to be specified). ") final JavaType toNode,
             @CliOption(key = "direction", mandatory = false, help = "INCOMING or OUTGOING") final Direction direction,
             @CliOption(key = "relationshipType", mandatory = false, unspecifiedDefaultValue = "SINGLE", specifiedDefaultValue = "SINGLE", help = "SINGLE, MODIFIABLE or READ_ONLY") final RelationshipType relationshipType) {
         boolean isVia;
@@ -126,22 +127,6 @@ public class GraphCommands implements CommandMarker {
             relationNode = viaNode;
         }
 
-        operations.newRelationship(this.getCurrentProvider(), fromNode, relationNode, isVia, type, direction,
-                fieldName, relationshipType);
-    }
-
-    /**
-     * 
-     * @return
-     */
-    private GraphProvider getCurrentProvider() {
-        GraphProvider returnValue;
-
-        returnValue = this.currentProvider;
-        if (returnValue == null) {
-            returnValue = GraphProvider.Neo4j;
-        }
-
-        return returnValue;
+        operations.newRelationship(fromNode, relationNode, isVia, type, direction, fieldName, relationshipType);
     }
 }

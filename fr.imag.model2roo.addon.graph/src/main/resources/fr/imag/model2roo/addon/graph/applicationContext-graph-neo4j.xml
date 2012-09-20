@@ -11,6 +11,7 @@
             http://www.springframework.org/schema/data/neo4j
             http://www.springframework.org/schema/data/neo4j/spring-neo4j-2.0.xsd">
     <context:annotation-config/>
+    <!-- GraphProvider: Neo4j -->
     <neo4j:config storeDirectory="${store.location}"/>
     ￼<neo4j:repositories base-package="**.**"/>
 </beans>

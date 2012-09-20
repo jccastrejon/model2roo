@@ -4,6 +4,7 @@ import static org.springframework.roo.model.JavaType.OBJECT;
 import static org.springframework.roo.model.RooJavaType.ROO_JAVA_BEAN;
 import static org.springframework.roo.model.RooJavaType.ROO_TO_STRING;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.Validate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
@@ -97,9 +97,9 @@ public class GraphOperationsImpl implements GraphOperations {
     /**
      * 
      */
-    public void graphSetup(final GraphProvider provider, final String dataStoreLocation) {
-        this.addDependencies(provider);
-        this.addConfiguration(provider, dataStoreLocation);
+    public void graphSetup(final GraphProvider graphProvider, final String dataStoreLocation) {
+        this.addDependencies(graphProvider);
+        this.addConfiguration(graphProvider, dataStoreLocation);
     }
 
     /**
@@ -112,17 +112,14 @@ public class GraphOperationsImpl implements GraphOperations {
     /**
      * 
      */
-    public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract,
-            final GraphProvider graphProvider) {
+    public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract) {
         int modifier;
         String entityId;
+        GraphProvider graphProvider;
         FieldMetadataBuilder fieldBuilder;
         ClassOrInterfaceTypeDetails entityDetails;
         ClassOrInterfaceTypeDetails superClassDetails;
         ClassOrInterfaceTypeDetailsBuilder entityBuilder;
-
-        Validate.notNull(name, "Entity name required");
-        Validate.notNull(graphProvider, "Graph provider required");
 
         // Class modifier
         modifier = Modifier.PUBLIC;
@@ -144,6 +141,7 @@ public class GraphOperationsImpl implements GraphOperations {
         entityBuilder.setExtendsTypes(Arrays.asList(superClass));
 
         // Associate appropriate annotations
+        graphProvider = this.getCurrentGraphProvider();
         entityBuilder.setAnnotations(graphProvider.getClassAnnotations());
         entityBuilder.addAnnotation(ROO_JAVA_BEAN_BUILDER);
         entityBuilder.addAnnotation(ROO_TO_STRING_BUILDER);
@@ -151,7 +149,7 @@ public class GraphOperationsImpl implements GraphOperations {
 
         // Add id field
         entityDetails = typeLocationService.getTypeDetails(name);
-        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                 graphProvider.getIdAnnotations(), new JavaSymbolName("nodeId"), JavaType.LONG_OBJECT);
         typeManagementService.addField(fieldBuilder.build());
     }
@@ -166,22 +164,21 @@ public class GraphOperationsImpl implements GraphOperations {
     /**
      * 
      */
-    public void newRepository(final JavaType domainType, final GraphProvider graphProvider) {
+    public void newRepository(final JavaType name, final JavaType domainType) {
         String entityId;
-        JavaType repository;
+        GraphProvider graphProvider;
         List<JavaType> repositoryParameters;
         ClassOrInterfaceTypeDetailsBuilder entityBuilder;
 
         // Create repository class
-        repository = new JavaType(domainType.getPackage().getFullyQualifiedPackageName() + "."
-                + domainType.getSimpleTypeName() + "Repository");
-        entityId = PhysicalTypeIdentifier.createIdentifier(repository, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
-        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, repository,
+        entityId = PhysicalTypeIdentifier.createIdentifier(name, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
+        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, name,
                 PhysicalTypeCategory.CLASS);
 
         // Add neo4j repository base class
         repositoryParameters = new ArrayList<JavaType>();
         repositoryParameters.add(domainType);
+        graphProvider = this.getCurrentGraphProvider();
         for (String baseClass : graphProvider.getRepositoryBaseClasses()) {
             entityBuilder.addExtendsTypes(new JavaType(baseClass, 0, DataType.TYPE, null, repositoryParameters));
         }
@@ -202,9 +199,10 @@ public class GraphOperationsImpl implements GraphOperations {
      * 
      * @param name
      */
-    public void newRelationshipEntity(final GraphProvider graphProvider, final JavaType name, final String type,
-            final JavaType startNode, final JavaType endNode, List<String> properties) {
+    public void newRelationshipEntity(final JavaType name, final String type, final JavaType startNode,
+            final JavaType endNode, List<String> properties) {
         String entityId;
+        GraphProvider graphProvider;
         FieldMetadataBuilder fieldBuilder;
         ClassOrInterfaceTypeDetails entityDetails;
         ClassOrInterfaceTypeDetailsBuilder entityBuilder;
@@ -216,6 +214,7 @@ public class GraphOperationsImpl implements GraphOperations {
                 PhysicalTypeCategory.CLASS);
 
         // Associate appropriate annotations
+        graphProvider = this.getCurrentGraphProvider();
         relationshipAnnotations = graphProvider.getRelationshipEntityAnnotations();
         for (AnnotationMetadataBuilder annotation : relationshipAnnotations) {
             annotation.addStringAttribute("type", type);
@@ -227,17 +226,17 @@ public class GraphOperationsImpl implements GraphOperations {
 
         // Id
         entityDetails = typeLocationService.getTypeDetails(name);
-        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                 graphProvider.getIdAnnotations(), new JavaSymbolName("relationshipId"), JavaType.LONG_OBJECT);
         entityBuilder.addField(fieldBuilder.build());
 
         // Start node
-        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                 graphProvider.getRelationshipStartNodeAnnotations(), new JavaSymbolName("startNode"), startNode);
         entityBuilder.addField(fieldBuilder.build());
 
         // End node
-        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                 graphProvider.getRelationshipEndNodeAnnotations(), new JavaSymbolName("endNode"), endNode);
         entityBuilder.addField(fieldBuilder.build());
 
@@ -245,7 +244,7 @@ public class GraphOperationsImpl implements GraphOperations {
         if (properties != null) {
             // One field of type String for each property
             for (String property : properties) {
-                fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                         new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(property), JavaType.STRING);
                 entityBuilder.addField(fieldBuilder.build());
             }
@@ -264,10 +263,11 @@ public class GraphOperationsImpl implements GraphOperations {
     /**
      * 
      */
-    public void newRelationship(final GraphProvider graphProvider, final JavaType fromNode,
-            final JavaType relationNode, final boolean isVia, final String type, final Direction direction,
-            final String fieldName, final RelationshipType relationshipType) {
+    public void newRelationship(final JavaType fromNode, final JavaType relationNode, final boolean isVia,
+            final String type, final Direction direction, final String fieldName,
+            final RelationshipType relationshipType) {
         List<JavaType> parameters;
+        GraphProvider graphProvider;
         FieldMetadataBuilder fieldBuilder;
         ClassOrInterfaceTypeDetails entityDetails;
         List<AnnotationMetadataBuilder> fieldAnnotations;
@@ -276,20 +276,20 @@ public class GraphOperationsImpl implements GraphOperations {
         entityDetails = typeLocationService.getTypeDetails(fromNode);
         switch (relationshipType) {
         case SINGLE:
-            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                     new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(fieldName), relationNode);
             break;
         case MODIFIABLE:
             parameters = new ArrayList<JavaType>();
             parameters.add(relationNode);
-            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                     new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(fieldName), new JavaType(
                             "java.util.Set", 0, DataType.TYPE, null, parameters));
             break;
         case READ_ONLY:
             parameters = new ArrayList<JavaType>();
             parameters.add(relationNode);
-            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PRIVATE,
                     new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(fieldName), new JavaType(
                             "java.lang.Iterable", 0, DataType.TYPE, null, parameters));
             break;
@@ -297,6 +297,7 @@ public class GraphOperationsImpl implements GraphOperations {
 
         if (fieldBuilder != null) {
             // Associate appropriate annotations
+            graphProvider = this.getCurrentGraphProvider();
             fieldAnnotations = graphProvider.getRelationshipAnnotations();
             if (isVia) {
                 fieldAnnotations = graphProvider.getRelationshipViaAnnotations();
@@ -319,7 +320,7 @@ public class GraphOperationsImpl implements GraphOperations {
      * 
      * @param provider
      */
-    private void addDependencies(final GraphProvider provider) {
+    private void addDependencies(final GraphProvider graphProvider) {
         Element configuration;
         List<Dependency> dependencies;
         List<Element> providerDependences;
@@ -328,7 +329,7 @@ public class GraphOperationsImpl implements GraphOperations {
         configuration = XmlUtils.getConfiguration(this.getClass());
 
         // Recover the dependencies associated to the specified provider
-        providerDependences = XmlUtils.findElements(provider.getConfigPrefix(), configuration);
+        providerDependences = XmlUtils.findElements(graphProvider.getConfigPrefix(), configuration);
         for (Element dependency : providerDependences) {
             dependencies.add(new Dependency(dependency));
         }
@@ -342,7 +343,7 @@ public class GraphOperationsImpl implements GraphOperations {
      * @param provider
      * @param dataStoreLocation
      */
-    private void addConfiguration(final GraphProvider provider, final String dataStoreLocation) {
+    private void addConfiguration(final GraphProvider graphProvider, final String dataStoreLocation) {
         String contextPath;
         String outputContents;
         InputStream templateStream;
@@ -360,7 +361,7 @@ public class GraphOperationsImpl implements GraphOperations {
         try {
             // Read template contents and update required variables
             templateStream = FileUtils.getInputStream(this.getClass(), "applicationContext-graph-"
-                    + provider.name().toLowerCase() + ".xml");
+                    + graphProvider.name().toLowerCase() + ".xml");
             outputContents = IOUtils.toString(templateStream);
             outputContents = outputContents.replace("${store.location}", dataStoreLocation);
             configurationStream = this.fileManager.createFile(contextPath).getOutputStream();
@@ -371,6 +372,28 @@ public class GraphOperationsImpl implements GraphOperations {
             IOUtils.closeQuietly(templateStream);
             IOUtils.closeQuietly(configurationStream);
         }
+    }
+
+    /**
+     * 
+     * @return
+     */
+    private GraphProvider getCurrentGraphProvider() {
+        int providerIndex;
+        String graphConfiguration;
+        GraphProvider returnValue;
+
+        returnValue = GraphProvider.Neo4j;
+        try {
+            graphConfiguration = IOUtils.toString(new FileInputStream(this.fileManager.readFile(this.getContextPath())
+                    .getFile()));
+            providerIndex = graphConfiguration.indexOf("GraphProvider:") + "GraphProvider:".length();
+            returnValue = GraphProvider.valueOf(graphConfiguration.substring(providerIndex,
+                    graphConfiguration.indexOf("-", providerIndex)).trim());
+        } catch (IOException e) {
+        }
+
+        return returnValue;
     }
 
     /**

@@ -19,10 +19,10 @@ public interface GraphOperations {
 
     /**
      * 
-     * @param provider
+     * @param graphProvider
      * @param dataStoreLocation
      */
-    public void graphSetup(final GraphProvider provider, final String dataStoreLocation);
+    public void graphSetup(final GraphProvider graphProvider, final String dataStoreLocation);
 
     /**
      * 
@@ -33,9 +33,10 @@ public interface GraphOperations {
     /**
      * 
      * @param name
-     * @param graphProvider
+     * @param superClass
+     * @param isAbstract
      */
-    public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract, final GraphProvider graphProvider);
+    public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract);
 
     /**
      * 
@@ -45,10 +46,10 @@ public interface GraphOperations {
 
     /**
      * 
+     * @param name
      * @param domainType
-     * @param graphProvider
      */
-    public void newRepository(final JavaType domainType, final GraphProvider graphProvider);
+    public void newRepository(final JavaType name, final JavaType domainType);
 
     /**
      * 
@@ -58,15 +59,14 @@ public interface GraphOperations {
 
     /**
      * 
-     * @param graphProvider
      * @param name
      * @param type
      * @param startNode
      * @param endNode
      * @param properties
      */
-    public void newRelationshipEntity(final GraphProvider graphProvider, final JavaType name, final String type,
-            final JavaType startNode, final JavaType endNode, List<String> properties);
+    public void newRelationshipEntity(final JavaType name, final String type, final JavaType startNode,
+            final JavaType endNode, List<String> properties);
 
     /**
      * 
@@ -76,7 +76,6 @@ public interface GraphOperations {
 
     /**
      * 
-     * @param graphProvider
      * @param node
      * @param relationNode
      * @param isVia
@@ -85,7 +84,7 @@ public interface GraphOperations {
      * @param fieldName
      * @param relationshipType
      */
-    public void newRelationship(final GraphProvider graphProvider, final JavaType node, final JavaType relationNode,
-            final boolean isVia, final String type, final Direction direction, final String fieldName,
+    public void newRelationship(final JavaType node, final JavaType relationNode, final boolean isVia,
+            final String type, final Direction direction, final String fieldName,
             final RelationshipType relationshipType);
 }
