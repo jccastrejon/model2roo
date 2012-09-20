@@ -19,6 +19,7 @@ import org.springframework.roo.classpath.TypeManagementService;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetailsBuilder;
 import org.springframework.roo.classpath.details.FieldMetadataBuilder;
+import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.model.DataType;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
@@ -153,6 +154,129 @@ public class GraphOperationsImpl implements GraphOperations {
 
         // Save repository
         typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isNewRelationshipEntityAvailable() {
+        return (fileManager.exists(this.getContextPath()));
+    }
+
+    /**
+     * 
+     * @param name
+     */
+    public void newRelationshipEntity(final GraphProvider graphProvider, final JavaType name, final String type,
+            final JavaType startNode, final JavaType endNode, List<String> properties) {
+        String entityId;
+        FieldMetadataBuilder fieldBuilder;
+        ClassOrInterfaceTypeDetails entityDetails;
+        ClassOrInterfaceTypeDetailsBuilder entityBuilder;
+        List<AnnotationMetadataBuilder> relationshipAnnotations;
+
+        // Create relationship class
+        entityId = PhysicalTypeIdentifier.createIdentifier(name, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
+        entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, name,
+                PhysicalTypeCategory.CLASS);
+
+        // Associate appropriate annotations
+        relationshipAnnotations = graphProvider.getRelationshipEntityAnnotations();
+        for (AnnotationMetadataBuilder annotation : relationshipAnnotations) {
+            annotation.addStringAttribute("type", type);
+        }
+        entityBuilder.setAnnotations(relationshipAnnotations);
+        typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
+
+        // Id
+        entityDetails = typeLocationService.getTypeDetails(name);
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                graphProvider.getIdAnnotations(), new JavaSymbolName("relationshipId"), JavaType.LONG_OBJECT);
+        entityBuilder.addField(fieldBuilder.build());
+
+        // Start node
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                graphProvider.getRelationshipStartNodeAnnotations(), new JavaSymbolName("startNode"), startNode);
+        entityBuilder.addField(fieldBuilder.build());
+
+        // End node
+        fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                graphProvider.getRelationshipEndNodeAnnotations(), new JavaSymbolName("endNode"), endNode);
+        entityBuilder.addField(fieldBuilder.build());
+
+        // Properties
+        if (properties != null) {
+            // One field of type String for each property
+            for (String property : properties) {
+                fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                        new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(property), JavaType.STRING);
+                entityBuilder.addField(fieldBuilder.build());
+            }
+        }
+
+        typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
+    }
+
+    /**
+     * 
+     */
+    public boolean isNewRelationshipAvailable() {
+        return (fileManager.exists(this.getContextPath()));
+    }
+
+    /**
+     * 
+     */
+    public void newRelationship(final GraphProvider graphProvider, final JavaType fromNode,
+            final JavaType relationNode, final boolean isVia, final String type, final Direction direction,
+            final String fieldName, final RelationshipType relationshipType) {
+        List<JavaType> parameters;
+        FieldMetadataBuilder fieldBuilder;
+        ClassOrInterfaceTypeDetails entityDetails;
+        List<AnnotationMetadataBuilder> fieldAnnotations;
+
+        fieldBuilder = null;
+        entityDetails = typeLocationService.getTypeDetails(fromNode);
+        switch (relationshipType) {
+        case SINGLE:
+            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                    new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(fieldName), relationNode);
+            break;
+        case MODIFIABLE:
+            parameters = new ArrayList<JavaType>();
+            parameters.add(relationNode);
+            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                    new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(fieldName), new JavaType(
+                            "java.util.Set", 0, DataType.TYPE, null, parameters));
+            break;
+        case READ_ONLY:
+            parameters = new ArrayList<JavaType>();
+            parameters.add(relationNode);
+            fieldBuilder = new FieldMetadataBuilder(entityDetails.getDeclaredByMetadataId(), Modifier.PROTECTED,
+                    new ArrayList<AnnotationMetadataBuilder>(), new JavaSymbolName(fieldName), new JavaType(
+                            "java.lang.Iterable", 0, DataType.TYPE, null, parameters));
+            break;
+        }
+
+        if (fieldBuilder != null) {
+            // Associate appropriate annotations
+            fieldAnnotations = graphProvider.getRelationshipAnnotations();
+            if (isVia) {
+                fieldAnnotations = graphProvider.getRelationshipViaAnnotations();
+            }
+            for (AnnotationMetadataBuilder annotation : fieldAnnotations) {
+                if (type != null) {
+                    annotation.addStringAttribute("type", type);
+                }
+                if (direction != null) {
+                    annotation.addEnumAttribute("direction", Direction.class.getCanonicalName(), direction.toString());
+                }
+                fieldBuilder.addAnnotation(annotation);
+            }
+
+            typeManagementService.addField(fieldBuilder.build());
+        }
     }
 
     /**

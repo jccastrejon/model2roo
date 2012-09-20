@@ -62,6 +62,76 @@ public enum GraphProvider {
      * 
      * @return
      */
+    public List<AnnotationMetadataBuilder> getRelationshipEntityAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
+
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType(
+                "org.springframework.data.neo4j.annotation.RelationshipEntity")));
+
+        return returnValue;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public List<AnnotationMetadataBuilder> getRelationshipAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
+
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType(
+                "org.springframework.data.neo4j.annotation.RelatedTo")));
+
+        return returnValue;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public List<AnnotationMetadataBuilder> getRelationshipViaAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
+
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType(
+                "org.springframework.data.neo4j.annotation.RelatedToVia")));
+
+        return returnValue;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public List<AnnotationMetadataBuilder> getRelationshipStartNodeAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
+
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue.add(new AnnotationMetadataBuilder(new JavaType(
+                "org.springframework.data.neo4j.annotation.StartNode")));
+
+        return returnValue;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public List<AnnotationMetadataBuilder> getRelationshipEndNodeAnnotations() {
+        List<AnnotationMetadataBuilder> returnValue;
+
+        returnValue = new ArrayList<AnnotationMetadataBuilder>();
+        returnValue
+                .add(new AnnotationMetadataBuilder(new JavaType("org.springframework.data.neo4j.annotation.EndNode")));
+
+        return returnValue;
+    }
+
+    /**
+     * 
+     * @return
+     */
     public List<AnnotationMetadataBuilder> getIdAnnotations() {
         List<AnnotationMetadataBuilder> returnValue;
 

@@ -1,11 +1,13 @@
 package fr.imag.model2roo.addon.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.springframework.roo.classpath.converters.JavaTypeConverter;
 import org.springframework.roo.classpath.details.BeanInfoUtils;
-import org.springframework.roo.classpath.operations.Cardinality;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.shell.CliAvailabilityIndicator;
 import org.springframework.roo.shell.CliCommand;
@@ -60,6 +62,33 @@ public class GraphCommands implements CommandMarker {
         }
     }
 
+    @CliAvailabilityIndicator("relationshipEntity graph")
+    public boolean isGraphRelationshipEntityAvailable() {
+        return operations.isNewRelationshipEntityAvailable();
+    }
+
+    @CliCommand(value = "relationship entity graph", help = "Creates a new graph relationship entity in SRC_MAIN_JAVA")
+    public void newGraphRelationshipEntity(
+            @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the entity to create") final JavaType name,
+            @CliOption(key = "type", mandatory = true, help = "Name of relationship") final String type,
+            @CliOption(key = "from", optionContext = "update,project", mandatory = true, help = "Name of the start graph entity") final JavaType fromNode,
+            @CliOption(key = "to", optionContext = "update,project", mandatory = true, help = "Name of the end graph entity") final JavaType toNode,
+            @CliOption(key = "properties", mandatory = false, help = "List of properties, separated by commas") final String properties) {
+        List<String> propertiesList;
+        if (BeanInfoUtils.isEntityReasonablyNamed(name)) {
+            propertiesList = null;
+            if (properties != null) {
+                propertiesList = new ArrayList<String>();
+                for (String property : properties.split(",")) {
+                    propertiesList.add(property.trim());
+                }
+            }
+            operations.newRelationshipEntity(this.getCurrentProvider(), name, type, fromNode, toNode, propertiesList);
+        } else {
+            throw new IllegalArgumentException("Invalid entity name");
+        }
+    }
+
     @CliAvailabilityIndicator("repository graph")
     public boolean isGraphRepositoryAvailable() {
         return operations.isNewRepositoryAvailable();
@@ -71,20 +100,32 @@ public class GraphCommands implements CommandMarker {
         operations.newRepository(domainType, this.getCurrentProvider());
     }
 
-    @CliAvailabilityIndicator("graph relationship")
+    @CliAvailabilityIndicator("relationship graph")
     public boolean isGraphRelationshipAvailable() {
-        return true;
+        return operations.isNewRelationshipAvailable();
     }
 
-    @CliCommand(value = "graph relationship", help = "Creates a new relationship between two graph entities")
+    @CliCommand(value = "relationship graph", help = "Creates a new relationship between two graph entities")
     public void newGraphRelationship(
-            @CliOption(key = "via", mandatory = false, help = "Name of explicit relationship class") final JavaType via,
+            @CliOption(key = "via", mandatory = false, help = "Name of explicit relationship class") final JavaType viaNode,
             @CliOption(key = "fieldName", mandatory = true, help = "Name of the field name") final String fieldName,
-            @CliOption(key = "type", mandatory = false, help = "Name of relationship") final String relationshipName,
-            @CliOption(key = "from", optionContext = "update,project", mandatory = true, help = "Name of the start graph entity") final JavaType from,
-            @CliOption(key = "to", optionContext = "update,project", mandatory = true, help = "Name of the end graph entity") final JavaType to,
-            @CliOption(key = "direction", mandatory = false, unspecifiedDefaultValue = "OUTGOING", specifiedDefaultValue = "OUTGOIONG", help = "INCOMING or OUTGOING") final Direction direction,
-            @CliOption(key = "cardinality", mandatory = false, unspecifiedDefaultValue = "ONE_TO_ONE", specifiedDefaultValue = "ONE_TO_MANY", help = "The relationship cardinarily") final Cardinality cardinality) {
+            @CliOption(key = "type", mandatory = false, help = "Name of relationship") final String type,
+            @CliOption(key = "from", optionContext = "update,project", mandatory = true, help = "Name of the start graph entity") final JavaType fromNode,
+            @CliOption(key = "to", optionContext = "update,project", mandatory = true, help = "Name of the end graph entity") final JavaType toNode,
+            @CliOption(key = "direction", mandatory = false, help = "INCOMING or OUTGOING") final Direction direction,
+            @CliOption(key = "relationshipType", mandatory = false, unspecifiedDefaultValue = "SINGLE", specifiedDefaultValue = "SINGLE", help = "SINGLE, MODIFIABLE or READ_ONLY") final RelationshipType relationshipType) {
+        boolean isVia;
+        JavaType relationNode;
+
+        // Determine if there's an associated relationshipEntity
+        isVia = false;
+        relationNode = toNode;
+        if (viaNode != null) {
+            relationNode = viaNode;
+        }
+
+        operations.newRelationship(this.getCurrentProvider(), fromNode, relationNode, isVia, type, direction,
+                fieldName, relationshipType);
     }
 
     /**
