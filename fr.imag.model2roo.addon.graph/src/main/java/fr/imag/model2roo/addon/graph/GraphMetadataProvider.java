@@ -6,10 +6,7 @@ import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
 import org.springframework.roo.classpath.PhysicalTypeMetadata;
-import org.springframework.roo.classpath.customdata.CustomDataKeys;
-import org.springframework.roo.classpath.customdata.taggers.AnnotatedTypeMatcher;
 import org.springframework.roo.classpath.customdata.taggers.CustomDataKeyDecorator;
-import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.classpath.itd.AbstractItdMetadataProvider;
 import org.springframework.roo.classpath.itd.ItdTypeDetailsProvidingMetadataItem;
 import org.springframework.roo.model.JavaType;
@@ -46,14 +43,6 @@ public final class GraphMetadataProvider extends AbstractItdMetadataProvider {
         metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier.getMetadataIdentiferType(),
                 getProvidesType());
         addMetadataTrigger(new JavaType(RooGraph.class.getName()));
-
-        // Register persistent types
-        for (GraphProvider graphProvider : GraphProvider.values()) {
-            for (AnnotationMetadataBuilder annotation : graphProvider.getClassAnnotations()) {
-                customDataKeyDecorator.registerMatcher(this.getClass().getCanonicalName(), new AnnotatedTypeMatcher(
-                        CustomDataKeys.PERSISTENT_TYPE, annotation.getAnnotationType()));
-            }
-        }
     }
 
     /**
