@@ -13,5 +13,5 @@
     <context:annotation-config/>
     <!-- GraphProvider: Neo4j -->
     <neo4j:config storeDirectory="${store.location}"/>
-    ￼<neo4j:repositories base-package="**.**"/>
+    ￼<neo4j:repositories base-package="TO_BE_CHANGED_BY_ADDON"/>
 </beans>

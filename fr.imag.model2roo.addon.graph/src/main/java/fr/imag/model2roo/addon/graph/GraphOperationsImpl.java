@@ -364,6 +364,9 @@ public class GraphOperationsImpl implements GraphOperations {
                     + graphProvider.name().toLowerCase() + ".xml");
             outputContents = IOUtils.toString(templateStream);
             outputContents = outputContents.replace("${store.location}", dataStoreLocation);
+            outputContents = outputContents.replace("TO_BE_CHANGED_BY_ADDON",
+                    projectOperations.getTopLevelPackage(projectOperations.getFocusedModuleName())
+                            .getFullyQualifiedPackageName());
             configurationStream = this.fileManager.createFile(contextPath).getOutputStream();
             IOUtils.write(outputContents, configurationStream);
         } catch (IOException e) {
