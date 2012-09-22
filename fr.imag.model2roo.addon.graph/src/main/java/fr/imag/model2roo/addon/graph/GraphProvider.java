@@ -25,7 +25,7 @@ public enum GraphProvider {
      * @return
      */
     public String getConfigPrefix() {
-        return "/configuration/graphstores/graphstore[@id='" + name() + "']";
+        return "/configuration/graphstores/graphstore[@id='" + name() + "']/dependency";
     }
 
     /**
@@ -71,7 +71,7 @@ public enum GraphProvider {
 
         return returnValue;
     }
-    
+
     /**
      * 
      * @return
@@ -85,7 +85,7 @@ public enum GraphProvider {
 
         return returnValue;
     }
-    
+
     /**
      * 
      * @return
