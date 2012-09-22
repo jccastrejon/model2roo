@@ -173,7 +173,7 @@ public class GraphOperationsImpl implements GraphOperations {
         // Create repository class
         entityId = PhysicalTypeIdentifier.createIdentifier(name, pathResolver.getFocusedPath(Path.SRC_MAIN_JAVA));
         entityBuilder = new ClassOrInterfaceTypeDetailsBuilder(entityId, Modifier.PUBLIC, name,
-                PhysicalTypeCategory.CLASS);
+                PhysicalTypeCategory.INTERFACE);
 
         // Add neo4j repository base class
         repositoryParameters = new ArrayList<JavaType>();
