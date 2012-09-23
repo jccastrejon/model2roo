@@ -187,6 +187,7 @@ public class Uml2RooAction extends ActionDelegate implements IActionDelegate {
 							} catch (IOException e) {
 								IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
 								Activator.getDefault().getLog().log(status);
+								consoleStream.println("Error generating roo file: " + e.getMessage());
 							} finally {
 								new File(target.getLocation().toFile(), "Uml2Roo.roo").renameTo(rooFile);
 								this.formatOutputFiles(rooFile.getParentFile());
