@@ -98,7 +98,7 @@ public class GraphCommands implements CommandMarker {
 
     @CliCommand(value = "repository graph", help = "Creates a new graph repository in SRC_MAIN_JAVA")
     public void newGraphRepository(
-            @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the repository to create") final JavaType name,
+            @CliOption(key = "interface", optionContext = "update,project", mandatory = true, help = "Name of the repository to create") final JavaType name,
             @CliOption(key = "entity", optionContext = JavaTypeConverter.PROJECT, mandatory = true, help = "The domain entity this repository should expose") final JavaType domainType) {
         operations.newRepository(name, domainType);
     }
