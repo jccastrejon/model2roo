@@ -19,6 +19,7 @@
 [module DataModel('http://www.eclipse.org/uml2/3.0.0/UML')]
 
 [import fr::imag::model2roo::common::Common/]
+[import fr::imag::model2roo::common::GraphDataModel/]
 [import fr::imag::model2roo::common::DocumentDataModel/]
 [import fr::imag::model2roo::common::RelationalDataModel/]
 
@@ -35,7 +36,13 @@
  * @param aPackage UML2 package.
 */]
 [template public generateDataModelSetup(aPackage : Package) post(trim())]
-[if aPackage.isDocumentDataModel() = 'true'] [aPackage.generateDocumentSetup()/] [else] [aPackage.generateRelationalSetup()/] [/if]
+[if aPackage.isDocumentDataModel() = 'true'] 
+  [aPackage.generateDocumentSetup()/] 
+[else] [if aPackage.isGraphDataModel() = 'true'] 
+  [aPackage.generateGraphSetup()/] 
+[else] 
+  [aPackage.generateRelationalSetup()/] 
+[/if] [/if]
 [/template]
 
 [**
@@ -51,8 +58,8 @@
   [if anElement.oclIsTypeOf(Class)]
     [let childClass : Class = anElement.oclAsType(Class)]
       [if not childClass.superClass->isEmpty()] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
-      [elseif not childClass.isAbstract] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
-      [/if]
+      [else] [if not childClass.isAbstract] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
+      [/if] [/if]
     [/let] [/if]
 [/for]
 [/template]
@@ -65,8 +72,11 @@
 [template public generateEntitiesProperties(aPackage : Package) post(trim())]
 [if aPackage.isDocumentDataModel() = 'true']
   [aPackage.generateDocumentEntitiesProperties()/]
-  [else] [aPackage.generateRelationalEntitiesProperties()/]
-[/if]
+[else] [if aPackage.isGraphDataModel() = 'true']
+  [aPackage.generateDocumentEntitiesProperties()/] 
+[else] 
+  [aPackage.generateRelationalEntitiesProperties()/]
+[/if] [/if]
 [/template]
 
 [**
@@ -75,7 +85,13 @@
  * @param aPackage UML2 Package.
 */]
 [template private generateEntity(aClass : Class, aPackage : Package) post(trim())]
-[if aPackage.isDocumentDataModel() = 'true'] [aClass.generateDocumentEntity()/] [else] [aClass.generateRelationalEntity()/] [/if]
+[if aPackage.isDocumentDataModel() = 'true'] 
+  [aClass.generateDocumentEntity()/] 
+[else] [if aPackage.isGraphDataModel() = 'true']
+  [aClass.generateGraphEntity()/] 
+[else] 
+  [aClass.generateRelationalEntity()/] 
+[/if] [/if]
 [/template]
 
 [**

@@ -98,6 +98,14 @@
         <element xmi:type="uml:Property" href="rooCommand.profile.uml#_q2J6EPT4EeGcPu8BxIpktA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_q2LIMPT4EeGcPu8BxIpktA"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_vmOuYAWBEeKXbfMfSbfJ4A" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <element xmi:type="uml:Property" href="rooCommand.profile.uml#_vlQeAAWBEeKXbfMfSbfJ4A"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vmOuYQWBEeKXbfMfSbfJ4A"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_x1TOAAWBEeKXbfMfSbfJ4A" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <element xmi:type="uml:Property" href="rooCommand.profile.uml#_x1R_4AWBEeKXbfMfSbfJ4A"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_x1T1EAWBEeKXbfMfSbfJ4A"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_i-KqKPT4EeGcPu8BxIpktA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_i-KqKfT4EeGcPu8BxIpktA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_i-KqKvT4EeGcPu8BxIpktA"/>
@@ -376,7 +384,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-1TTq_T5EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_-1RecPT5EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-1SskfT5EeGcPu8BxIpktA" x="882" y="198"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-1SskfT5EeGcPu8BxIpktA" x="882" y="180"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_DbYG4PT6EeGcPu8BxIpktA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_DbYt8PT6EeGcPu8BxIpktA" source="ShadowFigure">
@@ -416,7 +424,31 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DbYt-_T6EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_DbW4wPT6EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DbYG4fT6EeGcPu8BxIpktA" x="882" y="306"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DbYG4fT6EeGcPu8BxIpktA" x="880" y="289"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_UR5LwAWHEeKopslQxbsgfA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UR6Z4AWHEeKopslQxbsgfA" source="ShadowFigure">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UR6Z4QWHEeKopslQxbsgfA" key="ShadowFigure_Value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UR6Z4gWHEeKopslQxbsgfA" source="displayNameLabelIcon">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UR6Z4wWHEeKopslQxbsgfA" key="displayNameLabelIcon_value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UR6Z5AWHEeKopslQxbsgfA" source="QualifiedName">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UR6Z5QWHEeKopslQxbsgfA" key="QualifiedNameDepth" value="1000"/>
+    </eAnnotations>
+    <children xmi:type="notation:DecorationNode" xmi:id="_UR6Z5gWHEeKopslQxbsgfA" type="5023"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_UR7A8AWHEeKopslQxbsgfA" type="1063">
+      <children xmi:type="notation:Shape" xmi:id="_Wj4cgAWHEeKopslQxbsgfA" type="1037" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <element xmi:type="uml:EnumerationLiteral" href="rooCommand.profile.uml#_Wj2nUAWHEeKopslQxbsgfA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Wj4cgQWHEeKopslQxbsgfA"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_UR7A8QWHEeKopslQxbsgfA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_UR7A8gWHEeKopslQxbsgfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_UR7A8wWHEeKopslQxbsgfA"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UR7A9AWHEeKopslQxbsgfA"/>
+    </children>
+    <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_URwo4AWHEeKopslQxbsgfA"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UR5LwQWHEeKopslQxbsgfA" x="882" y="405" height="53"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_c6nMQfT4EeGcPu8BxIpktA"/>
   <element xmi:type="uml:Profile" href="rooCommand.profile.uml#_c6mlMPT4EeGcPu8BxIpktA"/>
