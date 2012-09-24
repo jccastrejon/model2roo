@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.roo.model.JavaType;
 
 /**
+ * Operations defined in the graph add-on.
  * 
  * @author jccastrejon
  * 
@@ -12,12 +13,14 @@ import org.springframework.roo.model.JavaType;
 public interface GraphOperations {
 
     /**
+     * Determines if the setup operation can be issued.
      * 
      * @return
      */
     public boolean isGraphSetupAvailable();
 
     /**
+     * Setup operation.
      * 
      * @param graphProvider
      * @param dataStoreLocation
@@ -25,12 +28,14 @@ public interface GraphOperations {
     public void graphSetup(final GraphProvider graphProvider, final String dataStoreLocation);
 
     /**
+     * Determines if the entity operation can be issued.
      * 
      * @return
      */
     public boolean isNewEntityAvailable();
 
     /**
+     * Entity operation.
      * 
      * @param name
      * @param superClass
@@ -39,12 +44,14 @@ public interface GraphOperations {
     public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract);
 
     /**
+     * Determines if the repository operation can be issued.
      * 
      * @return
      */
     public boolean isNewRepositoryAvailable();
 
     /**
+     * Repository operation.
      * 
      * @param name
      * @param domainType
@@ -52,12 +59,14 @@ public interface GraphOperations {
     public void newRepository(final JavaType name, final JavaType domainType);
 
     /**
+     * Determines if the relationship-entity operation can be issued.
      * 
      * @return
      */
     public boolean isNewRelationshipEntityAvailable();
 
     /**
+     * Relationship-Entity operation.
      * 
      * @param name
      * @param type
@@ -69,12 +78,14 @@ public interface GraphOperations {
             final JavaType endNode, List<String> properties);
 
     /**
+     * Determines if the relationship operation can be issued.
      * 
      * @return
      */
     public boolean isNewRelationshipAvailable();
 
     /**
+     * Relationship operation.
      * 
      * @param node
      * @param relationNode

@@ -7,7 +7,7 @@ import org.springframework.roo.classpath.details.annotations.AnnotationMetadataB
 import org.springframework.roo.model.JavaType;
 
 /**
- * Support graph providers.
+ * Graph providers supported by this add-on.
  * 
  * @author jccastrejon
  * 
@@ -21,6 +21,8 @@ public enum GraphProvider {
     }
 
     /**
+     * Configuration path in the
+     * 'resources/fr/imag/model2roo/addon/graph/configuration.xml' file.
      * 
      * @return
      */
@@ -29,22 +31,7 @@ public enum GraphProvider {
     }
 
     /**
-     * 
-     * @return
-     */
-    public String getLocationProperty() {
-        return name().toLowerCase() + ".location";
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String getPropertyFileName() {
-        return name().toLowerCase() + ".properties";
-    }
-
-    /**
+     * Get the annotations that should be associated to a graph node.
      * 
      * @return
      */
@@ -59,6 +46,8 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the annotations that should be associated to a graph
+     * relationship-entity.
      * 
      * @return
      */
@@ -73,6 +62,7 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the annotations that should be associated to a graph relationship.
      * 
      * @return
      */
@@ -87,6 +77,8 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the annotations that should be associated to a relationship-entity
+     * specification.
      * 
      * @return
      */
@@ -101,6 +93,8 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the annotations that should be associated to a starting node in a
+     * graph relationship.
      * 
      * @return
      */
@@ -115,6 +109,8 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the annotations that should be associated to an ending node in a
+     * graph relationship.
      * 
      * @return
      */
@@ -129,6 +125,7 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the annotations that should be associated to an id of a graph entity.
      * 
      * @return
      */
@@ -143,6 +140,7 @@ public enum GraphProvider {
     }
 
     /**
+     * Get the base classes associated to a graph repository.
      * 
      * @return
      */

@@ -15,6 +15,7 @@ import org.springframework.roo.shell.CliOption;
 import org.springframework.roo.shell.CommandMarker;
 
 /**
+ * Commands provided by the graph add-on.
  * 
  * @author jccastrejon
  * 
@@ -24,21 +25,32 @@ import org.springframework.roo.shell.CommandMarker;
 public class GraphCommands implements CommandMarker {
 
     /**
-     * 
+     * Operations implemented by this add-on.
      */
     @Reference
     private GraphOperations operations;
 
     /**
-     * 
+     * Graph database provider.
      */
     GraphProvider currentProvider;
 
+    /**
+     * Determines if the setup command can be issued.
+     * 
+     * @return
+     */
     @CliAvailabilityIndicator("graph setup")
     public boolean isGraphSetupAvailable() {
         return operations.isGraphSetupAvailable();
     }
 
+    /**
+     * Setup command.
+     * 
+     * @param graphProvider
+     * @param databaseLocation
+     */
     @CliCommand(value = "graph setup", help = "Install or updates a Graph database provider in your project")
     public void installGraphPersistence(
             @CliOption(key = { "provider" }, mandatory = true, help = "The graph provider to support") final GraphProvider graphProvider,
@@ -47,11 +59,23 @@ public class GraphCommands implements CommandMarker {
         this.operations.graphSetup(graphProvider, databaseLocation);
     }
 
+    /**
+     * Determines if the entity command can be issued.
+     * 
+     * @return
+     */
     @CliAvailabilityIndicator("entity graph")
     public boolean isGraphEntityAvailable() {
         return operations.isNewEntityAvailable();
     }
 
+    /**
+     * Entity command.
+     * 
+     * @param name
+     * @param superClass
+     * @param isAbstract
+     */
     @CliCommand(value = "entity graph", help = "Creates a new graph entity in SRC_MAIN_JAVA")
     public void newGraphEntity(
             @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the entity to create") final JavaType name,
@@ -64,11 +88,25 @@ public class GraphCommands implements CommandMarker {
         }
     }
 
+    /**
+     * Determines if the relationship-entity command can be issued.
+     * 
+     * @return
+     */
     @CliAvailabilityIndicator("relationshipEntity graph")
     public boolean isGraphRelationshipEntityAvailable() {
         return operations.isNewRelationshipEntityAvailable();
     }
 
+    /**
+     * Relationship-Entity command.
+     * 
+     * @param name
+     * @param type
+     * @param fromNode
+     * @param toNode
+     * @param properties
+     */
     @CliCommand(value = "relationship entity graph", help = "Creates a new graph relationship entity in SRC_MAIN_JAVA")
     public void newGraphRelationshipEntity(
             @CliOption(key = "class", optionContext = "update,project", mandatory = true, help = "Name of the entity to create") final JavaType name,
@@ -91,11 +129,22 @@ public class GraphCommands implements CommandMarker {
         }
     }
 
+    /**
+     * Determines if the repository command can be issued.
+     * 
+     * @return
+     */
     @CliAvailabilityIndicator("repository graph")
     public boolean isGraphRepositoryAvailable() {
         return operations.isNewRepositoryAvailable();
     }
 
+    /**
+     * Repository command.
+     * 
+     * @param name
+     * @param domainType
+     */
     @CliCommand(value = "repository graph", help = "Creates a new graph repository in SRC_MAIN_JAVA")
     public void newGraphRepository(
             @CliOption(key = "interface", optionContext = "update,project", mandatory = true, help = "Name of the repository to create") final JavaType name,
@@ -103,11 +152,27 @@ public class GraphCommands implements CommandMarker {
         operations.newRepository(name, domainType);
     }
 
+    /**
+     * Determines if the relationship command can be issued.
+     * 
+     * @return
+     */
     @CliAvailabilityIndicator("relationship graph")
     public boolean isGraphRelationshipAvailable() {
         return operations.isNewRelationshipAvailable();
     }
 
+    /**
+     * Relationship command.
+     * 
+     * @param viaNode
+     * @param fieldName
+     * @param type
+     * @param fromNode
+     * @param toNode
+     * @param direction
+     * @param relationshipType
+     */
     @CliCommand(value = "relationship graph", help = "Creates a new relationship between two graph entities")
     public void newGraphRelationship(
             @CliOption(key = "via", mandatory = false, help = "Name of explicit relationship class (Either this or the 'to' property has to be specified).") final JavaType viaNode,

@@ -1,6 +1,7 @@
 package fr.imag.model2roo.addon.graph;
 
 /**
+ * Relationship types.
  * 
  * @author jccastrejon
  * 

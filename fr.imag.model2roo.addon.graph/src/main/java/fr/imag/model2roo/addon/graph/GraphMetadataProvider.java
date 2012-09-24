@@ -1,12 +1,10 @@
 package fr.imag.model2roo.addon.graph;
 
 import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
 import org.springframework.roo.classpath.PhysicalTypeMetadata;
-import org.springframework.roo.classpath.customdata.taggers.CustomDataKeyDecorator;
 import org.springframework.roo.classpath.itd.AbstractItdMetadataProvider;
 import org.springframework.roo.classpath.itd.ItdTypeDetailsProvidingMetadataItem;
 import org.springframework.roo.model.JavaType;
@@ -18,17 +16,12 @@ import org.springframework.roo.project.LogicalPath;
  * services needed by the metadata type. Register metadata triggers and
  * dependencies here. Also define the unique add-on ITD identifier.
  * 
- * @since 1.1
+ * @author jccastrejon
+ * 
  */
 @Component
 @Service
 public final class GraphMetadataProvider extends AbstractItdMetadataProvider {
-
-    /**
-     * 
-     */
-    @Reference
-    private CustomDataKeyDecorator customDataKeyDecorator;
 
     /**
      * The activate method for this OSGi component, this will be called by the

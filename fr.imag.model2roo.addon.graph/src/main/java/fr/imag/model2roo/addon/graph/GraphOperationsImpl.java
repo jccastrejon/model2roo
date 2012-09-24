@@ -38,6 +38,7 @@ import org.springframework.roo.support.util.XmlUtils;
 import org.w3c.dom.Element;
 
 /**
+ * Implementation of the operations defined in the graph add-on.
  * 
  * @author jccastrejon
  * 
@@ -47,71 +48,62 @@ import org.w3c.dom.Element;
 public class GraphOperationsImpl implements GraphOperations {
 
     /**
-     * 
+     * Annotation that defines Roo java beans.
      */
     private static final AnnotationMetadataBuilder ROO_JAVA_BEAN_BUILDER = new AnnotationMetadataBuilder(ROO_JAVA_BEAN);
 
     /**
-     * 
+     * Annotation that defines Roo string builders.
      */
     private static final AnnotationMetadataBuilder ROO_TO_STRING_BUILDER = new AnnotationMetadataBuilder(ROO_TO_STRING);
 
     /**
-     * 
+     * Roo File manager.
      */
     @Reference
     private FileManager fileManager;
 
     /**
-     * 
+     * Roo path resolver.
      */
     @Reference
     private PathResolver pathResolver;
 
     /**
-     * Use ProjectOperations to install new dependencies, plugins, properties,
-     * etc into the project configuration
+     * Roo project operations.
      */
     @Reference
     private ProjectOperations projectOperations;
 
     /**
-     * 
+     * Roo type management service.
      */
     @Reference
     TypeManagementService typeManagementService;
 
     /**
-     * 
+     * Roo type location service.
      */
     @Reference
     private TypeLocationService typeLocationService;
 
-    /**
-     * 
-     */
+    @Override
     public boolean isGraphSetupAvailable() {
         return (!fileManager.exists(this.getContextPath()));
     }
 
-    /**
-     * 
-     */
+    @Override
     public void graphSetup(final GraphProvider graphProvider, final String dataStoreLocation) {
         this.addDependencies(graphProvider);
         this.addConfiguration(graphProvider, dataStoreLocation);
     }
 
-    /**
-     * 
-     */
+    @Override
     public boolean isNewEntityAvailable() {
         return (fileManager.exists(this.getContextPath()));
     }
 
-    /**
-     * 
-     */
+    @Override
     public void newEntity(final JavaType name, final JavaType superClass, final boolean isAbstract) {
         int modifier;
         String entityId;
@@ -154,16 +146,12 @@ public class GraphOperationsImpl implements GraphOperations {
         typeManagementService.addField(fieldBuilder.build());
     }
 
-    /**
-     * 
-     */
+    @Override
     public boolean isNewRepositoryAvailable() {
         return (fileManager.exists(this.getContextPath()));
     }
 
-    /**
-     * 
-     */
+    @Override
     public void newRepository(final JavaType name, final JavaType domainType) {
         String entityId;
         GraphProvider graphProvider;
@@ -187,18 +175,12 @@ public class GraphOperationsImpl implements GraphOperations {
         typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
     }
 
-    /**
-     * 
-     * @return
-     */
+    @Override
     public boolean isNewRelationshipEntityAvailable() {
         return (fileManager.exists(this.getContextPath()));
     }
 
-    /**
-     * 
-     * @param name
-     */
+    @Override
     public void newRelationshipEntity(final JavaType name, final String type, final JavaType startNode,
             final JavaType endNode, List<String> properties) {
         String entityId;
@@ -253,16 +235,12 @@ public class GraphOperationsImpl implements GraphOperations {
         typeManagementService.createOrUpdateTypeOnDisk(entityBuilder.build());
     }
 
-    /**
-     * 
-     */
+    @Override
     public boolean isNewRelationshipAvailable() {
         return (fileManager.exists(this.getContextPath()));
     }
 
-    /**
-     * 
-     */
+    @Override
     public void newRelationship(final JavaType fromNode, final JavaType relationNode, final boolean isVia,
             final String type, final Direction direction, final String fieldName,
             final RelationshipType relationshipType) {
@@ -317,6 +295,7 @@ public class GraphOperationsImpl implements GraphOperations {
     }
 
     /**
+     * Add the project dependencies associated to the specified graph provider.
      * 
      * @param provider
      */
@@ -339,6 +318,8 @@ public class GraphOperationsImpl implements GraphOperations {
     }
 
     /**
+     * Add the configuration file associated to the specified graph provider, in
+     * the specified location.
      * 
      * @param provider
      * @param dataStoreLocation
@@ -378,6 +359,7 @@ public class GraphOperationsImpl implements GraphOperations {
     }
 
     /**
+     * Get the graph provider associated to the current project.
      * 
      * @return
      */
@@ -400,6 +382,7 @@ public class GraphOperationsImpl implements GraphOperations {
     }
 
     /**
+     * Get the configuration context path.
      * 
      * @return
      */
