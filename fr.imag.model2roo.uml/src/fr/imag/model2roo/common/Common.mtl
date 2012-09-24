@@ -45,7 +45,7 @@
  * @param prefix Prefix to output before the property's value.
  */]
 [template public getValidValue(value : String, prefix : String) post(trim())]
-  [if(value.size() > 0)]
+  [if(value.size() > 0 and not value.contains('_'))]
     [prefix/][value/] [/if]
 [/template]
 
