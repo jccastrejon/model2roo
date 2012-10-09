@@ -53,21 +53,13 @@
 [comment] Base classes [/comment]
 [aPackage.generateBaseClasses()/]
 
-[comment] Child class [/comment]
-[for (anElement: Element | aPackage.ownedElement)]
-  [if anElement.oclIsTypeOf(Class)]
-    [let childClass : Class = anElement.oclAsType(Class)]
-      [if not childClass.superClass->isEmpty()] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
-      [else] [if not childClass.isAbstract] [anElement.oclAsType(Class).generateEntity(aPackage)/] 
-      [/if] [/if]
-    [/let] [/if]
-[/for]
+[comment] Child classes [/comment]
+[aPackage.generateChildClasses()/]
 [/template]
 
 [**
  * Generate the properties of the classes contained in the specified package.
  * @param aPackage UML package.
- * TODO: Revisar clases que no tienen padre, pero tampoco hijos...esas clases s’ deben escribirse en el log (a menos de que sean abstractas)
  */]
 [template public generateEntitiesProperties(aPackage : Package) post(trim())]
 [if aPackage.isDocumentDataModel() = 'true']
@@ -99,12 +91,31 @@
  * @param aPackage UML2 Package.
 */]
 [template private generateBaseClasses(aPackage : Package) post(trim())]
-[if aPackage.isDocumentDataModel() = 'false']
 [for (anElement: Element | aPackage.ownedElement)]
   [if anElement.oclIsTypeOf(Class)]
     [let childClass : Class = anElement.oclAsType(Class)]
-      [if childClass.superClass->isEmpty()] [anElement.oclAsType(Class).generateEntity(aPackage)/] [/if]
+      [comment] Classes that don't have a super class [/comment]
+      [if childClass.superClass->isEmpty()]
+        [comment] In document data model, abstract classes are not generated in the output file [/comment]
+        [if aPackage.isDocumentDataModel() = 'true']
+          [if not anElement.oclAsType(Class).isAbstract] [anElement.oclAsType(Class).generateEntity(aPackage)/] [/if]
+        [else]
+          [anElement.oclAsType(Class).generateEntity(aPackage)/] [/if]
+      [/if]
+    [/let] 
+  [/if]
+[/for]
+[/template]
+
+[**
+ * Generates the required Spring Roo commands for each Class contained in a UML package, and that have an associated base class.
+ * @param aPackage UML2 Package.
+*/]
+[template private generateChildClasses(aPackage : Package) post(trim())]
+[for (anElement: Element | aPackage.ownedElement)]
+  [if anElement.oclIsTypeOf(Class)]
+    [let childClass : Class = anElement.oclAsType(Class)]
+      [if not childClass.superClass->isEmpty()] [anElement.oclAsType(Class).generateEntity(aPackage)/] [/if]
     [/let] [/if]
 [/for]
-[/if]
 [/template]
