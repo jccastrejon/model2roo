@@ -40,8 +40,8 @@
  */]
 [template public generateEntityReference(association : Association) post(trim())]
 [for (property : Property | association.ownedEnd)]
-[if property.aggregation.toString() = 'composite'] field set --type ~.domain.[property.type.generateReference(association)/]
-[else] field reference --type ~.domain.[property.type.generateReference(association)/] [/if]
+[if property.aggregation.toString() = 'composite'] field set --type ~.domain.[property.type.getAssociationEnd(association)/]
+[else] field reference --type ~.domain.[property.type.getAssociationEnd(association)/] [/if]
 [/for]
 [/template]
 
@@ -65,4 +65,10 @@
 [if not (end.name = begin.name)]
 [end.name/] [/if]
 [/for]
+[/template]
+
+[template private getAssociationEnd(begin : Type, association : Association) post(trim())]
+[let end : String = begin.generateReference(association)]
+  [if end.trim().size() > 0] [end/] [else] [begin.name/] [/if]
+[/let]
 [/template]
