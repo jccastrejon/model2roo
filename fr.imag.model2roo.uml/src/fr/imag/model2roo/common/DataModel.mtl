@@ -21,6 +21,7 @@
 [import fr::imag::model2roo::common::Common/]
 [import fr::imag::model2roo::common::GraphDataModel/]
 [import fr::imag::model2roo::common::DocumentDataModel/]
+[import fr::imag::model2roo::common::PolyglotDataModel/]
 [import fr::imag::model2roo::common::RelationalDataModel/]
 
 [**
@@ -40,9 +41,11 @@
   [aPackage.generateDocumentSetup()/] 
 [else] [if aPackage.isGraphDataModel() = 'true'] 
   [aPackage.generateGraphSetup()/] 
+[else] [if aPackage.isPolyglotDataModel() = 'true']
+  [aPackage.generatePolyglotSetup()/]
 [else] 
   [aPackage.generateRelationalSetup()/] 
-[/if] [/if]
+[/if] [/if] [/if]
 [/template]
 
 [**
@@ -50,11 +53,12 @@
  * @param aPackage UML2 package.
  */]
 [template public generateEntities(aPackage : Package) post(trim())]
-[comment] Base classes [/comment]
-[aPackage.generateBaseClasses()/]
-
-[comment] Child classes [/comment]
-[aPackage.generateChildClasses()/]
+[if aPackage.isPolyglotDataModel() = 'true']
+  [aPackage.generatePolyglotEntities()/]
+[else]
+  [aPackage.generateBaseClasses()/]
+  [aPackage.generateChildClasses()/]
+[/if]
 [/template]
 
 [**
@@ -78,7 +82,10 @@
 */]
 [template private generateEntity(aClass : Class, aPackage : Package) post(trim())]
 [if aPackage.isDocumentDataModel() = 'true'] 
-  [aClass.generateDocumentEntity()/] 
+  [comment] In document data model, abstract classes are not generated in the output file [/comment]
+  [if not aClass.isAbstract] 
+    [aClass.generateDocumentEntity()/]
+  [/if]
 [else] [if aPackage.isGraphDataModel() = 'true']
   [aClass.generateGraphEntity()/] 
 [else] 
@@ -94,14 +101,9 @@
 [for (anElement: Element | aPackage.ownedElement)]
   [if anElement.oclIsTypeOf(Class)]
     [let childClass : Class = anElement.oclAsType(Class)]
-      [comment] Classes that don't have a super class [/comment]
+      [comment] Only classes that don't have a super class [/comment]
       [if childClass.superClass->isEmpty()]
-        [comment] In document data model, abstract classes are not generated in the output file [/comment]
-        [if aPackage.isDocumentDataModel() = 'true']
-          [if not anElement.oclAsType(Class).isAbstract] [anElement.oclAsType(Class).generateEntity(aPackage)/] [/if]
-        [else]
-          [anElement.oclAsType(Class).generateEntity(aPackage)/] 
-        [/if] 
+        [anElement.oclAsType(Class).generateEntity(aPackage)/] 
       [/if]
     [/let] 
   [/if]
