@@ -1,0 +1,20 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-10 14:02:42
+addon create advanced --topLevelPackage fr.imag.model2roo.addon.polyglot
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-10 14:03:09
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-10 14:42:34
+osgi ps
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-10 14:43:01
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-10 14:43:50
+// mvn clean install
+osgi start --url file:///Users/jccastrejon/java/workspace_model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+osgi ps
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-10 14:44:44
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-10 14:56:06
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+osgi start --url file:///Users/jccastrejon/java/workspace_model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+osgi ps
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-10 14:56:33
