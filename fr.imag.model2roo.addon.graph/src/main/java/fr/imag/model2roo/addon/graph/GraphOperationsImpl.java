@@ -40,6 +40,7 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.jvnet.inflector.Noun;
 import org.springframework.roo.addon.propfiles.PropFileOperations;
+import org.springframework.roo.addon.web.mvc.jsp.menu.MenuOperations;
 import org.springframework.roo.classpath.PhysicalTypeCategory;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
 import org.springframework.roo.classpath.TypeLocationService;
@@ -114,6 +115,9 @@ public class GraphOperationsImpl implements GraphOperations {
 
     @Reference
     private PropFileOperations propFileOperations;
+
+    @Reference
+    private MenuOperations menuOperations;
 
     @Override
     public boolean isGraphSetupAvailable() {
@@ -393,6 +397,11 @@ public class GraphOperationsImpl implements GraphOperations {
                 applicationPropertiesPath = "WEB-INF/i18n/application.properties";
                 propFileOperations.addPropertyIfNotExists(webappPath, applicationPropertiesPath,
                         "menu_item_" + entity.toLowerCase() + "_list_label", entityNamePlural);
+
+                // Add listing links in main jsp menu
+                menuOperations.addMenuItem(new JavaSymbolName(entity), new JavaSymbolName("list"), "global_menu_list",
+                        "/" + entityNamePlural + "?page=1&amp;size=${empty param.size ? 10 : param.size}", "",
+                        pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP));
             }
 
         }

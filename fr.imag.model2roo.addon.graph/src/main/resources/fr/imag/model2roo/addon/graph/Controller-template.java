@@ -53,11 +53,11 @@ privileged aspect __ENTITY__Controller_Graph_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("__ENTITY_LOWER_CASE__", __ENTITY_LOWER_CASE__Repository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
+            uiModel.addAttribute("__ENTITY_PLURAL_LOWER_CASE__", __ENTITY_LOWER_CASE__Repository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
             float nrOfPages = (float) __ENTITY_LOWER_CASE__Repository.count() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("__ENTITY_LOWER_CASE__", __ENTITY_LOWER_CASE__Repository.findAll());
+            uiModel.addAttribute("__ENTITY_PLURAL_LOWER_CASE__", __ENTITY_LOWER_CASE__Repository.findAll());
         }
         return "__ENTITY_PLURAL_LOWER_CASE__/list";
     }

@@ -232,3 +232,46 @@ osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
 osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
 exit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 21:21:18
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:19:00
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:19:06
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:24:05
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:24:11
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:26:28
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:26:34
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:27:38
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:27:43
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:33:31
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:33:34
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:33:54
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:34:00
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:40:42
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:40:49
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:42:34
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:42:40
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-10-14 23:51:24
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-14 23:51:31

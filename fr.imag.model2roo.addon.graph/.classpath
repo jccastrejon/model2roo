@@ -33,4 +33,15 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.classpath/1.2.2.RELEASE/org.springframework.roo.classpath-1.2.2.RELEASE.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/roo/wrapping/org.springframework.roo.wrapping.inflector/0.7.0.0010/org.springframework.roo.wrapping.inflector-0.7.0.0010.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.propfiles/1.2.2.RELEASE/org.springframework.roo.addon.propfiles-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.web.mvc.jsp/1.2.2.RELEASE/org.springframework.roo.addon.web.mvc.jsp-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.configurable/1.2.2.RELEASE/org.springframework.roo.addon.configurable-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.web.mvc.controller/1.2.2.RELEASE/org.springframework.roo.addon.web.mvc.controller-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.finder/1.2.2.RELEASE/org.springframework.roo.addon.finder-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.jpa/1.2.2.RELEASE/org.springframework.roo.addon.jpa-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.plural/1.2.2.RELEASE/org.springframework.roo.addon.plural-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.test/1.2.2.RELEASE/org.springframework.roo.addon.test-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.dod/1.2.2.RELEASE/org.springframework.roo.addon.dod-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.serializable/1.2.2.RELEASE/org.springframework.roo.addon.serializable-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.json/1.2.2.RELEASE/org.springframework.roo.addon.json-1.2.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/roo/org.springframework.roo.addon.backup/1.2.2.RELEASE/org.springframework.roo.addon.backup-1.2.2.RELEASE.jar"/>
 </classpath>
