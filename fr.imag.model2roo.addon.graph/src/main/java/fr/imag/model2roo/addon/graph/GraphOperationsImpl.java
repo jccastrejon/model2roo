@@ -39,6 +39,7 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.jvnet.inflector.Noun;
+import org.springframework.roo.addon.propfiles.PropFileOperations;
 import org.springframework.roo.classpath.PhysicalTypeCategory;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
 import org.springframework.roo.classpath.TypeLocationService;
@@ -53,6 +54,7 @@ import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.project.Dependency;
+import org.springframework.roo.project.LogicalPath;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.project.PathResolver;
 import org.springframework.roo.project.ProjectOperations;
@@ -109,6 +111,9 @@ public class GraphOperationsImpl implements GraphOperations {
      */
     @Reference
     private TypeLocationService typeLocationService;
+
+    @Reference
+    private PropFileOperations propFileOperations;
 
     @Override
     public boolean isGraphSetupAvailable() {
@@ -328,9 +333,13 @@ public class GraphOperationsImpl implements GraphOperations {
         String entityName;
         Set<String> entities;
         String outputContents;
+        LogicalPath webappPath;
+        String entityNamePlural;
+        String entityNameLowerCase;
         InputStream templateStream;
-        OutputStream controllerStream;
         Set<FileDetails> aspectFiles;
+        OutputStream controllerStream;
+        String applicationPropertiesPath;
 
         // Erase temporary graph aspect files
         rootPath = this.getRootPath();
@@ -350,6 +359,8 @@ public class GraphOperationsImpl implements GraphOperations {
             // Add a basic controller with mvc operations
             aspectFiles = new HashSet<FileDetails>();
             for (String entity : entities) {
+                entityNameLowerCase = entity.toLowerCase();
+                entityNamePlural = this.getPlural(entity).toLowerCase();
                 aspectFiles = this.fileManager.findMatchingAntPath(rootPath + entity + "Controller_Roo_Controller.aj");
                 for (FileDetails typeDetails : aspectFiles) {
                     // Update controllers content
@@ -362,9 +373,8 @@ public class GraphOperationsImpl implements GraphOperations {
                                 .getTopLevelPackage(this.projectOperations.getFocusedModuleName())
                                 .getFullyQualifiedPackageName());
                         outputContents = outputContents.replace("__ENTITY__", entity);
-                        outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entity.toLowerCase());
-                        outputContents = outputContents.replace("__ENTITY_PLURAL_LOWER_CASE__", this.getPlural(entity)
-                                .toLowerCase());
+                        outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entityNameLowerCase);
+                        outputContents = outputContents.replace("__ENTITY_PLURAL_LOWER_CASE__", entityNamePlural);
 
                         controllerStream = this.fileManager.createFile(
                                 typeDetails.getCanonicalPath().replace("_Roo_", "_Graph_")).getOutputStream();
@@ -377,6 +387,12 @@ public class GraphOperationsImpl implements GraphOperations {
                         IOUtils.closeQuietly(controllerStream);
                     }
                 }
+
+                // Add properties labels
+                webappPath = pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP);
+                applicationPropertiesPath = "WEB-INF/i18n/application.properties";
+                propFileOperations.addPropertyIfNotExists(webappPath, applicationPropertiesPath,
+                        "menu_item_" + entity.toLowerCase() + "_list_label", entityNamePlural);
             }
 
         }
@@ -483,7 +499,7 @@ public class GraphOperationsImpl implements GraphOperations {
      * @return
      */
     private String getRootPath() {
-        return projectOperations.getFocusedModule().getRoot() + "**" + File.separator;
+        return this.projectOperations.getFocusedModule().getRoot() + "**" + File.separator;
     }
 
     /**
