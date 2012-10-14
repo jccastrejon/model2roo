@@ -38,6 +38,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.jvnet.inflector.Noun;
 import org.springframework.roo.classpath.PhysicalTypeCategory;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
 import org.springframework.roo.classpath.TypeLocationService;
@@ -330,7 +331,7 @@ public class GraphOperationsImpl implements GraphOperations {
         InputStream templateStream;
         OutputStream controllerStream;
         Set<FileDetails> aspectFiles;
-        
+
         // Erase temporary graph aspect files
         rootPath = this.getRootPath();
         aspectFiles = this.fileManager.findMatchingAntPath(rootPath + "*"
@@ -362,10 +363,13 @@ public class GraphOperationsImpl implements GraphOperations {
                                 .getFullyQualifiedPackageName());
                         outputContents = outputContents.replace("__ENTITY__", entity);
                         outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entity.toLowerCase());
+                        outputContents = outputContents.replace("__ENTITY_PLURAL_LOWER_CASE__", this.getPlural(entity)
+                                .toLowerCase());
 
                         controllerStream = this.fileManager.createFile(
                                 typeDetails.getCanonicalPath().replace("_Roo_", "_Graph_")).getOutputStream();
                         IOUtils.write(outputContents, controllerStream);
+
                     } catch (IOException e) {
                         throw new IllegalStateException(e);
                     } finally {
@@ -473,12 +477,28 @@ public class GraphOperationsImpl implements GraphOperations {
     private String getContextPath() {
         return pathResolver.getFocusedIdentifier(Path.SPRING_CONFIG_ROOT, "applicationContext-graph.xml");
     }
-    
+
     /**
      * 
      * @return
      */
     private String getRootPath() {
         return projectOperations.getFocusedModule().getRoot() + "**" + File.separator;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    private String getPlural(final String entityName) {
+        String returnValue;
+
+        try {
+            returnValue = Noun.pluralOf(entityName);
+        } catch (RuntimeException e) {
+            returnValue = null;
+        }
+
+        return returnValue;
     }
 }

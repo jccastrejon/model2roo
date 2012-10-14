@@ -28,24 +28,24 @@ privileged aspect __ENTITY__Controller_Graph_Controller {
     public String __ENTITY__Controller.create(@Valid __ENTITY__ __ENTITY_LOWER_CASE__, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, __ENTITY_LOWER_CASE__);
-            return "__ENTITY_LOWER_CASE__/create";
+            return "__ENTITY_PLURAL_LOWER_CASE__/create";
         }
         uiModel.asMap().clear();
         __ENTITY_LOWER_CASE__Repository.save(__ENTITY_LOWER_CASE__);
-        return "redirect:/__ENTITY_LOWER_CASE__/" + encodeUrlPathSegment(__ENTITY_LOWER_CASE__.getNodeId().toString(), httpServletRequest);
+        return "redirect:/__ENTITY_PLURAL_LOWER_CASE__/" + encodeUrlPathSegment(__ENTITY_LOWER_CASE__.getNodeId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String __ENTITY__Controller.createForm(Model uiModel) {
         populateEditForm(uiModel, new __ENTITY__());
-        return "__ENTITY_LOWER_CASE__/create";
+        return "__ENTITY_PLURAL_LOWER_CASE__/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String __ENTITY__Controller.show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("__ENTITY_LOWER_CASE__", __ENTITY_LOWER_CASE__Repository.findOne(id));
         uiModel.addAttribute("itemId", id);
-        return "__ENTITY_LOWER_CASE__/show";
+        return "__ENTITY_PLURAL_LOWER_CASE__/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -59,7 +59,7 @@ privileged aspect __ENTITY__Controller_Graph_Controller {
         } else {
             uiModel.addAttribute("__ENTITY_LOWER_CASE__", __ENTITY_LOWER_CASE__Repository.findAll());
         }
-        return "__ENTITY_LOWER_CASE__/list";
+        return "__ENTITY_PLURAL_LOWER_CASE__/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -70,13 +70,13 @@ privileged aspect __ENTITY__Controller_Graph_Controller {
         }
         uiModel.asMap().clear();
         __ENTITY_LOWER_CASE__Repository.save(__ENTITY_LOWER_CASE__);
-        return "redirect:/__ENTITY_LOWER_CASE__/" + encodeUrlPathSegment(__ENTITY_LOWER_CASE__.getNodeId().toString(), httpServletRequest);
+        return "redirect:/__ENTITY_PLURAL_LOWER_CASE__/" + encodeUrlPathSegment(__ENTITY_LOWER_CASE__.getNodeId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String __ENTITY__Controller.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, __ENTITY_LOWER_CASE__Repository.findOne(id));
-        return "__ENTITY_LOWER_CASE__/update";
+        return "__ENTITY_PLURAL_LOWER_CASE__/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -86,6 +86,6 @@ privileged aspect __ENTITY__Controller_Graph_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/__ENTITY_LOWER_CASE__";
+        return "redirect:/__ENTITY_PLURAL_LOWER_CASE__";
     }
 }
