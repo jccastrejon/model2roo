@@ -116,4 +116,16 @@ public interface GraphOperations {
     public void newRelationship(final JavaType node, final JavaType relationNode, final boolean isVia,
             final String type, final Direction direction, final String fieldName,
             final RelationshipType relationshipType);
+
+    /**
+     * Determines if the web mvc operation can be issued.
+     * 
+     * @return
+     */
+    public boolean isMvcSetupAvailable();
+
+    /**
+     * Web mvc setup operation.
+     */
+    public void mvcSetup();
 }

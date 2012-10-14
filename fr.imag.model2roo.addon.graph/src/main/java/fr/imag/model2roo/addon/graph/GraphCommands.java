@@ -212,4 +212,22 @@ public class GraphCommands implements CommandMarker {
 
         operations.newRelationship(fromNode, relationNode, isVia, type, direction, fieldName, relationshipType);
     }
+
+    /**
+     * Determines if the web mvc setup can be issued.
+     * 
+     * @return
+     */
+    @CliAvailabilityIndicator("web mvc setup graph")
+    public boolean isMvcSetupAvailable() {
+        return operations.isMvcSetupAvailable();
+    }
+
+    /**
+     * Web mvc setup command.
+     */
+    @CliCommand(value = "web mvc setup graph", help = "Setups basic mvc support for graph entities")
+    public void mvcSetup() {
+        operations.mvcSetup();
+    }
 }

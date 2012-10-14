@@ -22,6 +22,7 @@ import static org.springframework.roo.model.JavaType.OBJECT;
 import static org.springframework.roo.model.RooJavaType.ROO_JAVA_BEAN;
 import static org.springframework.roo.model.RooJavaType.ROO_TO_STRING;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +30,9 @@ import java.io.OutputStream;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.felix.scr.annotations.Component;
@@ -43,6 +46,7 @@ import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetailsBuilder;
 import org.springframework.roo.classpath.details.FieldMetadataBuilder;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
+import org.springframework.roo.file.monitor.event.FileDetails;
 import org.springframework.roo.model.DataType;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
@@ -312,6 +316,68 @@ public class GraphOperationsImpl implements GraphOperations {
         }
     }
 
+    @Override
+    public boolean isMvcSetupAvailable() {
+        return (fileManager.exists(this.getContextPath()));
+    }
+
+    @Override
+    public void mvcSetup() {
+        String rootPath;
+        String entityName;
+        Set<String> entities;
+        String outputContents;
+        InputStream templateStream;
+        OutputStream controllerStream;
+        Set<FileDetails> aspectFiles;
+        
+        // Erase temporary graph aspect files
+        rootPath = this.getRootPath();
+        aspectFiles = this.fileManager.findMatchingAntPath(rootPath + "*"
+                + new NodeEntityMetadataProviderImpl().getItdUniquenessFilenameSuffix() + ".aj");
+
+        // Update mvc configuration
+        if (aspectFiles != null) {
+            entities = new HashSet<String>(aspectFiles.size());
+            for (FileDetails typeDetails : aspectFiles) {
+                entityName = typeDetails.getFile().getName();
+                entityName = entityName.substring(0, entityName.indexOf('_'));
+                entities.add(entityName);
+                this.fileManager.delete(typeDetails.getCanonicalPath());
+            }
+
+            // Add a basic controller with mvc operations
+            aspectFiles = new HashSet<FileDetails>();
+            for (String entity : entities) {
+                aspectFiles = this.fileManager.findMatchingAntPath(rootPath + entity + "Controller_Roo_Controller.aj");
+                for (FileDetails typeDetails : aspectFiles) {
+                    // Update controllers content
+                    templateStream = null;
+                    controllerStream = null;
+                    try {
+                        templateStream = FileUtils.getInputStream(this.getClass(), "Controller-template.java");
+                        outputContents = IOUtils.toString(templateStream);
+                        outputContents = outputContents.replace("__TOP_PACKAGE__", this.projectOperations
+                                .getTopLevelPackage(this.projectOperations.getFocusedModuleName())
+                                .getFullyQualifiedPackageName());
+                        outputContents = outputContents.replace("__ENTITY__", entity);
+                        outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entity.toLowerCase());
+
+                        controllerStream = this.fileManager.createFile(
+                                typeDetails.getCanonicalPath().replace("_Roo_", "_Graph_")).getOutputStream();
+                        IOUtils.write(outputContents, controllerStream);
+                    } catch (IOException e) {
+                        throw new IllegalStateException(e);
+                    } finally {
+                        IOUtils.closeQuietly(templateStream);
+                        IOUtils.closeQuietly(controllerStream);
+                    }
+                }
+            }
+
+        }
+    }
+
     /**
      * Add the project dependencies associated to the specified graph provider.
      * 
@@ -406,5 +472,13 @@ public class GraphOperationsImpl implements GraphOperations {
      */
     private String getContextPath() {
         return pathResolver.getFocusedIdentifier(Path.SPRING_CONFIG_ROOT, "applicationContext-graph.xml");
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    private String getRootPath() {
+        return projectOperations.getFocusedModule().getRoot() + "**" + File.separator;
     }
 }

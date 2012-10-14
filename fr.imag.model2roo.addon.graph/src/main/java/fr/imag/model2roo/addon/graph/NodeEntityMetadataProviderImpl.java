@@ -100,7 +100,7 @@ public class NodeEntityMetadataProviderImpl extends AbstractItdMetadataProvider 
     }
 
     public String getItdUniquenessFilenameSuffix() {
-        return "Neo4j_Entity";
+        return "Graph_Entity";
     }
 
     @Override
