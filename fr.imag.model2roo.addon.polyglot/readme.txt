@@ -1,1 +1,1 @@
-Welcome to my addon!
+Model2Roo - Add-on for polyglot persistence
