@@ -335,28 +335,20 @@ public class GraphOperationsImpl implements GraphOperations {
     public void mvcSetup() {
         String rootPath;
         String entityName;
-        boolean updatedFile;
         Set<String> entities;
-        String outputContents;
-        List<String> fileLines;
-        LogicalPath webappPath;
-        InputStream inputStream;
         String entityNamePlural;
-        OutputStream outputStream;
         String entityNameLowerCase;
-        StringBuilder fileContents;
-        Set<FileDetails> aspectFiles;
-        String applicationPropertiesPath;
+        Set<FileDetails> matchingFiles;
 
         // Erase temporary graph aspect files
         rootPath = this.getRootPath();
-        aspectFiles = this.fileManager.findMatchingAntPath(rootPath + "*"
+        matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "*"
                 + new NodeEntityMetadataProviderImpl().getItdUniquenessFilenameSuffix() + ".aj");
 
         // Update mvc configuration
-        if (aspectFiles != null) {
-            entities = new HashSet<String>(aspectFiles.size());
-            for (FileDetails typeDetails : aspectFiles) {
+        if (matchingFiles != null) {
+            entities = new HashSet<String>(matchingFiles.size());
+            for (FileDetails typeDetails : matchingFiles) {
                 entityName = typeDetails.getFile().getName();
                 entityName = entityName.substring(0, entityName.indexOf('_'));
                 entities.add(entityName);
@@ -364,81 +356,135 @@ public class GraphOperationsImpl implements GraphOperations {
             }
 
             // Add a basic controller with mvc operations
-            aspectFiles = new HashSet<FileDetails>();
+            matchingFiles = new HashSet<FileDetails>();
             for (String entity : entities) {
                 entityNameLowerCase = entity.toLowerCase();
                 entityNamePlural = this.getPlural(entity).toLowerCase();
-                aspectFiles = this.fileManager.findMatchingAntPath(rootPath + entity + "Controller_Roo_Controller.aj");
-                for (FileDetails typeDetails : aspectFiles) {
+                matchingFiles = this.fileManager
+                        .findMatchingAntPath(rootPath + entity + "Controller_Roo_Controller.aj");
+                for (FileDetails typeDetails : matchingFiles) {
                     // Update controllers content
-                    inputStream = null;
-                    outputStream = null;
-                    try {
-                        inputStream = FileUtils.getInputStream(this.getClass(), "Controller-template.java");
-                        outputContents = IOUtils.toString(inputStream);
-                        outputContents = outputContents.replace("__TOP_PACKAGE__", this.projectOperations
-                                .getTopLevelPackage(this.projectOperations.getFocusedModuleName())
-                                .getFullyQualifiedPackageName());
-                        outputContents = outputContents.replace("__ENTITY__", entity);
-                        outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entityNameLowerCase);
-                        outputContents = outputContents.replace("__ENTITY_PLURAL_LOWER_CASE__", entityNamePlural);
-
-                        outputStream = this.fileManager.createFile(
-                                typeDetails.getCanonicalPath().replace("_Roo_", "_Graph_")).getOutputStream();
-                        IOUtils.write(outputContents, outputStream);
-
-                    } catch (IOException e) {
-                        throw new IllegalStateException(e);
-                    } finally {
-                        IOUtils.closeQuietly(inputStream);
-                        IOUtils.closeQuietly(outputStream);
-                    }
+                    this.updateControllers(typeDetails, entity, entityNameLowerCase, entityNamePlural);
                 }
 
                 // Add properties labels
-                webappPath = pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP);
-                applicationPropertiesPath = "WEB-INF/i18n/application.properties";
-                propFileOperations.addPropertyIfNotExists(webappPath, applicationPropertiesPath,
-                        "menu_item_" + entity.toLowerCase() + "_list_label", entityNamePlural);
+                this.addPropertiesLabels(entity, entityNamePlural);
 
                 // Add listing links in main jsp menu
-                menuOperations.addMenuItem(new JavaSymbolName(entity), new JavaSymbolName("list"), "global_menu_list",
-                        "/" + entityNamePlural + "?page=1&amp;size=${empty param.size ? 10 : param.size}", "",
-                        pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP));
+                this.addMenuListingLinks(entity, entityNamePlural);
 
                 // Remove references to nodeIds
-                aspectFiles = this.fileManager.findMatchingAntPath(rootPath + "*.jspx");
-                for (FileDetails typeDetails : aspectFiles) {
-                    inputStream = null;
-                    try {
-                        inputStream = new FileInputStream(typeDetails.getFile());
-                        fileLines = IOUtils.readLines(inputStream);
-                        if (fileLines != null) {
-                            updatedFile = false;
-                            fileContents = new StringBuilder();
-                            // Identify and remove nodeId references
-                            for (String line : fileLines) {
-                                if (!line.contains("nodeId")) {
-                                    fileContents.append(line).append("\n");
-                                } else {
-                                    updatedFile = true;
-                                }
-                            }
-
-                            // Save modified file
-                            if (updatedFile) {
-                                this.fileManager.createOrUpdateTextFileIfRequired(typeDetails.getCanonicalPath(),
-                                        fileContents.toString(), false);
-                            }
-                        }
-                    } catch (IOException e) {
-                        throw new IllegalStateException(e);
-                    } finally {
-                        IOUtils.closeQuietly(inputStream);
-                    }
+                matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "*.jspx");
+                for (FileDetails typeDetails : matchingFiles) {
+                    this.removeNodeIdReferences(typeDetails);
                 }
             }
+        }
+    }
 
+    /**
+     * Add listing labels for the specified entity.
+     * 
+     * @param entityNamePlural
+     */
+    private void addPropertiesLabels(final String entity, final String entityNamePlural) {
+        LogicalPath webappPath;
+        String applicationPropertiesPath;
+
+        webappPath = pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP);
+        applicationPropertiesPath = "WEB-INF/i18n/application.properties";
+        this.propFileOperations.addPropertyIfNotExists(webappPath, applicationPropertiesPath,
+                "menu_item_" + entity.toLowerCase() + "_list_label", entityNamePlural);
+    }
+
+    /**
+     * Add a link to the entity listing in the main menu jsp file.
+     * 
+     * @param entity
+     * @param entityNamePlural
+     */
+    private void addMenuListingLinks(final String entity, final String entityNamePlural) {
+        this.menuOperations.addMenuItem(new JavaSymbolName(entity), new JavaSymbolName("list"), "global_menu_list", "/"
+                + entityNamePlural + "?page=1&amp;size=${empty param.size ? 10 : param.size}", "",
+                pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP));
+    }
+
+    /**
+     * Update the mvc controller associated to the specified entity, with crud
+     * operations.
+     * 
+     * @param typeDetails
+     * @param entityName
+     * @param entityNameLowerCase
+     * @param entityNamePlural
+     */
+    private void updateControllers(final FileDetails typeDetails, final String entityName,
+            final String entityNameLowerCase, final String entityNamePlural) {
+        String outputContents;
+        InputStream inputStream;
+        OutputStream outputStream;
+
+        inputStream = null;
+        outputStream = null;
+        try {
+            inputStream = FileUtils.getInputStream(this.getClass(), "Controller-template.java");
+            outputContents = IOUtils.toString(inputStream);
+            outputContents = outputContents.replace("__TOP_PACKAGE__",
+                    this.projectOperations.getTopLevelPackage(this.projectOperations.getFocusedModuleName())
+                            .getFullyQualifiedPackageName());
+            outputContents = outputContents.replace("__ENTITY__", entityName);
+            outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entityNameLowerCase);
+            outputContents = outputContents.replace("__ENTITY_PLURAL_LOWER_CASE__", entityNamePlural);
+
+            outputStream = this.fileManager.createFile(typeDetails.getCanonicalPath().replace("_Roo_", "_Graph_"))
+                    .getOutputStream();
+            IOUtils.write(outputContents, outputStream);
+
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+            IOUtils.closeQuietly(outputStream);
+        }
+    }
+
+    /**
+     * Remove references to the nodeId field from the jsp file.
+     * 
+     * @param typeDetails
+     */
+    private void removeNodeIdReferences(final FileDetails typeDetails) {
+        boolean updatedFile;
+        List<String> fileLines;
+        InputStream inputStream;
+        StringBuilder fileContents;
+
+        inputStream = null;
+        try {
+            inputStream = new FileInputStream(typeDetails.getFile());
+            fileLines = IOUtils.readLines(inputStream);
+            if (fileLines != null) {
+                updatedFile = false;
+                fileContents = new StringBuilder();
+                // Identify and remove nodeId references
+                for (String line : fileLines) {
+                    if (!line.contains("nodeId")) {
+                        fileContents.append(line).append("\n");
+                    } else {
+                        updatedFile = true;
+                    }
+                }
+
+                // Save modified file
+                if (updatedFile) {
+                    this.fileManager.createOrUpdateTextFileIfRequired(typeDetails.getCanonicalPath(),
+                            fileContents.toString(), false);
+                }
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
     }
 
@@ -539,6 +585,7 @@ public class GraphOperationsImpl implements GraphOperations {
     }
 
     /**
+     * Project root path.
      * 
      * @return
      */
@@ -547,6 +594,7 @@ public class GraphOperationsImpl implements GraphOperations {
     }
 
     /**
+     * Get the plural name for an entity.
      * 
      * @return
      */
