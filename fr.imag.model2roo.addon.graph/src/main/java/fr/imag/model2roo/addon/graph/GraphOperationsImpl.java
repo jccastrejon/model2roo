@@ -341,6 +341,8 @@ public class GraphOperationsImpl implements GraphOperations {
         Set<FileDetails> matchingFiles;
 
         // Erase temporary graph aspect files
+        // These aspect files were used to generate the mvc scaffolding, but are
+        // not really required by the spring data graph add-on
         rootPath = this.getRootPath();
         matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "*"
                 + new NodeEntityMetadataProviderImpl().getItdUniquenessFilenameSuffix() + ".aj");
