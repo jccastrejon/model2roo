@@ -331,6 +331,8 @@ public class GraphOperationsImpl implements GraphOperations {
         return (fileManager.exists(this.getContextPath()));
     }
 
+    // TODO: Avoid roo restoring the files we modify in this method (This
+    // happens when we open the roo console after a successful first execution).
     @Override
     public void mvcSetup() {
         String rootPath;
@@ -354,7 +356,10 @@ public class GraphOperationsImpl implements GraphOperations {
                 entityName = typeDetails.getFile().getName();
                 entityName = entityName.substring(0, entityName.indexOf('_'));
                 entities.add(entityName);
-                this.fileManager.delete(typeDetails.getCanonicalPath());
+
+                // TODO: Find a workaround, because even if we erase the file,
+                // roo creates it again at the end
+                // this.fileManager.delete(typeDetails.getCanonicalPath());
             }
 
             // Add a basic controller with mvc operations
