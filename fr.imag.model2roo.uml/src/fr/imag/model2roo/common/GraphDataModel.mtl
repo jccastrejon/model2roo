@@ -37,6 +37,14 @@
 [/template]
 
 [**
+ * Generate the appropriate mvc setup for graph data models.
+ * @param aPackage UML2 Package
+*/]
+[template public generateGraphMvcSetup(aPackage : Package) post(trim())]
+  web mvc setup graph
+[/template]
+
+[**
  * Generate the appropriate commands for a document representation of the given class.
  * @param aClass UML2 Class.
 */]

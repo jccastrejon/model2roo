@@ -19,6 +19,8 @@
 [module Commands('http://www.eclipse.org/uml2/3.0.0/UML')]
 
 [import fr::imag::model2roo::common::Common /]
+[import fr::imag::model2roo::common::GraphDataModel /]
+[import fr::imag::model2roo::common::PolyglotDataModel /]
 
 [**
  * Get the Spring Roo commands associated to the entities of the specified package.
@@ -41,5 +43,9 @@
 web mvc setup 
 [if aPackage.getAppliedStereotype('rooCommand::RooModelCommand')->notEmpty()] [aPackage.generateModelCommands(aPackage.getAppliedStereotype('rooCommand::RooModelCommand'), '')/]
 [else] ['controllersAll'.getMapping()/] ['controllersAll'.getDefaultValue()/]
+[/if]
+
+[if aPackage.isGraphDataModel() = 'true' or aPackage.isPolyglotDataModel() = 'true']
+  [aPackage.generateGraphMvcSetup()/]
 [/if]
 [/template]
