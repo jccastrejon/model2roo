@@ -331,8 +331,8 @@ public class GraphOperationsImpl implements GraphOperations {
         return (fileManager.exists(this.getContextPath()));
     }
 
-    // TODO: Avoid roo restoring the files we modify in this method (This
-    // happens when we open the roo console after a successful first execution).
+    // TODO: Avoid roo restoring the files we modify (This happens to the
+    // menu.jspx when we open the roo console after a successful execution).
     @Override
     public void mvcSetup() {
         String rootPath;
@@ -379,12 +379,6 @@ public class GraphOperationsImpl implements GraphOperations {
 
                 // Add listing links in main jsp menu
                 this.addMenuListingLinks(entity, entityNamePlural);
-
-                // Remove references to nodeIds
-                matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "*.jspx");
-                for (FileDetails typeDetails : matchingFiles) {
-                    this.removeNodeIdReferences(typeDetails);
-                }
             }
         }
     }
@@ -452,46 +446,6 @@ public class GraphOperationsImpl implements GraphOperations {
         } finally {
             IOUtils.closeQuietly(inputStream);
             IOUtils.closeQuietly(outputStream);
-        }
-    }
-
-    /**
-     * Remove references to the nodeId field from the jsp file.
-     * 
-     * @param typeDetails
-     */
-    private void removeNodeIdReferences(final FileDetails typeDetails) {
-        boolean updatedFile;
-        List<String> fileLines;
-        InputStream inputStream;
-        StringBuilder fileContents;
-
-        inputStream = null;
-        try {
-            inputStream = new FileInputStream(typeDetails.getFile());
-            fileLines = IOUtils.readLines(inputStream);
-            if (fileLines != null) {
-                updatedFile = false;
-                fileContents = new StringBuilder();
-                // Identify and remove nodeId references
-                for (String line : fileLines) {
-                    if (!line.contains("nodeId")) {
-                        fileContents.append(line).append("\n");
-                    } else {
-                        updatedFile = true;
-                    }
-                }
-
-                // Save modified file
-                if (updatedFile) {
-                    this.fileManager.createOrUpdateTextFileIfRequired(typeDetails.getCanonicalPath(),
-                            fileContents.toString(), false);
-                }
-            }
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        } finally {
-            IOUtils.closeQuietly(inputStream);
         }
     }
 
