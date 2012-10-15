@@ -335,14 +335,17 @@ public class GraphOperationsImpl implements GraphOperations {
     public void mvcSetup() {
         String rootPath;
         String entityName;
+        boolean updatedFile;
         Set<String> entities;
         String outputContents;
+        List<String> fileLines;
         LogicalPath webappPath;
+        InputStream inputStream;
         String entityNamePlural;
+        OutputStream outputStream;
         String entityNameLowerCase;
-        InputStream templateStream;
+        StringBuilder fileContents;
         Set<FileDetails> aspectFiles;
-        OutputStream controllerStream;
         String applicationPropertiesPath;
 
         // Erase temporary graph aspect files
@@ -368,11 +371,11 @@ public class GraphOperationsImpl implements GraphOperations {
                 aspectFiles = this.fileManager.findMatchingAntPath(rootPath + entity + "Controller_Roo_Controller.aj");
                 for (FileDetails typeDetails : aspectFiles) {
                     // Update controllers content
-                    templateStream = null;
-                    controllerStream = null;
+                    inputStream = null;
+                    outputStream = null;
                     try {
-                        templateStream = FileUtils.getInputStream(this.getClass(), "Controller-template.java");
-                        outputContents = IOUtils.toString(templateStream);
+                        inputStream = FileUtils.getInputStream(this.getClass(), "Controller-template.java");
+                        outputContents = IOUtils.toString(inputStream);
                         outputContents = outputContents.replace("__TOP_PACKAGE__", this.projectOperations
                                 .getTopLevelPackage(this.projectOperations.getFocusedModuleName())
                                 .getFullyQualifiedPackageName());
@@ -380,15 +383,15 @@ public class GraphOperationsImpl implements GraphOperations {
                         outputContents = outputContents.replace("__ENTITY_LOWER_CASE__", entityNameLowerCase);
                         outputContents = outputContents.replace("__ENTITY_PLURAL_LOWER_CASE__", entityNamePlural);
 
-                        controllerStream = this.fileManager.createFile(
+                        outputStream = this.fileManager.createFile(
                                 typeDetails.getCanonicalPath().replace("_Roo_", "_Graph_")).getOutputStream();
-                        IOUtils.write(outputContents, controllerStream);
+                        IOUtils.write(outputContents, outputStream);
 
                     } catch (IOException e) {
                         throw new IllegalStateException(e);
                     } finally {
-                        IOUtils.closeQuietly(templateStream);
-                        IOUtils.closeQuietly(controllerStream);
+                        IOUtils.closeQuietly(inputStream);
+                        IOUtils.closeQuietly(outputStream);
                     }
                 }
 
@@ -402,6 +405,38 @@ public class GraphOperationsImpl implements GraphOperations {
                 menuOperations.addMenuItem(new JavaSymbolName(entity), new JavaSymbolName("list"), "global_menu_list",
                         "/" + entityNamePlural + "?page=1&amp;size=${empty param.size ? 10 : param.size}", "",
                         pathResolver.getFocusedPath(Path.SRC_MAIN_WEBAPP));
+
+                // Remove references to nodeIds
+                aspectFiles = this.fileManager.findMatchingAntPath(rootPath + "*.jspx");
+                for (FileDetails typeDetails : aspectFiles) {
+                    inputStream = null;
+                    try {
+                        inputStream = new FileInputStream(typeDetails.getFile());
+                        fileLines = IOUtils.readLines(inputStream);
+                        if (fileLines != null) {
+                            updatedFile = false;
+                            fileContents = new StringBuilder();
+                            // Identify and remove nodeId references
+                            for (String line : fileLines) {
+                                if (!line.contains("nodeId")) {
+                                    fileContents.append(line).append("\n");
+                                } else {
+                                    updatedFile = true;
+                                }
+                            }
+
+                            // Save modified file
+                            if (updatedFile) {
+                                this.fileManager.createOrUpdateTextFileIfRequired(typeDetails.getCanonicalPath(),
+                                        fileContents.toString(), false);
+                            }
+                        }
+                    } catch (IOException e) {
+                        throw new IllegalStateException(e);
+                    } finally {
+                        IOUtils.closeQuietly(inputStream);
+                    }
+                }
             }
 
         }
