@@ -16,8 +16,8 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <description>An add-on created by Spring Roo's addon creator feature.</description>
-    <url>http://www.some.company</url>
+    <description>Model2Roo - Add-on for polyglot persistence.</description>
+    <url>https://code.google.com/p/model2roo-addon-polyglot/</url>
     <properties>
         <roo.version>1.2.2.RELEASE</roo.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

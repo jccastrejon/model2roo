@@ -1,3 +1,21 @@
+/*
+ * Copyright 2012 jccastrejon
+ *  
+ * This file is part of Model2Roo.
+ *
+ * Model2Roo is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * Model2Roo is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with Model2Roo.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.imag.model2roo.addon.polyglot;
 
 import java.util.ArrayList;
@@ -14,9 +32,10 @@ import org.springframework.roo.support.util.XmlUtils;
 import org.w3c.dom.Element;
 
 /**
- * Implementation of operations this add-on offers.
+ * Implementation of the operations defined in the polyglot add-on.
  * 
- * @since 1.1
+ * @author jccastrejon
+ * 
  */
 @Component
 @Service
@@ -54,7 +73,7 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
     }
 
     /**
-     * 
+     * Remove conflicting maven dependencies.
      */
     private void removeDependencies() {
         Element configuration;
