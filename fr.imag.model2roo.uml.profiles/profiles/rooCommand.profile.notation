@@ -19,7 +19,7 @@
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_gH95FvT4EeGcPu8BxIpktA" type="1084"/>
     <element xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gH95F_T4EeGcPu8BxIpktA" x="387" y="90"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gH95F_T4EeGcPu8BxIpktA" x="387" y="117"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_gICxkfT4EeGcPu8BxIpktA" type="1031" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_gICxk_T4EeGcPu8BxIpktA" source="ShadowFigure">
@@ -40,7 +40,7 @@
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_gICxmfT4EeGcPu8BxIpktA" type="1084"/>
     <element xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gICxmvT4EeGcPu8BxIpktA" x="108" y="90"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gICxmvT4EeGcPu8BxIpktA" x="126" y="117"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_i-KDEPT4EeGcPu8BxIpktA" type="1026" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_i-KqIPT4EeGcPu8BxIpktA" source="ShadowFigure">
@@ -118,7 +118,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i-KqMPT4EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Stereotype" href="rooCommand.profile.uml#_i-I08PT4EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i-KDEfT4EeGcPu8BxIpktA" x="45" y="189"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i-KDEfT4EeGcPu8BxIpktA" x="81" y="189"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="__MgvMPT4EeGcPu8BxIpktA" type="1026" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__MhWQPT4EeGcPu8BxIpktA" source="ShadowFigure">
@@ -184,7 +184,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="__MhWUPT4EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Stereotype" href="rooCommand.profile.uml#__MfhEPT4EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__MgvMfT4EeGcPu8BxIpktA" x="333" y="189"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__MgvMfT4EeGcPu8BxIpktA" x="342" y="189"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_VACF4PT5EeGcPu8BxIpktA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VACs8PT5EeGcPu8BxIpktA" source="ShadowFigure">
@@ -224,7 +224,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VADUB_T5EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_VABe0PT5EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VACF4fT5EeGcPu8BxIpktA" x="585" y="180" width="118"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VACF4fT5EeGcPu8BxIpktA" x="342" y="405" width="118"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_f-Yp0PT5EeGcPu8BxIpktA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_f-ZQ4PT5EeGcPu8BxIpktA" source="ShadowFigure">
@@ -352,7 +352,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mq6MOfT5EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_mq4XAPT5EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mq4-EfT5EeGcPu8BxIpktA" x="720" y="171"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mq4-EfT5EeGcPu8BxIpktA" x="711" y="171"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_-1SskPT5EeGcPu8BxIpktA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-1TToPT5EeGcPu8BxIpktA" source="ShadowFigure">
@@ -384,7 +384,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-1TTq_T5EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_-1RecPT5EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-1SskfT5EeGcPu8BxIpktA" x="882" y="117"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-1SskfT5EeGcPu8BxIpktA" x="468" y="405"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_DbYG4PT6EeGcPu8BxIpktA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_DbYt8PT6EeGcPu8BxIpktA" source="ShadowFigure">
@@ -432,7 +432,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DbYt-_T6EeGcPu8BxIpktA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_DbW4wPT6EeGcPu8BxIpktA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DbYG4fT6EeGcPu8BxIpktA" x="882" y="225"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DbYG4fT6EeGcPu8BxIpktA" x="585" y="153" width="118"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_UR5LwAWHEeKopslQxbsgfA" type="2006" fontName="Lucida Grande" fontHeight="11" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UR6Z4AWHEeKopslQxbsgfA" source="ShadowFigure">
@@ -456,7 +456,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UR7A9AWHEeKopslQxbsgfA"/>
     </children>
     <element xmi:type="uml:Enumeration" href="rooCommand.profile.uml#_URwo4AWHEeKopslQxbsgfA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UR5LwQWHEeKopslQxbsgfA" x="882" y="369" height="53"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UR5LwQWHEeKopslQxbsgfA" x="585" y="432" width="118" height="53"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_c6nMQfT4EeGcPu8BxIpktA"/>
   <element xmi:type="uml:Profile" href="rooCommand.profile.uml#_c6mlMPT4EeGcPu8BxIpktA"/>

@@ -14,7 +14,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_A334sbxtEeGZp5DeL12NNQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rooCommand.ecore#//eSubpackages"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_A334srxtEeGZp5DeL12NNQ" x="126" y="35"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_A334srxtEeGZp5DeL12NNQ" x="162" y="54"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_I7z58LxtEeGZp5DeL12NNQ" type="1003">
     <children xmi:type="notation:Node" xmi:id="_I70hALxtEeGZp5DeL12NNQ" type="4007"/>
@@ -65,7 +65,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_I7z58bxtEeGZp5DeL12NNQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="14668776" lineColor="4210752"/>
     <element xmi:type="ecore:EAnnotation" href="rooCommand.ecore#//%rooCommand::RooModelCommand%"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_I7z58rxtEeGZp5DeL12NNQ" x="81" y="99"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_I7z58rxtEeGZp5DeL12NNQ" x="126" y="99"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_eaXtQLxtEeGZp5DeL12NNQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_eaYUULxtEeGZp5DeL12NNQ" type="4001"/>
@@ -81,7 +81,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_eaXtQbxtEeGZp5DeL12NNQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rooCommand.ecore#//EClass"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eaXtQrxtEeGZp5DeL12NNQ" x="369" y="36"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eaXtQrxtEeGZp5DeL12NNQ" x="369" y="54"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_fgGmQLxtEeGZp5DeL12NNQ" type="1003">
     <children xmi:type="notation:Node" xmi:id="_fgHNULxtEeGZp5DeL12NNQ" type="4007"/>
