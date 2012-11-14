@@ -7,4 +7,41 @@
             <version>1.0</version>
         </dependency>
     </removeDependencies>
+    <addDependencies>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+    </addDependencies>
+    <addBeans>
+        <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+            <property name="order" value="1" />
+            <property name="mediaTypes">
+                <map>
+                    <entry key="json" value="application/json" />
+                </map>
+            </property>
+
+            <property name="defaultViews">
+                <list>
+                    <!-- JSON View -->
+                    <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+                </list>
+            </property>
+        </bean>
+    </addBeans>
+    <blobDependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+    </blobDependencies>
 </configuration>

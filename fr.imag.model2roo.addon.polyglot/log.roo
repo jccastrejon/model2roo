@@ -18,3 +18,193 @@ osgi start --url file:///Users/jccastrejon/java/workspace_model2roo/fr.imag.mode
 osgi ps
 exit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-10-10 14:56:33
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-14 10:16:08
+osgi start --url file:///Users/jccastrejon/java/workspace_model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-14 10:16:11
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-14 10:17:21
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-14 10:17:23
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-14 10:17:49
+osgi ps
+// [failed] osgi uninstall --bundleSymbolicName model2roo-addon-polyglot
+osgi ps
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+osgi ps
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-14 10:19:49
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:21:47
+osgi ps
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+osgi ps
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+osgi ps
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:23:28
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:33:32
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:33:34
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:38:58
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:39:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:42:38
+osgi ps
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+exi
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:43:17
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:44:59
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:45:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:45:15
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:45:18
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:11:56
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:11:58
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:12:04
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:12:07
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:15:02
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:15:04
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:15:11
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:15:13
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:37:05
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:37:08
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:37:13
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:37:15
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:38:54
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:38:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:39:01
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:39:04
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:43:43
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:43:45
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:43:51
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:43:53
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:45:45
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:45:47
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:45:52
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:45:54
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:50:52
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:50:55
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 14:50:59
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 14:51:02
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 16:52:44
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 16:52:47
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 16:52:53
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 16:52:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 16:57:23
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 16:57:25
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 16:57:31
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 16:57:34
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:05:17
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:05:20
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:05:25
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:05:28
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:10:33
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:10:36
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:10:41
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:10:44
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:15:55
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:15:58
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:16:03
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:16:06
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:18:20
+// [failed] osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:18:23
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:18:28
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:18:31
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:19:54
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:19:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:20:01
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:20:04
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:21:56
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:21:58
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:22:04
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:22:07
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:33:32
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:33:34
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:33:42
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:33:44
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:35:46
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:35:48
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:35:53
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:35:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:40:00
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:40:02
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 17:40:08
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 17:40:11

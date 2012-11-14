@@ -21,8 +21,10 @@ package fr.imag.model2roo.addon.polyglot;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.springframework.roo.model.JavaType;
 import org.springframework.roo.shell.CliAvailabilityIndicator;
 import org.springframework.roo.shell.CliCommand;
+import org.springframework.roo.shell.CliOption;
 import org.springframework.roo.shell.CommandMarker;
 
 /**
@@ -58,5 +60,69 @@ public class PolyglotCommands implements CommandMarker {
     @CliCommand(value = "polyglot setup", help = "Setup Polyglot addon")
     public void setup() {
         operations.setup();
+    }
+
+    /**
+     * Determines if the setup command is available.
+     * 
+     * @return
+     */
+    @CliAvailabilityIndicator("polyglot rest")
+    public boolean isConfigureRestAvailable() {
+        return operations.isConfigureRestAvailable();
+    }
+
+    /**
+     * Setup configuration for polyglot persistence applications.
+     */
+    @CliCommand(value = "polyglot rest", help = "Setup Rest addon")
+    public void configureRest() {
+        operations.configureRest();
+    }
+
+    /**
+     * Determine if the command to add support for blob types.
+     * 
+     * @return
+     */
+    @CliAvailabilityIndicator("polyglot blob setup")
+    public boolean isBlobSetupAvailable() {
+        return operations.isBlobSetupAvailable();
+    }
+
+    /**
+     * Add support for blob types.
+     * 
+     * @param entity
+     */
+    @CliCommand(value = "polyglot blob setup", help = "Blob setup")
+    public void blobSetup(
+            @CliOption(key = { "entity" }, mandatory = true, help = "The entity with associated blob properties") final JavaType entity) {
+        operations.blobSetup(entity);
+    }
+
+    /**
+     * Determine if the configuration for a blob property is available.
+     * 
+     * @return
+     */
+    @CliAvailabilityIndicator("polyglot blob property")
+    public boolean isBlobPropertyAvailable() {
+        return operations.isBlobPropertyAvailable();
+    }
+
+    /**
+     * Add configuration for a blob property.
+     * 
+     * @param entity
+     * @param property
+     * @param contentType
+     */
+    @CliCommand(value = "polyglot blob property", help = "Blob property setup")
+    public void blobProperty(
+            @CliOption(key = { "entity" }, mandatory = true, help = "The entity with associated blob properties") final JavaType entity,
+            @CliOption(key = { "property" }, mandatory = true, help = "Property name") final String property,
+            @CliOption(key = { "type" }, mandatory = true, help = "Property content-type") final String contentType) {
+        operations.blobProperty(entity, property, contentType);
     }
 }

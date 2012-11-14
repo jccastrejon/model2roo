@@ -18,6 +18,8 @@
  */
 package fr.imag.model2roo.addon.polyglot;
 
+import org.springframework.roo.model.JavaType;
+
 /**
  * Operations defined by the polyglot add-on.
  * 
@@ -37,4 +39,43 @@ public interface PolyglotOperations {
      * Setup configuration for polyglot persistence applications.
      */
     void setup();
+
+    /**
+     * 
+     * @return
+     */
+    boolean isConfigureRestAvailable();
+
+    /**
+     * 
+     */
+    void configureRest();
+
+    /**
+     * Determine if the command to add support for blob types.
+     * 
+     * @return
+     */
+    boolean isBlobSetupAvailable();
+
+    /**
+     * Add support for blob types.
+     */
+    void blobSetup(final JavaType entity);
+
+    /**
+     * Determine if the configuration for a blob property is available.
+     * 
+     * @return
+     */
+    boolean isBlobPropertyAvailable();
+
+    /**
+     * Add configuration for a blob property.
+     * 
+     * @param entity
+     * @param property
+     * @param contentType
+     */
+    void blobProperty(final JavaType entity, final String property, final String contentType);
 }
