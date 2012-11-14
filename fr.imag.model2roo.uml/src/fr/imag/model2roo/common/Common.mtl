@@ -288,9 +288,10 @@ field [property.type.getRooType(property)/] --fieldName [property.name/] [proper
  */]
 [template private getUndefinedType(type : Type, property : Property) post(trim())]
 [if not property.getAppliedStereotype('rooStructure::RooFieldDate').oclIsUndefined()] date --type java.util.Date
+[else] [if not property.getAppliedStereotype('rooStructure::RooFieldFile').oclIsUndefined()] file
 [else] [if property.getValue(property.getAppliedStereotype('rooStructure::RooFieldNumber'), '_numberType').oclIsInvalid()] string
 [else] [property.getValue(property.getAppliedStereotype('rooStructure::RooFieldNumber'), '_numberType').oclAsType(EnumerationLiteral).name.getRooNumberType()/]
-[/if] [/if]
+[/if] [/if] [/if]
 [/template]
 
 [**
@@ -302,7 +303,7 @@ field [property.type.getRooType(property)/] --fieldName [property.name/] [proper
   [else] [if type = 'Float'] number --type java.lang.Float
   [else] [if type = 'Short'] number --type java.lang.Short
   [else] [if type = 'Long'] number --type java.lang.Long
-  [else] [if type = 'Int'] number --type java.lang.Integer
+  [else] [if type = 'Integer'] number --type java.lang.Integer
   [else] [if type = 'Double'] number --type java.lang.Double
   [else] string
   [/if] [/if] [/if] [/if] [/if] [/if]

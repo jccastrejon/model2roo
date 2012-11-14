@@ -41,11 +41,12 @@
  */]
 [template public generateSystemCommands(aPackage : Package) post(trim())]
 web mvc setup 
+polyglot rest
 [if aPackage.getAppliedStereotype('rooCommand::RooModelCommand')->notEmpty()] [aPackage.generateModelCommands(aPackage.getAppliedStereotype('rooCommand::RooModelCommand'), '')/]
 [else] ['controllersAll'.getMapping()/] ['controllersAll'.getDefaultValue()/]
 [/if]
 
-[if aPackage.isGraphDataModel() = 'true' or aPackage.isPolyglotDataModel() = 'true']
+[if aPackage.isGraphDataModel() = 'true']
   [aPackage.generateGraphMvcSetup()/]
 [/if]
 [/template]
