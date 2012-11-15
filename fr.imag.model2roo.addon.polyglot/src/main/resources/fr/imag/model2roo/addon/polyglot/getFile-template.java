@@ -11,7 +11,7 @@ __END_IMPORTS__
 
 
 __INIT_METHOD__
-    @RequestMapping(value = "/show__PROPERTY__/{id}", produces = "text/html")
+    @RequestMapping(value = "/get__PROPERTY__/{id}", produces = "text/html")
     public String get__PROPERTY__Content(@PathVariable("id") BigInteger id, HttpServletResponse response, Model uiModel) {
         __ENTITY__ __ENTITY_LOWER__;
         OutputStream outputStream;

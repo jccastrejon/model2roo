@@ -171,6 +171,12 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
                 pathResolver.getFocusedIdentifier(Path.SRC_MAIN_WEBAPP, "/WEB-INF/tags/form/multi.tagx"));
         this.copyFile("file.tagx",
                 pathResolver.getFocusedIdentifier(Path.SRC_MAIN_WEBAPP, "/WEB-INF/tags/form/fields/file.tagx"));
+        this.copyFile("url.tagx",
+                pathResolver.getFocusedIdentifier(Path.SRC_MAIN_WEBAPP, "/WEB-INF/tags/form/fields/url.tagx"));
+        this.copyFile("column.tagx",
+                pathResolver.getFocusedIdentifier(Path.SRC_MAIN_WEBAPP, "/WEB-INF/tags/form/fields/column.tagx"));
+        this.copyFile("table.tagx",
+                pathResolver.getFocusedIdentifier(Path.SRC_MAIN_WEBAPP, "/WEB-INF/tags/form/fields/table.tagx"));
 
         // Use tags in create.jspx
         this.updateFile("form:multi", "form:create", "/" + entity.getSimpleTypeName().toLowerCase() + "*/create.jspx");
@@ -200,12 +206,22 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
         String showImports;
         String outputContents;
 
-        // Update tag in create.jspx
+        // Update create.jspx
         this.updateFile("field:file field=\"" + property + "\"", "field:textarea field=\"" + property + "\"", "/"
                 + entity.getSimpleTypeName().toLowerCase() + "*/create.jspx");
 
+        // Update show.jspx
+        this.updateFile("field:url field=\"" + property + "\"", "field:display field=\"" + property + "\"", "/"
+                + entity.getSimpleTypeName().toLowerCase() + "*/show.jspx");
+
+        // Update list.jspx
+        this.updateFile("property=\"" + property + "\" url=\"true\"", "property=\"" + property + "\"", "/"
+                + entity.getSimpleTypeName().toLowerCase() + "*/list.jspx");
+        
+        //TODO: Update update.jspx
+
         // Add show methods
-        outputContents = this.getFileContents("showBlob-template.java");
+        outputContents = this.getFileContents("getFile-template.java");
         showImports = outputContents.substring(
                 outputContents.indexOf("__INIT_IMPORTS__") + "__INIT_IMPORTS__".length(),
                 outputContents.indexOf("__END_IMPORTS__"));
@@ -258,18 +274,21 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
         String outputContents;
         OutputStream outputStream;
 
-        if (!this.fileManager.exists(destinationPath)) {
-            outputStream = null;
-            try {
-                outputContents = this.getFileContents(fileName);
-                outputStream = this.fileManager.createFile(destinationPath).getOutputStream();
-                IOUtils.write(outputContents, outputStream);
-            } catch (IOException e) {
-                throw new IllegalStateException(e);
-            } finally {
-                IOUtils.closeQuietly(outputStream);
-            }
+        if (this.fileManager.exists(destinationPath)) {
+            this.fileManager.delete(destinationPath);
         }
+
+        outputStream = null;
+        try {
+            outputContents = this.getFileContents(fileName);
+            outputStream = this.fileManager.createFile(destinationPath).getOutputStream();
+            IOUtils.write(outputContents, outputStream);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            IOUtils.closeQuietly(outputStream);
+        }
+
     }
 
     /**
