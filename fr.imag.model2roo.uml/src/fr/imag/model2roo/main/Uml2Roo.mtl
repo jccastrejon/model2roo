@@ -63,6 +63,7 @@ project --topLevelPackage [aPackage.name.toLower()/]
 
 // Entities commands
 [aPackage.generateEntitiesCommands()/]
+[aPackage.generateBlobCommands()/]
 
 // MVC Finders
 [aPackage.generateMVCFinders()/]

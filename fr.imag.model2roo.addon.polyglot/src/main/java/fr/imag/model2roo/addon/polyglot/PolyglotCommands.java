@@ -63,21 +63,42 @@ public class PolyglotCommands implements CommandMarker {
     }
 
     /**
-     * Determines if the setup command is available.
+     * Determines if the rest setup is available.
      * 
      * @return
      */
-    @CliAvailabilityIndicator("polyglot rest")
+    @CliAvailabilityIndicator("polyglot rest setup")
     public boolean isConfigureRestAvailable() {
         return operations.isConfigureRestAvailable();
     }
 
     /**
-     * Setup configuration for polyglot persistence applications.
+     * Configuration or rest support.
      */
-    @CliCommand(value = "polyglot rest", help = "Setup Rest addon")
+    @CliCommand(value = "polyglot rest setup", help = "Setup Rest addon")
     public void configureRest() {
         operations.configureRest();
+    }
+
+    /**
+     * Determines if the configuration of rest methods is available.
+     * 
+     * @return
+     */
+    @CliAvailabilityIndicator("polyglot rest methods")
+    public boolean isConfigureRestMethodsAvailable() {
+        return operations.isConfigureRestMethodsAvailable();
+    }
+
+    /**
+     * Configuration of rest methods for the specified entity.
+     * 
+     * @param entity
+     */
+    @CliCommand(value = "polyglot rest methods", help = "Setup rest methods for an entity")
+    public void configureRestMethods(
+            @CliOption(key = { "entity" }, mandatory = true, help = "The entity for which rest methods will be created") final JavaType entity) {
+        operations.configureRestMethods(entity);
     }
 
     /**
@@ -122,7 +143,7 @@ public class PolyglotCommands implements CommandMarker {
     public void blobProperty(
             @CliOption(key = { "entity" }, mandatory = true, help = "The entity with associated blob properties") final JavaType entity,
             @CliOption(key = { "property" }, mandatory = true, help = "Property name") final String property,
-            @CliOption(key = { "type" }, mandatory = true, help = "Property content-type") final String contentType) {
+            @CliOption(key = { "contentType" }, mandatory = true, help = "Property content-type") final String contentType) {
         operations.blobProperty(entity, property, contentType);
     }
 }

@@ -115,12 +115,41 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
         webConfigDocument = XmlUtils.readXml(fileManager.getInputStream(webConfigPath));
         webConfig = webConfigDocument.getDocumentElement();
 
-        addedBeans = XmlUtils.findElements("/configuration/addBeans", XmlUtils.getConfiguration(this.getClass()));
+        addedBeans = XmlUtils.findElements("/configuration/addBeans/bean", XmlUtils.getConfiguration(this.getClass()));
         for (Element element : addedBeans) {
             webConfig.appendChild(webConfigDocument.importNode(element, true));
         }
 
         fileManager.createOrUpdateTextFileIfRequired(webConfigPath, XmlUtils.nodeToString(webConfigDocument), false);
+    }
+
+    /** {@inheritDoc} */
+    public boolean isConfigureRestMethodsAvailable() {
+        return this.isSetupAvailable();
+    }
+
+    /** {@inheritDoc} */
+    public void configureRestMethods(final JavaType entity) {
+        String restMethods;
+        String restImports;
+        String outputContents;
+
+        // Add rest methods and imports
+        outputContents = this.getFileContents("restMethods-template.java");
+        restImports = outputContents.substring(
+                outputContents.indexOf("__INIT_IMPORTS__") + "__INIT_IMPORTS__".length(),
+                outputContents.indexOf("__END_IMPORTS__"));
+        restMethods = outputContents.substring(
+                outputContents.indexOf("__INIT_METHODS__") + "__INIT_METHODS__".length(),
+                outputContents.indexOf("__END_METHODS__"));
+
+        restMethods = restMethods.replace("__ENTITY__", WordUtils.capitalize(entity.getSimpleTypeName()));
+        restMethods = restMethods.replace("__ENTITY_LOWER__", entity.getSimpleTypeName().toLowerCase());
+
+        this.updateFile(restImports + "\nimport org.springframework.web.bind.annotation.RequestMapping",
+                "import org.springframework.web.bind.annotation.RequestMapping", entity.getSimpleTypeName()
+                        + "Controller.java");
+        this.updateFile("Controller {\n" + restMethods, "Controller {", entity.getSimpleTypeName() + "Controller.java");
     }
 
     /** {@inheritDoc} */
@@ -144,8 +173,7 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
                 pathResolver.getFocusedIdentifier(Path.SRC_MAIN_WEBAPP, "/WEB-INF/tags/form/fields/file.tagx"));
 
         // Use tags in create.jspx
-        this.updateFile("form:multi", "form:create", "/" + entity.getSimpleTypeName().toLowerCase() + "*/create.jspx",
-                true);
+        this.updateFile("form:multi", "form:create", "/" + entity.getSimpleTypeName().toLowerCase() + "*/create.jspx");
 
         // Add binder imports and method
         outputContents = this.getFileContents("binder-template.java");
@@ -155,9 +183,10 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
         binderMethod = outputContents.substring(outputContents.indexOf("__INIT_BINDER__") + "__INIT_BINDER__".length(),
                 outputContents.indexOf("__END_BINDER__"));
 
-        this.updateFile(binderImports, "import org.springframework.web.bind.annotation.RequestMapping",
-                entity.getSimpleTypeName() + "Controller.java", false);
-        this.updateFile(binderMethod, "}", entity.getSimpleTypeName() + "Controller.java", false);
+        this.updateFile(binderImports + "\nimport org.springframework.web.bind.annotation.RequestMapping",
+                "import org.springframework.web.bind.annotation.RequestMapping", entity.getSimpleTypeName()
+                        + "Controller.java");
+        this.updateFile("Controller {\n" + binderMethod, "Controller {", entity.getSimpleTypeName() + "Controller.java");
     }
 
     /** {@inheritDoc} */
@@ -173,15 +202,16 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
 
         // Update tag in create.jspx
         this.updateFile("field:file field=\"" + property + "\"", "field:textarea field=\"" + property + "\"", "/"
-                + entity.getSimpleTypeName().toLowerCase() + "*/create.jspx", true);
+                + entity.getSimpleTypeName().toLowerCase() + "*/create.jspx");
 
         // Add show methods
         outputContents = this.getFileContents("showBlob-template.java");
         showImports = outputContents.substring(
                 outputContents.indexOf("__INIT_IMPORTS__") + "__INIT_IMPORTS__".length(),
                 outputContents.indexOf("__END_IMPORTS__"));
-        this.updateFile(showImports, "import org.springframework.web.bind.annotation.RequestMapping",
-                entity.getSimpleTypeName() + "Controller.java", false);
+        this.updateFile(showImports + "\nimport org.springframework.web.bind.annotation.RequestMapping",
+                "import org.springframework.web.bind.annotation.RequestMapping", entity.getSimpleTypeName()
+                        + "Controller.java");
 
         showMethod = outputContents.substring(outputContents.indexOf("__INIT_METHOD__") + "__INIT_METHOD__".length(),
                 outputContents.indexOf("__END_METHOD__"));
@@ -190,7 +220,7 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
         showMethod = showMethod.replace("__ENTITY_LOWER__", entity.getSimpleTypeName().toLowerCase());
         showMethod = showMethod.replace("__CONTENT_TYPE__", UploadedFileContentType.valueOf(contentType)
                 .getContentType());
-        this.updateFile(showMethod, "@InitBinder", entity.getSimpleTypeName() + "Controller.java", false);
+        this.updateFile(showMethod + "\n@InitBinder", "@InitBinder", entity.getSimpleTypeName() + "Controller.java");
     }
 
     /**
@@ -280,11 +310,10 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
      * 
      * @param newContent
      * @param startToken
+     * @param endToken
      * @param fileName
-     * @param replace
      */
-    private void updateFile(final String newContent, final String startToken, final String fileName,
-            final boolean replace) {
+    private void updateFile(final String newContent, final String startToken, final String fileName) {
         String rootPath;
         String replaceContent;
         InputStream inputStream;
@@ -304,9 +333,6 @@ public class PolyglotOperationsImpl implements PolyglotOperations {
 
                 // Decide whether the start token should be kept
                 replaceContent = newContent;
-                if (!replace) {
-                    replaceContent = replaceContent + "\n" + startToken;
-                }
 
                 // Update content
                 controllerContents = controllerContents.replace(startToken, replaceContent);

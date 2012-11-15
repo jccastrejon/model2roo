@@ -3,6 +3,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 __END_IMPORTS__
 
 __INIT_BINDER__

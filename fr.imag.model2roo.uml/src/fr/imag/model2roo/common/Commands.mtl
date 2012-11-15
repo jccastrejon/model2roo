@@ -41,7 +41,7 @@
  */]
 [template public generateSystemCommands(aPackage : Package) post(trim())]
 web mvc setup 
-polyglot rest
+polyglot rest setup
 [if aPackage.getAppliedStereotype('rooCommand::RooModelCommand')->notEmpty()] [aPackage.generateModelCommands(aPackage.getAppliedStereotype('rooCommand::RooModelCommand'), '')/]
 [else] ['controllersAll'.getMapping()/] ['controllersAll'.getDefaultValue()/]
 [/if]
@@ -49,4 +49,30 @@ polyglot rest
 [if aPackage.isGraphDataModel() = 'true']
   [aPackage.generateGraphMvcSetup()/]
 [/if]
+[/template]
+
+[**
+ * 
+ * @param aPackage UML package.
+*/]
+[template public generateBlobCommands(aPackage : Package) post(trim())]
+[for (aClass: Element | aPackage.ownedElement)]
+  [if aClass.oclIsTypeOf(Class)]
+    [let fieldProperty : Element = aClass.ownedElement->any(aProperty | not aProperty.getAppliedStereotype('rooStructure::RooFieldFile').oclIsUndefined())]
+        [if not fieldProperty.oclIsUndefined()]
+          polyglot blob setup --entity ~.domain.[aClass.oclAsType(Class).name/]
+
+          [for (aProperty: Element | aClass.ownedElement)]
+            [if aProperty.oclIsTypeOf(Property)]
+              [if not aProperty.getAppliedStereotype('rooStructure::RooFieldFile').oclIsUndefined()]
+                [let stereotype : Stereotype = aProperty.getAppliedStereotype('rooStructure::RooFieldFile')]
+                  polyglot blob property --entity ~.domain.[aClass.oclAsType(Class).name/] --property [aProperty.oclAsType(Property).name/] [stereotype.ownedMember.getRooDetail(stereotype, aProperty)/]
+                [/let]
+              [/if]
+            [/if]
+          [/for]
+        [/if]
+    [/let]
+  [/if]
+[/for]
 [/template]

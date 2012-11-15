@@ -41,15 +41,30 @@ public interface PolyglotOperations {
     void setup();
 
     /**
+     * Determines if the rest setup is available.
      * 
      * @return
      */
     boolean isConfigureRestAvailable();
 
     /**
-     * 
+     * Configuration or rest support.
      */
     void configureRest();
+
+    /**
+     * Determines if the configuration of rest methods is available.
+     * 
+     * @return
+     */
+    boolean isConfigureRestMethodsAvailable();
+
+    /**
+     * Configuration of rest methods for the specified entity.
+     * 
+     * @param entity
+     */
+    void configureRestMethods(final JavaType entity);
 
     /**
      * Determine if the command to add support for blob types.
