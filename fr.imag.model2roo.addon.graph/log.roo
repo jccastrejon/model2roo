@@ -327,3 +327,35 @@ quit
 osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
 quit
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 10:43:49
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 13:43:29
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 13:43:32
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 13:43:39
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 13:43:42
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 13:59:37
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 13:59:40
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 13:59:44
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 13:59:48
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 14:03:54
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 14:03:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 14:04:13
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 14:04:16
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 14:09:15
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.graph
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 14:09:19
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-20 14:09:24
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.graph/target/fr.imag.model2roo.addon.graph-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 14:09:27

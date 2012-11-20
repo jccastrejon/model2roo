@@ -336,10 +336,13 @@ public class GraphOperationsImpl implements GraphOperations {
     // menu.jspx when we open the roo console after a successful execution).
     @Override
     public void mvcSetup() {
+        int startIndex;
         String rootPath;
         String entityName;
+        String packageName;
         Set<String> entities;
         String outputContents;
+        String converterMethod;
         InputStream inputStream;
         String entityNamePlural;
         OutputStream outputStream;
@@ -400,6 +403,45 @@ public class GraphOperationsImpl implements GraphOperations {
 
                     outputStream = new FileOutputStream(typeDetails.getFile());
                     IOUtils.write(outputContents, outputStream);
+                } catch (IOException e) {
+                    throw new IllegalStateException(e);
+                } finally {
+                    IOUtils.closeQuietly(inputStream);
+                    IOUtils.closeQuietly(outputStream);
+                }
+            }
+        }
+
+        // Add converters from ids to graph entities
+        matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "domain/*.java");
+        if (matchingFiles != null) {
+            for (FileDetails typeDetails : matchingFiles) {
+                inputStream = null;
+                outputStream = null;
+                try {
+                    inputStream = FileUtils.getInputStream(this.getClass(), "ConversionService-template.java");
+                    converterMethod = IOUtils.toString(inputStream);
+                    entityName = typeDetails.getFile().getName().replace(".java", "");
+                    converterMethod = converterMethod.replace("__ENTITY__", entityName);
+                    converterMethod = converterMethod.replace("__ENTITY_LOWER__", entityName.toLowerCase());
+
+                    for (FileDetails outputDetails : this.fileManager.findMatchingAntPath(rootPath
+                            + "ApplicationConversionServiceFactoryBean.java")) {
+                        inputStream = new FileInputStream(outputDetails.getFile());
+                        outputContents = IOUtils.toString(inputStream);
+                        startIndex = outputContents.indexOf("package") + "package".length();
+                        packageName = outputContents.substring(startIndex, outputContents.indexOf(".web", startIndex))
+                                .trim();
+                        converterMethod = converterMethod.replace("__TOP_PACKAGE__", packageName);
+
+                        outputContents = outputContents.replace("FormattingConversionServiceFactoryBean {",
+                                "FormattingConversionServiceFactoryBean {\n" + converterMethod + "\n");
+                        outputContents = outputContents.replace("super.installFormatters(registry);",
+                                "registry.addConverter(getLongTo" + entityName
+                                        + "Converter());\nsuper.installFormatters(registry);");
+                        outputStream = new FileOutputStream(outputDetails.getFile());
+                        IOUtils.write(outputContents, outputStream);
+                    }
                 } catch (IOException e) {
                     throw new IllegalStateException(e);
                 } finally {
