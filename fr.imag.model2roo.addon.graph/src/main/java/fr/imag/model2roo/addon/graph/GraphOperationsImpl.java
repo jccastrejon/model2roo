@@ -24,6 +24,7 @@ import static org.springframework.roo.model.RooJavaType.ROO_TO_STRING;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -338,7 +339,10 @@ public class GraphOperationsImpl implements GraphOperations {
         String rootPath;
         String entityName;
         Set<String> entities;
+        String outputContents;
+        InputStream inputStream;
         String entityNamePlural;
+        OutputStream outputStream;
         String entityNameLowerCase;
         Set<FileDetails> matchingFiles;
 
@@ -379,6 +383,29 @@ public class GraphOperationsImpl implements GraphOperations {
 
                 // Add listing links in main jsp menu
                 this.addMenuListingLinks(entity, entityNamePlural);
+            }
+        }
+
+        // TODO: Only update files of graph entities
+        // Update list.jspx
+        matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "list.jspx");
+        if (matchingFiles != null) {
+            inputStream = null;
+            outputStream = null;
+            for (FileDetails typeDetails : matchingFiles) {
+                try {
+                    inputStream = new FileInputStream(typeDetails.getFile());
+                    outputContents = IOUtils.toString(inputStream);
+                    outputContents = outputContents.replace("<table:table", "<table:table typeIdFieldName=\"nodeId\"");
+
+                    outputStream = new FileOutputStream(typeDetails.getFile());
+                    IOUtils.write(outputContents, outputStream);
+                } catch (IOException e) {
+                    throw new IllegalStateException(e);
+                } finally {
+                    IOUtils.closeQuietly(inputStream);
+                    IOUtils.closeQuietly(outputStream);
+                }
             }
         }
     }
