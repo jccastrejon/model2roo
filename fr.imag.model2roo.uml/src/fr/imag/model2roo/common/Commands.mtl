@@ -31,6 +31,7 @@
   [if anElement.oclIsTypeOf(Class)]
     [if anElement.getAppliedStereotype('rooCommand::RooEntityCommand')->notEmpty()] [anElement.generateModelCommands(anElement.getAppliedStereotype('rooCommand::RooEntityCommand'), anElement.oclAsType(Class).name)/]
     [/if]
+    polyglot rest methods --entity  ~.domain.[anElement.oclAsType(Class).name/]
   [/if]
 [/for]
 [/template]
