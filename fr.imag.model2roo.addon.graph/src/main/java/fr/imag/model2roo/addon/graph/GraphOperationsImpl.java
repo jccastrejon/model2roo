@@ -338,8 +338,8 @@ public class GraphOperationsImpl implements GraphOperations {
     public void mvcSetup() {
         int startIndex;
         String rootPath;
+        String tmpString;
         String entityName;
-        String packageName;
         Set<String> entities;
         String outputContents;
         String converterMethod;
@@ -430,9 +430,9 @@ public class GraphOperationsImpl implements GraphOperations {
                         inputStream = new FileInputStream(outputDetails.getFile());
                         outputContents = IOUtils.toString(inputStream);
                         startIndex = outputContents.indexOf("package") + "package".length();
-                        packageName = outputContents.substring(startIndex, outputContents.indexOf(".web", startIndex))
+                        tmpString = outputContents.substring(startIndex, outputContents.indexOf(".web", startIndex))
                                 .trim();
-                        converterMethod = converterMethod.replace("__TOP_PACKAGE__", packageName);
+                        converterMethod = converterMethod.replace("__TOP_PACKAGE__", tmpString);
 
                         outputContents = outputContents.replace("FormattingConversionServiceFactoryBean {",
                                 "FormattingConversionServiceFactoryBean {\n" + converterMethod + "\n");
@@ -450,6 +450,35 @@ public class GraphOperationsImpl implements GraphOperations {
                 }
             }
         }
+
+        // Remove nodeId's form field in create.jspx
+        matchingFiles = this.fileManager.findMatchingAntPath(rootPath + "create.jspx");
+        matchingFiles.addAll(this.fileManager.findMatchingAntPath(rootPath + "update.jspx"));
+        if (matchingFiles != null) {
+            for (FileDetails typeDetails : matchingFiles) {
+                inputStream = null;
+                outputStream = null;
+                try {
+                    inputStream = new FileInputStream(typeDetails.getFile());
+                    outputContents = IOUtils.toString(inputStream);
+
+                    if (outputContents.contains("<field:input field=\"nodeId\"")) {
+                        startIndex = outputContents.indexOf("<field:input field=\"nodeId\"");
+                        tmpString = outputContents.substring(startIndex, outputContents.indexOf(">", startIndex) + 1);
+                        outputContents = outputContents.replace(tmpString, "");
+
+                        outputStream = new FileOutputStream(typeDetails.getFile());
+                        IOUtils.write(outputContents, outputStream);
+                    }
+                } catch (IOException e) {
+                    throw new IllegalStateException(e);
+                } finally {
+                    IOUtils.closeQuietly(inputStream);
+                    IOUtils.closeQuietly(outputStream);
+                }
+            }
+        }
+
     }
 
     /**
