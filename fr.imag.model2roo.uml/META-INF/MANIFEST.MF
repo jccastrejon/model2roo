@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Acceleo Model2roo Module Runtime Plug-in
 Bundle-SymbolicName: fr.imag.model2roo.uml
-Bundle-Version: 1.0.0.1
+Bundle-Version: 1.1.0.0
 Bundle-Activator: fr.imag.model2roo.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime, 

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Uml2Roo - Part of the Model2Roo project
 Bundle-SymbolicName: fr.imag.model2roo.uml.ui;singleton:=true
-Bundle-Version: 1.0.0.1
+Bundle-Version: 1.1.0.0
 Bundle-Activator: fr.imag.model2roo.uml.ui.Activator
 Bundle-Vendor: fr.imag
 Require-Bundle: org.eclipse.ui,

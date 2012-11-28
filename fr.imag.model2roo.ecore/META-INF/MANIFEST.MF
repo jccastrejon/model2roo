@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Acceleo Ecore Module Runtime Plug-in
 Bundle-SymbolicName: fr.imag.model2roo.ecore
-Bundle-Version: 1.0.0.1
+Bundle-Version: 1.1.0.0
 Bundle-Activator: fr.imag.model2roo.ecore.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime,
