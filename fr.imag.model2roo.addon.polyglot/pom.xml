@@ -4,7 +4,7 @@
     <groupId>fr.imag.model2roo.addon.polyglot</groupId>
     <artifactId>fr.imag.model2roo.addon.polyglot</artifactId>
     <packaging>bundle</packaging>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
+    <version>0.1.0.0</version>
     <name>fr-imag-model2roo-addon-polyglot</name>
     <organization>
         <name>Université de Grenoble</name>
