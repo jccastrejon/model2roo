@@ -340,3 +340,35 @@ osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
 osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
 exit
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-20 16:00:03
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-22 22:01:53
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-22 22:01:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-22 22:02:24
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-22 22:02:27
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-22 22:10:24
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-22 22:10:26
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-22 22:10:38
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-22 22:10:41
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-22 22:14:54
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-22 22:14:57
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-22 22:15:03
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-22 22:15:06
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-28 10:29:09
+osgi uninstall --bundleSymbolicName fr.imag.model2roo.addon.polyglot
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-28 10:29:12
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-28 10:29:20
+osgi start --url file:///Users/jccastrejon/git/model2roo/fr.imag.model2roo.addon.polyglot/target/fr.imag.model2roo.addon.polyglot-0.1.0.BUILD-SNAPSHOT.jar
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-28 10:29:23
