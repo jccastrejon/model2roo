@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
@@ -661,7 +662,7 @@ public class GraphOperationsImpl implements GraphOperations {
         String returnValue;
 
         try {
-            returnValue = Noun.pluralOf(entityName);
+            returnValue = Noun.pluralOf(entityName, Locale.US);
         } catch (RuntimeException e) {
             returnValue = null;
         }
